@@ -1,0 +1,48 @@
+<%- include('partials/header') -%>
+
+<%- include('partials/navbar') -%>
+
+<%- include('partials/page_heading') -%>
+
+	<!-- All Islands -->
+	
+	<section class="" id="content">
+		<!-- Modal -->
+		<div class="modal fade" id="ModalCenter" tabindex="-1" role="dialog" aria-labelledby="ModalCenterTitle" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content text-white lighter-gray-section">
+					<button type="button" class="modal-body-style text-white lighter-gray-section" data-dismiss="modal" aria-label="Close">
+						<div id="modal-title" class="card-header text-center card-heading-larger"></div>
+						<img id="modal-image"src="" class="card-img-top" alt="...">
+						<div class="card-body">
+							<p class="card-text text-center code-text">Code: <span id="modal-code"></span> <br>(<span id="modal-author"></span>)</p>
+						</div>
+				</div>
+			</div>
+		</div>
+		<div class="album py-4 light-gray-section">
+			<div class="container">
+				<div class="row">
+
+					<% tilesDisplay.forEach(function(map) { -%>
+						<div class="col-lg-4">
+							<!-- <a class="card-modal" href="#ModalCenter" data-toggle="modal" onclick="generateModalData('Cizzorz Deathrun', 'images/deathrun_island.jpg', '0940-9970-7913', 'itscizzorz');"> -->
+								<a class="card-link" href="/maps/<%= map.code %>">
+								<div class="card mb-4 shadow-sm text-white lighter-gray-section">
+									<div class="card-header text-center card-heading-larger"><%= map.name %></div>
+									<img src="<%= map.photo %>" class="card-img-top" alt="...">
+								</a>
+									<div class="card-body">
+										<p class="card-text text-center code-text">Code: <%= map.code %> %> <br>(<%= map.author %>)</p>
+									</div>
+								</div>
+							<!-- </a> -->
+						</div>
+					<% }); -%>
+				</div>
+			</div>
+		</div>
+		
+	</section>
+
+<%- include('partials/footer') -%>

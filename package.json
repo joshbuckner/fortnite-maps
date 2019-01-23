@@ -1,0 +1,27 @@
+{
+  "name": "fortnite-maps",
+  "version": "1.0.0",
+  "description": "Discover fortnite creative mode maps and search for creator codes.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "fortnite",
+    "creative",
+    "creator",
+    "codes",
+    "maps",
+    "mode"
+  ],
+  "author": "Josh Buckner",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "ejs": "^2.6.1",
+    "express": "^4.16.4",
+    "lodash": "^4.17.11",
+    "mongoose": "^5.4.5",
+    "multer": "^1.4.1"
+  }
+}
