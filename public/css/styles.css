@@ -145,6 +145,12 @@ body {
 		margin: 0 auto;
 		padding: 0;
 	}
+	#userMap .container-fluid {
+		padding: 0 10%;
+	}
+	/*#userMap .my-5 {
+		margin: 0;
+	}*/
 
 }
 
@@ -186,7 +192,7 @@ a:link {
 }*/
 
 #userMap .container-fluid {
-	padding: 0 20%;
+	padding: 0 15%;
 }
 
 .dropdown .dropdown-menu .dropdown-item {
@@ -205,5 +211,21 @@ a:link {
 
 .fort-text-yellow {
 	color: #f1ed62;
+}
+
+.text-auto-lg {
+	font-size: 5.5vw;
+}
+
+.text-auto-md {
+	font-size: 3vw;
+}
+
+.text-auto-sm {
+	font-size: 2.5vw;
+}
+
+.text-auto-xs {
+	font-size: 1.3vw;
 }
 

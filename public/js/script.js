@@ -85,3 +85,16 @@ function resetForm() {
 	$('#image-preview')[0].src = "images/fortnite_creative_2.jpg";
 	$(".custom-file-label")[0].innerText = "Choose Photo";
 }
+
+const copyToClipboard = () => {
+  const el = document.createElement('textarea');
+  el.value = $('#map-code-text')[0].innerHTML;
+  document.body.appendChild(el);
+  el.select();
+  document.execCommand('copy');
+  document.body.removeChild(el);
+};
+
+
+
+
