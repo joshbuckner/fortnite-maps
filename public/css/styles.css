@@ -214,18 +214,18 @@ a:link {
 }
 
 .text-auto-lg {
-	font-size: 5.5vw;
+	font-size: 4vw;
 }
 
 .text-auto-md {
-	font-size: 3vw;
-}
-
-.text-auto-sm {
 	font-size: 2.5vw;
 }
 
+.text-auto-sm {
+	font-size: 2vw;
+}
+
 .text-auto-xs {
-	font-size: 1.3vw;
+	font-size: 1.5vw;
 }
 
