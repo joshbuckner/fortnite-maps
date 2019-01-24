@@ -186,7 +186,7 @@ a:link {
 }*/
 
 #userMap .container-fluid {
-	padding: 0 10%;
+	padding: 0 20%;
 }
 
 .dropdown .dropdown-menu .dropdown-item {
@@ -206,3 +206,4 @@ a:link {
 .fort-text-yellow {
 	color: #f1ed62;
 }
+
