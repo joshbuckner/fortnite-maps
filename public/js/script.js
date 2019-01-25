@@ -88,7 +88,7 @@ function resetForm() {
 
 const copyToClipboard = () => {
   const el = document.createElement('textarea');
-  el.value = $('#map-code-text')[0].innerHTML;
+  el.value = $('#map-code-text')[0].innerHTML.slice(0, 14);
   document.body.appendChild(el);
   el.select();
   document.execCommand('copy');

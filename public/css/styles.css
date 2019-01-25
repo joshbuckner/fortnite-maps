@@ -140,17 +140,17 @@ body {
 	.submit-map .container-fluid {
 		padding: 0% 10%;
 	}
-
 	.center-search {
 		margin: 0 auto;
 		padding: 0;
 	}
-	#userMap .container-fluid {
+	/*#userMap .container {
 		padding: 0 10%;
-	}
+	}*/
 	/*#userMap .my-5 {
 		margin: 0;
 	}*/
+
 
 }
 
@@ -257,11 +257,32 @@ a:link {
 	margin-left: 2rem;
 	margin-right: 2rem;
 	letter-spacing: 2px;
+	line-height: 1.5;
 }
 
 .island-code {
 	margin-left: 2rem;
 	margin-right: 2rem;
 	letter-spacing: 10px;
+	line-height: 1;
 }
+.island-copy {
+	margin-left: 2rem;
+	margin-right: 2rem;
+}
+.island-views {
+	display: inline;
+	float: right;
+	margin-left: 2rem;
+	margin-right: 2rem;
+}
+
+/*.yt-div {
+	height: 180px;
+  	width: 270px;
+  	max-width: 50%;
+}
+*/
+
+
 

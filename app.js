@@ -23,7 +23,8 @@ const mapsSchema = {
 	code: String,
 	photo: String,
 	category: String,
-	date: Date
+	date: Date,
+	views: Number
 };
 
 const Map = mongoose.model("Map", mapsSchema);
@@ -48,8 +49,14 @@ app.get('/maps/:mapName', function(req, res) {
 		foundMaps.forEach(function(map) {
 			
 			const storedCode = map.code;
+			
 
 			if (requestedMap === storedCode) {
+				
+				Map.update({ name: map.name }, { $inc: { views: 1 }}, function(err, result) {
+					console.log(result);
+				});
+				console.log (map.views);
 				res.render('userMap', { map: map, headingDisplay: map.category });
 				// console.log(map);
 			}
@@ -135,7 +142,8 @@ app.post('/submit', upload.single('mapPhoto'), function(req, res) {
 		code: islandCode,
 		photo: filePath,
 		category: category,
-		date: date
+		date: date,
+		views: 1
 	});
 
 	
@@ -147,7 +155,7 @@ app.post('/submit', upload.single('mapPhoto'), function(req, res) {
 			} else {
 				console.log("Map is okay to add");
 				console.log(map);
-				// map.save();
+				map.save();
 				// res.redirect('/maps/' + map.code);
 				// , { map: map, headingDisplay: map.name }
 			}
