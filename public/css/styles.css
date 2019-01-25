@@ -284,5 +284,46 @@ a:link {
 }
 */
 
+@media (max-width: 992px) {
+	.island-title {
+		margin-left: 0;
+		margin-right: 0;
+		line-height: 1;
+	}
+
+	.island-author {
+		margin-left: 0;
+		margin-right: 0;
+	}
+
+	.island-bio {
+		margin-left: 0;
+		margin-right: 0;
+		letter-spacing: 2px;
+		line-height: 1.5;
+	}
+
+	.island-code {
+		margin-left: 0;
+		margin-right: 0;
+		letter-spacing: 10px;
+		line-height: 1;
+	}
+	.island-copy {
+		margin-left: 0;
+		margin-right: 0;
+	}
+	.island-views {
+		display: inline;
+		float: right;
+		margin-left: 0;
+		margin-right: 0;
+	}
+}
+
+#copy-code {
+	white-space: nowrap;
+}
+
 
 

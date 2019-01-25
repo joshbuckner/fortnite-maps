@@ -1,5 +1,10 @@
+//enable tooltips
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
+
 // Example starter JavaScript for disabling form submissions if there are invalid fields
-(function() {
+$(function() {
 	'use strict'
 
 	window.addEventListener('load', function() {
@@ -87,12 +92,15 @@ function resetForm() {
 }
 
 const copyToClipboard = () => {
-  const el = document.createElement('textarea');
-  el.value = $('#map-code-text')[0].innerHTML.slice(0, 14);
-  document.body.appendChild(el);
-  el.select();
-  document.execCommand('copy');
-  document.body.removeChild(el);
+
+	$('#copy-code').attr('data-original-title', 'Copied to Clipboard!').tooltip('show');
+
+  	const el = document.createElement('textarea');
+  	el.value = $('#map-code-text')[0].innerHTML.slice(0, 14);
+  	document.body.appendChild(el);
+  	el.select();
+  	document.execCommand('copy');
+  	document.body.removeChild(el);
 };
 
 
