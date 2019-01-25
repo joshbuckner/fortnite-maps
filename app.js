@@ -147,7 +147,7 @@ app.post('/submit', upload.single('mapPhoto'), function(req, res) {
 			} else {
 				console.log("Map is okay to add");
 				console.log(map);
-				map.save();
+				// map.save();
 				// res.redirect('/maps/' + map.code);
 				// , { map: map, headingDisplay: map.name }
 			}

@@ -229,3 +229,14 @@ a:link {
 	font-size: 1.5vw;
 }
 
+.map-title {
+	font-size: 3.5rem;
+	margin: 0;
+	line-height: .7;
+}
+
+.map-views {
+	margin: 0;
+	line-height: .7;
+}
+
