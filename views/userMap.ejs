@@ -5,33 +5,11 @@
 <!-- <%- include('partials/page_heading') -%> -->
 	
 <section class="" id="userMap">
-	<div class="container-fluid mb-5 mt-4">
+	<div class="container mb-5 mt-4">
 		<div class="row">
-			<div class="col-lg-8 mb-4">
-				<div class="card lighter-gray-section text-white submit-success">
-				    <div class="card-body map-title-box">
-				    	<!-- <p style="display: inline;float: right;" class="h3 pt-3 map-views"><i class="far fa-eye"></i> 128,399</p> -->
-				        <h5 class="map-title pt-2"><%= map.name %></h5>
-
-				        
-				       <!--  <p class="card-text text-muted h3">By <%= map.author %></p> -->
-				        
-				    </div>
-				</div>
-			</div>
-			<div class="col-lg-4 mb-4">
-				<div class="card lighter-gray-section text-white text-center submit-success">
-				    <div class="card-body">
-				    	<a onclick="copyToClipboard()">
-				        	<h5 id="map-code-text" class="map-views h1"><%= map.code %></h5>
-				        	<!-- <p class="card-text text-muted h5">Island Code (Click to Copy)</p> -->
-				    	</a>
-				    </div>
-				</div>
-			</div>
-			<div class="col-lg-8 mb-4">
-				<div class="card lighter-gray-section text-white">
-				    <div class="card-body">
+			<div class="col-xl-6 col-lg-5 mb-4">
+				<div class="text-white">
+				    <div class="card-body pt-5">
 						<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
 					  		<div class="carousel-inner">
 					    		<div class="carousel-item active">
@@ -67,6 +45,39 @@
 					</div>		
       			</div>
     		</div>
+    		<div class="col-xl-6 col-lg-7 mb-4">
+    			<div class="text-white h-100">
+    				<div class="card-body">
+    					<h1 class="display-3 submit-success island-title pt-5"><%= map.name %></h1>
+    					<h5 class="island-author pb-4">By <%= map.author %></h5>
+    					<h3 class="island-bio submit-success fort-text-yellow pb-4">TEAM 1: RUNNERS MUST GO TO THE TOP. TEAM 2: SNIPERS MUST STOP THE RUNNERS. SUPPORT A CREATOR: THE4CLEM4</h3>
+    					<h6 class="island-author">ISLAND CODE</h6>
+    					<h3 class="display-4 island-code submit-success pb-4"><%= map.code %></h3>
+					</div> 
+				</div>   			
+    		</div>
+    		<!-- <div class="col-lg-7 mb-4">
+				<div class="card lighter-gray-section text-white submit-success">
+				    <div class="card-body map-title-box">
+				    	<p style="display: inline;float: right;" class="h3 pt-3 map-views"><i class="far fa-eye"></i> 128,399</p>
+				        <h5 class="map-title pt-2"><%= map.name %></h5>
+
+				        
+				        <p class="card-text text-muted h3">By <%= map.author %></p>
+				        
+				    </div>
+				</div>
+			</div> -->
+			<!-- <div class="col-lg-4 mb-4">
+				<div class="card lighter-gray-section text-white text-center submit-success">
+				    <div class="card-body">
+				    	<a onclick="copyToClipboard()">
+				        	<h5 id="map-code-text" class="map-views h1"><%= map.code %></h5>
+				        	<p class="card-text text-muted h5">Island Code (Click to Copy)</p>
+				    	</a>
+				    </div>
+				</div>
+			</div> -->
   		</div>
 	</div>
 </section>

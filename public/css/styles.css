@@ -191,8 +191,9 @@ a:link {
 	
 }*/
 
-#userMap .container-fluid {
-	padding: 0 15%;
+#userMap .container {
+	max-width: 100%;
+	width: 1600px;
 }
 
 .dropdown .dropdown-menu .dropdown-item {
@@ -238,5 +239,29 @@ a:link {
 .map-views {
 	margin: 0;
 	line-height: .7;
+}
+
+.island-title {
+	margin-left: 2rem;
+	margin-right: 2rem;
+	line-height: 1;
+
+}
+
+.island-author {
+	margin-left: 2rem;
+	margin-right: 2rem;
+}
+
+.island-bio {
+	margin-left: 2rem;
+	margin-right: 2rem;
+	letter-spacing: 2px;
+}
+
+.island-code {
+	margin-left: 2rem;
+	margin-right: 2rem;
+	letter-spacing: 10px;
 }
 
