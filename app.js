@@ -7,23 +7,14 @@ const multer = require('multer');
 const rp = require("request-promise");
 const cheerio = require("cheerio");
 
-//web scraper
 
-// const options = {
-//   uri: `https://fortnite.com/fn/3847-9331-2064`,
-//   transform: function (body) {
-//     return cheerio.load(body);
-//   }
-// };
-
-
-// rp(options)
-//   .then(($) => {
-//     console.log($('.island-header-tagline').text());
-//   })
-//   .catch((err) => {
-//     console.log(err);
-//   });
+// web scraper options
+const options = {
+  uri: `https://fortnite.com/fn/3847-9331-2064`,
+  transform: function (body) {
+    return cheerio.load(body);
+  }
+};
 
 const upload = multer({ dest: 'public/uploads'});
 
@@ -44,7 +35,8 @@ const mapsSchema = {
 	photo: String,
 	category: String,
 	date: Date,
-	views: Number
+	views: Number,
+	bio: String
 };
 
 const Map = mongoose.model("Map", mapsSchema);
@@ -74,9 +66,9 @@ app.get('/maps/:mapName', function(req, res) {
 			if (requestedMap === storedCode) {
 				
 				Map.update({ name: map.name }, { $inc: { views: 1 }}, function(err, result) {
-					console.log(result);
+					// console.log(result);
 				});
-				console.log (map.views);
+				// console.log (map.views);
 				res.render('userMap', { map: map, headingDisplay: map.category });
 				// console.log(map);
 			}
@@ -132,6 +124,34 @@ app.get('/creative-builds', function(req, res) {
 	});
 });
 
+app.get('/popular', function(req, res) {
+	Map.find({}, function(err, foundMaps) {
+		const newMaps = foundMaps.sort(function(a, b) {
+		    a = a.views;
+		    b = b.views;
+		    return a>b ? -1 : a<b ? 1 : 0;
+		});
+		// console.log(newMaps);
+		if(!err) {
+			res.render('maps', { tilesDisplay: newMaps, headingDisplay: "Popular Maps" });
+		}
+	});
+});
+
+app.get('/new', function(req, res) {
+	Map.find({}, function(err, foundMaps) {
+		const newMaps = foundMaps.sort(function(a, b) {
+		    a = a.date;
+		    b = b.date;
+		    return a>b ? -1 : a<b ? 1 : 0;
+		});
+		console.log(newMaps);
+		if(!err) {
+			res.render('maps', { tilesDisplay: newMaps, headingDisplay: "New Maps" });
+		}
+	});
+});
+
 app.get('/submit', function(req, res) {
 	// console.log("submit clicked");
 	res.render('submit', {headingDisplay: "Submit A Map"});
@@ -163,7 +183,8 @@ app.post('/submit', upload.single('mapPhoto'), function(req, res) {
 		photo: filePath,
 		category: category,
 		date: date,
-		views: 1
+		views: 1,
+		bio: "default"
 	});
 
 	
@@ -174,8 +195,20 @@ app.post('/submit', upload.single('mapPhoto'), function(req, res) {
 				console.log("Map already in database");
 			} else {
 				console.log("Map is okay to add");
-				console.log(map);
+				rp(options)
+				.then(($) => {
+					const bio = $('.island-header-tagline').text();
+
+					Map.update({ code: islandCode }, { $set: { bio: bio }}, function(err, result) {
+						// console.log(result);
+					});
+				})
+				.catch((err) => {
+					console.log(err);
+				});
 				map.save();
+
+				console.log(map);
 				// res.redirect('/maps/' + map.code);
 				// , { map: map, headingDisplay: map.name }
 			}
