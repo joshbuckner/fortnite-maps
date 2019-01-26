@@ -193,7 +193,7 @@ a:link {
 
 #userMap .container {
 	max-width: 100%;
-	width: 1600px;
+	width: 1200px;
 }
 
 .dropdown .dropdown-menu .dropdown-item {
@@ -242,39 +242,36 @@ a:link {
 }
 
 .island-title {
-	margin-left: 2rem;
-	margin-right: 2rem;
+
+	
 	line-height: 1;
 
 }
 
 .island-author {
-	margin-left: 2rem;
-	margin-right: 2rem;
+
+	
 }
 
 .island-bio {
-	margin-left: 2rem;
-	margin-right: 2rem;
+
+	
 	letter-spacing: 2px;
 	line-height: 1.5;
 }
 
 .island-code {
-	margin-left: 2rem;
-	margin-right: 2rem;
+
+	
 	letter-spacing: 10px;
 	line-height: 1;
 }
 .island-copy {
-	margin-left: 2rem;
-	margin-right: 2rem;
+
+	
 }
 .island-views {
-	display: inline;
-	float: right;
-	margin-left: 2rem;
-	margin-right: 2rem;
+	
 }
 
 /*.yt-div {
@@ -286,38 +283,37 @@ a:link {
 
 @media (max-width: 992px) {
 	.island-title {
-		margin-left: 0;
-		margin-right: 0;
+		
+		
 		line-height: 1;
 	}
 
 	.island-author {
-		margin-left: 0;
-		margin-right: 0;
+		
+		
 	}
 
 	.island-bio {
-		margin-left: 0;
-		margin-right: 0;
+		
+		
 		letter-spacing: 2px;
 		line-height: 1.5;
 	}
 
 	.island-code {
-		margin-left: 0;
-		margin-right: 0;
+		
+		
 		letter-spacing: 10px;
 		line-height: 1;
 	}
 	.island-copy {
-		margin-left: 0;
-		margin-right: 0;
+		
+		
 	}
 	.island-views {
-		display: inline;
-		float: right;
-		margin-left: 0;
-		margin-right: 0;
+		
+		
+		
 	}
 }
 
