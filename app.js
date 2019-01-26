@@ -4,6 +4,26 @@ const mongoose = require('mongoose');
 const ejs = require('ejs');
 const _ = require('lodash');
 const multer = require('multer');
+const rp = require("request-promise");
+const cheerio = require("cheerio");
+
+//web scraper
+
+// const options = {
+//   uri: `https://fortnite.com/fn/3847-9331-2064`,
+//   transform: function (body) {
+//     return cheerio.load(body);
+//   }
+// };
+
+
+// rp(options)
+//   .then(($) => {
+//     console.log($('.island-header-tagline').text());
+//   })
+//   .catch((err) => {
+//     console.log(err);
+//   });
 
 const upload = multer({ dest: 'public/uploads'});
 
