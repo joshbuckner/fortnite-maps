@@ -62,14 +62,13 @@ body {
 #jumbo {
 	padding-top: 0;
 	padding-bottom: 0;
-	transition: padding-top 2s, padding-bottom 2s;
 
 }
 
 #jumbo-home {
 	padding-top: 5rem;
 	padding-bottom: 5rem;
-	transition: padding-top 2s, padding-bottom 2s;
+
 }
 
 .jumbotron {
