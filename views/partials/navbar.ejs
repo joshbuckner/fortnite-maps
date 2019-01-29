@@ -40,12 +40,12 @@
 							</li>
 						</ul>
 						<!-- Search Bar & Button -->
-						<form class="navbar-form form-inline my-2 my-lg-0">
+						<form action="/search" method="POST" class="navbar-form form-inline my-2 my-lg-0">
 						
-								<div class="input-group center-search">
-									<input class="form-control mr-sm-2 rounded-right" type="search" placeholder="Search" aria-label="Search" id="search-input">
-									<button class="btn btn-outline-light gray-outline" type="submit" id="search-submit" onclick="searchCards();hideSubmit();">Search</button>
-								</div>
+							<div class="input-group center-search">
+								<input class="form-control mr-sm-2 rounded-right" type="search" placeholder="Search" aria-label="Search" id="search-input" name="searchInput">
+								<button class="btn btn-outline-light gray-outline" type="submit" id="search-submit">Search</button>
+							</div>
 
 						</form>
 					</div>

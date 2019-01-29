@@ -157,6 +157,19 @@ app.get('/submit', function(req, res) {
 	res.render('submit', {headingDisplay: "Submit A Map"});
 });
 
+app.post('/search', function(req, res) {
+	// Map.createIndex( { name: "text", author: "text" } );
+
+	// console.log(req.body.searchInput);
+	searchInput = req.body.searchInput;
+
+	Map.find({name: {$regex: searchInput, $options: "$i"}}, function(err, foundMaps) {
+		if(!err) {
+			res.render('maps', { tilesDisplay: foundMaps, headingDisplay: "Search results for: " + searchInput });
+		}
+	});
+});
+
 app.post('/submit', upload.single('mapPhoto'), function(req, res) {
 	const mapName = req.body.mapName;
 	const authorName = req.body.authorName;
