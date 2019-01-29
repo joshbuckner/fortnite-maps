@@ -15,6 +15,14 @@ body {
 
 }
 
+.creative-background-home {
+	background-image: url("../images/fortnite_creative_trans.jpg");
+	background-size: cover;
+	background-position: 0% 45%;
+
+}
+
+
 .bg-gray {
 	background-color: #2a2a2a;
 }
@@ -54,7 +62,14 @@ body {
 #jumbo {
 	padding-top: 0;
 	padding-bottom: 0;
+	transition: padding-top 2s, padding-bottom 2s;
 
+}
+
+#jumbo-home {
+	padding-top: 5rem;
+	padding-bottom: 5rem;
+	transition: padding-top 2s, padding-bottom 2s;
 }
 
 .jumbotron {

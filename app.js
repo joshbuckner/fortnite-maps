@@ -7,15 +7,6 @@ const multer = require('multer');
 const rp = require("request-promise");
 const cheerio = require("cheerio");
 
-
-// web scraper options
-const options = {
-  uri: `https://fortnite.com/fn/3847-9331-2064`,
-  transform: function (body) {
-    return cheerio.load(body);
-  }
-};
-
 const upload = multer({ dest: 'public/uploads'});
 
 const app = express();
@@ -182,7 +173,6 @@ app.post('/submit', upload.single('mapPhoto'), function(req, res) {
 	const filePath = req.file.path.substring(7);
 	// console.log(filePath);
 
-
 	if (!req.file) {
 		console.log("no file recieved");
 	} else {
@@ -208,6 +198,15 @@ app.post('/submit', upload.single('mapPhoto'), function(req, res) {
 				console.log("Map already in database");
 			} else {
 				console.log("Map is okay to add");
+
+				// web scraper options
+				const options = {
+				  	uri: `https://fortnite.com/fn/` + islandCode,
+				  	transform: function (body) {
+				    	return cheerio.load(body);
+				  	}
+				};
+
 				rp(options)
 				.then(($) => {
 					const bio = $('.island-header-tagline').text();
