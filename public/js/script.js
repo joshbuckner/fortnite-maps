@@ -38,6 +38,24 @@ function previewFile() {
   var reader  = new FileReader();
 
   reader.addEventListener("load", function () {
+
+  	// var img = new Image();
+  	// img.addEventListener("load", function() {
+  	// 	var height = img.height;
+  	// 	var width = img.width;
+  	// 	if (width % 120 === 0 && height % 20 === 0){
+  	// 		console.log(width);
+  	// 		console.log(height);
+  	// 		console.log("success");
+  	// 		preview[0].src = reader.result;
+  	// 	} else {
+  	// 		console.log(width);
+  	// 		console.log(height);
+  	// 		preview[0].src = "";
+  	// 		console.log(document.querySelector('input[type=file]').files);
+  	// 	}
+  	// });
+  	// img.src = reader.result;
     preview[0].src = reader.result;
   }, false);
 
@@ -104,5 +122,9 @@ const copyToClipboard = () => {
 };
 
 
-
-
+$('.mini-link').click(function(e) {
+        e.preventDefault();
+        $('.mini-link').removeClass('active');
+        $('')
+        $(this).addClass('active');
+    });

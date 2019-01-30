@@ -39,7 +39,7 @@ app.get('/', function(req, res) {
 	Map.find({}, function(err, foundMaps) {
 		if(!err) {
 			
-			res.render('home', { tilesDisplay: foundMaps, headingDisplay: "Fortnite Creative Codes" });
+			res.render('home', { tilesDisplay: foundMaps, headingDisplay: "Fortnite Creative Codes", headingImage: "heading-image-default", siteBackground: "site-background" });
 		}
 	});
 });
@@ -60,7 +60,7 @@ app.get('/maps/:mapName', function(req, res) {
 					// console.log(result);
 				});
 				// console.log (map.views);
-				res.render('userMap', { map: map, headingDisplay: map.category });
+				res.render('userMap', { map: map, siteBackground: "site-background" });
 				// console.log(map);
 			}
 		});
@@ -70,7 +70,7 @@ app.get('/maps/:mapName', function(req, res) {
 app.get('/all', function(req, res) {
 	Map.find({}, function(err, foundMaps) {
 		if(!err) {
-			res.render('maps', { tilesDisplay: foundMaps, headingDisplay: "All Maps" });
+			res.render('maps', { tilesDisplay: foundMaps, headingDisplay: "All Maps", headingImage: "heading-image", siteBackground: "site-background" });
 		}
 	});
 });
@@ -78,7 +78,7 @@ app.get('/all', function(req, res) {
 app.get('/obstacle-parkour', function(req, res) {
 	Map.find({category: "obstacle-parkour"}, function(err, foundMaps) {
 		if(!err) {
-			res.render('maps', { tilesDisplay: foundMaps, headingDisplay: "Obstacle & Parkour Maps" });
+			res.render('maps', { tilesDisplay: foundMaps, headingDisplay: "Obstacle & Parkour Maps", headingImage: "heading-image-freefall", siteBackground: "site-background" });
 		}
 	});
 });
@@ -86,15 +86,23 @@ app.get('/obstacle-parkour', function(req, res) {
 app.get('/racing', function(req, res) {
 	Map.find({category: "racing"}, function(err, foundMaps) {
 		if(!err) {
-			res.render('maps', { tilesDisplay: foundMaps, headingDisplay: "Racing Maps" });
+			res.render('maps', { tilesDisplay: foundMaps, headingDisplay: "Racing Maps", headingImage: "heading-image-racing", siteBackground: "site-background" });
 		}
 	});
 });
 
-app.get('/multiplayer', function(req, res) {
-	Map.find({category: "multiplayer"}, function(err, foundMaps) {
+app.get('/minigame', function(req, res) {
+	Map.find({category: "minigame"}, function(err, foundMaps) {
 		if(!err) {
-			res.render('maps', { tilesDisplay: foundMaps, headingDisplay: "Multiplayer Maps" });
+			res.render('maps', { tilesDisplay: foundMaps, headingDisplay: "Minigame Maps", headingImage: "heading-image-multiplayer", siteBackground: "site-background" });
+		}
+	});
+});
+
+app.get('/battle-arena', function(req, res) {
+	Map.find({category: "battle-arena"}, function(err, foundMaps) {
+		if(!err) {
+			res.render('maps', { tilesDisplay: foundMaps, headingDisplay: "Battle Arena Maps", headingImage: "heading-image-multiplayer", siteBackground: "site-background" });
 		}
 	});
 });
@@ -102,7 +110,7 @@ app.get('/multiplayer', function(req, res) {
 app.get('/edit-courses', function(req, res) {
 	Map.find({category: "edit-courses"}, function(err, foundMaps) {
 		if(!err) {
-			res.render('maps', { tilesDisplay: foundMaps, headingDisplay: "Edit Courses" });
+			res.render('maps', { tilesDisplay: foundMaps, headingDisplay: "Edit Courses", headingImage: "heading-image-edit", siteBackground: "site-background" });
 		}
 	});
 });
@@ -110,7 +118,7 @@ app.get('/edit-courses', function(req, res) {
 app.get('/creative-builds', function(req, res) {
 	Map.find({category: "creative-builds"}, function(err, foundMaps) {
 		if(!err) {
-			res.render('maps', { tilesDisplay: foundMaps, headingDisplay: "Creative Builds" });
+			res.render('maps', { tilesDisplay: foundMaps, headingDisplay: "Creative Builds", headingImage: "heading-image", siteBackground: "site-background" });
 		}
 	});
 });
@@ -124,28 +132,29 @@ app.get('/popular', function(req, res) {
 		});
 		// console.log(newMaps);
 		if(!err) {
-			res.render('maps', { tilesDisplay: newMaps, headingDisplay: "Popular Maps" });
+			res.render('maps', { tilesDisplay: newMaps, headingDisplay: "Popular Maps", headingImage: "heading-image-sniper", siteBackground: "site-background" });
 		}
 	});
 });
 
 app.get('/new', function(req, res) {
 	Map.find({}, function(err, foundMaps) {
-		const newMaps = foundMaps.sort(function(a, b) {
-		    a = a.date;
-		    b = b.date;
-		    return a>b ? -1 : a<b ? 1 : 0;
+		let newMaps = foundMaps.sort(function(a, b) {
+			return  b.date - a.date;
+		    // a = a.date;
+		    // b = b.date;
+		    // return a>b ? 1 : a<b ? -1 : 0;
 		});
-		console.log(newMaps);
+		// console.log(newMaps);
 		if(!err) {
-			res.render('maps', { tilesDisplay: newMaps, headingDisplay: "New Maps" });
+			res.render('maps', { tilesDisplay: newMaps, headingDisplay: "New Maps", headingImage: "heading-image-zombies", siteBackground: "site-background" });
 		}
 	});
 });
 
 app.get('/submit', function(req, res) {
 	// console.log("submit clicked");
-	res.render('submit', {headingDisplay: "Submit A Map"});
+	res.render('submit', {headingDisplay: "Submit A Map", headingImage: "heading-image-submit", siteBackground: "submit-background" });
 });
 
 app.post('/search', function(req, res) {
@@ -156,7 +165,7 @@ app.post('/search', function(req, res) {
 
 	Map.find({name: {$regex: searchInput, $options: "$i"}}, function(err, foundMaps) {
 		if(!err) {
-			res.render('maps', { tilesDisplay: foundMaps, headingDisplay: "Search results for: " + searchInput });
+			res.render('maps', { tilesDisplay: foundMaps, headingDisplay: "Search results for: " + searchInput, headingImage: "heading-image", siteBackground: "site-background" });
 		}
 	});
 });
@@ -172,6 +181,7 @@ app.post('/submit', upload.single('mapPhoto'), function(req, res) {
 	// host = req.host;
 	const filePath = req.file.path.substring(7);
 	// console.log(filePath);
+	
 
 	if (!req.file) {
 		console.log("no file recieved");

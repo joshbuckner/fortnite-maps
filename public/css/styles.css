@@ -15,7 +15,17 @@ body {
 	background-size: cover;
 	background-position: 0% 45%;
 	padding: 12rem;
-	z-index: -1;
+	
+}
+
+.submit-background {
+	position: absolute;
+	background-image: linear-gradient( rgba(31, 31, 31, .7), rgba(31, 31, 31, 0.7)), url("../images/fortnite_creative_2.png");
+	width: 100%;
+	background-size: cover;
+	background-position: 0% 10%;
+	padding: 12rem;
+	
 }
 
 .creative-background {
@@ -353,13 +363,112 @@ a:link {
 	margin-top: 5rem;
 	
 }
+
 .heading-image {
 	background-image: url("../images/fortnite_creative_2.png");
 	background-position: 0% 10%;
 	background-size: cover;
 	padding: 7rem 0;
 }
+
+.heading-image-multiplayer {
+	background-image: url("../images/fortnite_multiplayer_image.jpg");
+	background-position: 0% 40%;
+	background-size: cover;
+	padding: 7rem 0;
+}
+
+.heading-image-sniper {
+	background-image: url("../images/fortnite_sniper_image.jpg");
+	background-position: 0% 20%;
+	background-size: cover;
+	padding: 7rem 0;
+}
+
+.heading-image-freefall {
+	background-image: url("../images/fortnite_freefall_image.jpg");
+	background-position: 0% 40%;
+	background-size: cover;
+	padding: 7rem 0;
+}
+
+.heading-image-zombies {
+	background-image: url("../images/fortnite_zombies_image.jpg");
+	background-position: 0% 25%;
+	background-size: cover;
+	padding: 7rem 0;
+}
+
+.heading-image-submit {
+	background-image: url("../images/fortnite_playground_mode.jpg");
+	background-position: 0% 50%;
+	background-size: cover;
+	padding: 7rem 0;
+}
+
+.heading-image-edit {
+	background-image: url("../images/fortnite_edit_image.jpg");
+	background-position: 0% 60%;
+	background-size: cover;
+	padding: 7rem 0;
+}
+
+.heading-image-creative {
+	background-image: url("../images/fortnite_block_image.png");
+	background-position: 0% 35%;
+	background-size: cover;
+	padding: 7rem 0;
+}
+
+.heading-image-racing {
+	background-image: url("../images/fortnite_racing_image.png");
+	background-position: 0% 50%;
+	background-size: cover;
+	padding: 7rem 0;
+}
+
+.heading-image-default {
+	background-image: url("../images/fortnite_image.jpg");
+	background-position: 0% 70%;
+	background-size: cover;
+	padding: 7rem 0;
+}
+
 .heading-text {
 	background-color: rgb(42,42,42);
 	padding-top: .5rem;
 }
+
+
+.mini-nav li a {
+	display: block;
+	padding: 8px;
+}
+
+.mini-nav {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: rgb(42,42,42);
+}
+
+.mini-nav li {
+  float: left;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 0 16px 14px;
+  text-decoration: none;
+}
+
+.mini-link {
+	border-bottom: solid 3px rgb(42,42,42);
+	cursor: pointer;
+}
+
+.active, .mini-nav li:hover {
+    border-bottom: solid 3px #f1ed62;
+}
+
+

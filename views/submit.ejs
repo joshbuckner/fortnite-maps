@@ -11,7 +11,7 @@
 		<div class="submit-container rounded">
 			<form id="myForm" method="POST" autocomplete="off" class="needs-validation placeholder-center" novalidate enctype="multipart/form-data">
 				<div class="mb-5 input-group input-group-md">
-					<input name="mapName" type="text" class="form-control text-center rounded" id="map-name" placeholder="Map Name" required>
+					<input name="mapName" type="text" class="form-control text-center rounded" id="map-name" placeholder="Map Name (maximum 24 characters)" required maxlength="24">
 					<div class="invalid-feedback">
 						Please enter a Map Name.
 					</div>
@@ -41,7 +41,7 @@
 						</div>
 					</div>
 					<div class="mt-3 mb-5">
-						<img id="image-preview" src="images/fortnite_creative_2.jpg" class="file-preview ml-auto mr-auto img-fluid rounded" height="" alt="Image preview...">
+						<img id="image-preview" src="images/fortnite_creative_2.jpg" class="file-preview ml-auto mr-auto img-fluid rounded" height="" alt="Map Photo">
 					</div>
 				<!-- </div> -->
 
@@ -50,7 +50,8 @@
 						<option value="">Choose Category</option class="p-4">
 						<option value="obstacle-parkour" class="p-4">Obstacle & Parkour</option>
 						<option value="racing" class="p-4">Racing</option>
-						<option value="multiplayer" class="p-4">Multiplayer</option>
+						<option value="minigame" class="p-4">Minigame</option>
+						<option value="battle-arena" class="p-4">Battle Arena</option>
 						<option value="edit-courses" class="p-4">Edit Courses</option>
 						<option value="creative-builds" class="p-4">Creative Builds</option>
 					</select>
