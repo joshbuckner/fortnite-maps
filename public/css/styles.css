@@ -173,6 +173,7 @@ body {
 		margin: 0 auto;
 		padding: 0;
 	}
+
 	.submit-container {
 		padding: 10% 10% 1.5%;
 	}
@@ -471,3 +472,48 @@ a:link {
 	/*padding-right: 20rem;*/
 	/*padding-left: 20rem;*/
 }
+
+#navbar-main input {
+	color: rgba(255,255,255,.9);
+}
+
+input[type="search"] {
+	background-color: rgba(255,255,255,.1);
+	border: none;
+}
+
+input[type="search"]:focus {
+  background-color: rgba(255,255,255,.1);
+}
+
+.search-icon {
+	color: rgba(255,255,255,.5);
+}
+
+.search-icon:hover {
+	color: rgba(255,255,255,1);
+}
+
+/*.submit-map input {
+	color: rgba(255,255,255,.9) !important;
+}
+
+.submit-map input[type="text"] {
+	background-color: rgba(255,255,255,.1);
+	border: none;
+}
+
+.submit-map input[type="tel"] {
+	background-color: rgba(255,255,255,.1);
+	border: none;
+}
+
+.submit-map select {
+	background-color: rgba(255,255,255,.1);
+	border: none;
+}
+
+.submit-map input[type="file"] {
+	background-color: rgba(255,255,255,.1);
+	border: none;
+}*/
