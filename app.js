@@ -132,7 +132,7 @@ app.get('/popular', function(req, res) {
 		});
 		// console.log(newMaps);
 		if(!err) {
-			res.render('maps', { tilesDisplay: newMaps, headingDisplay: "Popular Maps", headingImage: "heading-image-sniper", siteBackground: "site-background" });
+			res.render('maps_filtered', { tilesDisplay: newMaps, headingDisplay: "Popular Maps", headingImage: "heading-image-sniper", siteBackground: "site-background" });
 		}
 	});
 });
@@ -147,7 +147,7 @@ app.get('/new', function(req, res) {
 		});
 		// console.log(newMaps);
 		if(!err) {
-			res.render('maps', { tilesDisplay: newMaps, headingDisplay: "New Maps", headingImage: "heading-image-zombies", siteBackground: "site-background" });
+			res.render('maps_filtered', { tilesDisplay: newMaps, headingDisplay: "New Maps", headingImage: "heading-image-zombies", siteBackground: "site-background" });
 		}
 	});
 });

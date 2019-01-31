@@ -163,23 +163,18 @@ body {
 }
 
 .submit-container {
-	padding: 10% 10% 1.5%;
-	background-color: rgba(31, 31, 31, .7);
+	padding: 10% 25% 1.5%;
+	background-color: rgb(42,42,42);
 	
 }
 
-.submit-map .container-fluid {
-	padding: 0% 35%;
-	/*margin-top: 3%;*/
-}
-
 @media (max-width: 992px) {
-	.submit-map .container-fluid {
-		padding: 0% 10%;
-	}
 	.center-search {
 		margin: 0 auto;
 		padding: 0;
+	}
+	.submit-container {
+		padding: 10% 10% 1.5%;
 	}
 	/*#userMap .container {
 		padding: 0 10%;
@@ -360,7 +355,7 @@ a:link {
 
 .home-page-heading {
 	position: relative;
-	margin-top: 5rem;
+	margin-top: 2rem;
 	
 }
 
@@ -458,17 +453,21 @@ a:link {
   display: block;
   color: white;
   text-align: center;
-  padding: 0 16px 14px;
+  padding: 0 16px 5px;
   text-decoration: none;
 }
 
 .mini-link {
+	margin-top: 3rem;
 	border-bottom: solid 3px rgb(42,42,42);
 	cursor: pointer;
 }
 
-.active, .mini-nav li:hover {
+.active, .mini-link:hover {
     border-bottom: solid 3px #f1ed62;
 }
 
-
+.filter-display {
+	/*padding-right: 20rem;*/
+	/*padding-left: 20rem;*/
+}
