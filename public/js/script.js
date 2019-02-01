@@ -122,9 +122,9 @@ const copyToClipboard = () => {
 };
 
 
-// $('.mini-link').click(function(e) {
+// $('.nav-item').click(function(e) {
 //         // e.preventDefault();
-//         $('.mini-link').removeClass('active');
+//         $('.nav-item').removeClass('active');
 //         $('')
 //         $(this).addClass('active');
 //     });
