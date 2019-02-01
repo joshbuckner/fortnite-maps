@@ -3,17 +3,21 @@
 		<div class="<%= headingImage %> rounded-top">
 		</div>
 		<div class="heading-text rounded-bottom">
-			<div class="">
-				<div class="">
-					<ul class="mini-nav" style="display: inline; position: absolute;">
-						<li class="mini-link active"><a>Newest</a></li>
-						<li class="mini-link"><a>Most Viewed</a></li>
+			
+				<div class="mini-nav-div">
+					<ul class="mini-nav">
+						<li id="newest" class="mini-link <%= newestActive %> hvr-underline-reveal">
+							<a href="?sortby=newest" >Newest</a>
+						</li>
+						<li id="mostViewed" class="mini-link <%= viewsActive %> hvr-underline-reveal">
+							<a href="?sortby=views" >Most Viewed</a>
+						</li>
 					</ul>
 				</div>
 				<div class="">
 					<h1 class="jumbotron-heading filter-display text-center"><%= headingDisplay %></h1>
 				</div>
-			</div>
+			
 		</div>
 	</div>
 </section>
