@@ -30,11 +30,21 @@
 						<div class="col-lg-4 hvr-grow">
 								<a class="card-link" href="/maps/<%= map.code %>">
 								<div class="card mb-4 shadow-sm text-white lighter-gray-section">
-									<div class="card-header text-center card-heading-larger"><%= map.name %></div>
+									<div class="card-header text-center card-heading-larger">
+										
+										<%= map.name %>
+									</div>
 									<img src="<%= map.photo %>" class="card-img-top" alt="...">
 								</a>
 									<div class="card-body">
-										<p class="card-text text-center code-text">Code: <%= map.code %> %> <br>(<%= map.author %>)</p>
+										<div class="row">
+											<div class="col-9">
+												<p class="card-text code-text text-center">Code: <%= map.code %> %> <br>(<%= map.author %>)</p>
+											</div>
+											<div class="code-text h6 pt-3 text-center col-3">
+												<i class="far fa-eye" style="color: #f1ed62;"></i> <%= map.views %>
+											</div>
+										</div>
 									</div>
 								</div>
 							<!-- </a> -->
