@@ -3,352 +3,112 @@ body {
 	font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
-@font-face {
-	font-family: 'Burbank Big Cd Bk';
-	src: url('../fonts/BurbankBigCondensed-Bold.otf');
-}
+/*color palette*/
 
-.site-background {
-	position: absolute;
-	background-image: linear-gradient( rgba(31, 31, 31, .7), rgba(31, 31, 31, 0.7)), url("../images/fortnite_creative_trans.jpg");
-	width: 100%;
-	background-size: cover;
-	background-position: 0% 45%;
-	padding: 12rem;
-	
-}
-
-.submit-background {
-	position: absolute;
-	background-image: linear-gradient( rgba(31, 31, 31, .7), rgba(31, 31, 31, 0.7)), url("../images/fortnite_creative_2.png");
-	width: 100%;
-	background-size: cover;
-	background-position: 0% 10%;
-	padding: 12rem;
-	
-}
-
-.creative-background {
-	background-image: url("../images/fortnite_creative_trans.jpg");
-	background-size: cover;
-	background-position: 0% 45%;
-
-}
-
-.creative-background-home {
-	background-image: url("../images/fortnite_creative_trans.jpg");
-	background-size: cover;
-	background-position: 0% 45%;
-
-}
-
-.ash-grey {
-	background-color: #b5c2b7;
-	background-size: cover;
-}
-
-.bg-gray {
+.mine_shaft_gray_bg {
 	background-color: #2a2a2a;
 }
 
-.gray-outline {
-	border-color: #6c757d;
+.pale_sky_gray {
+  color: #6c757d;
 }
 
-
-.light-gray-section {
-	background-color: #1f1f1f;
+.manz_yellow {
+  color: #f1ed62;
 }
 
-.lighter-gray-section {
-	background-color: #292929;
+/*fonts*/
+
+@font-face {
+  font-family: 'Burbank Big Cd Bk';
+  src: url('../fonts/BurbankBigCondensed-Bold.otf');
 }
 
-.card-heading-larger {
-	font-size: 1.5em;
+.burbank_font {
+  font-family: 'Burbank Big Cd Bk', sans-serif;
 }
 
-.social-ico {
-	color: #6c757d;
-	margin: 0px 10px 20px;
-}
-
-.gray-text {
-	color: #6c757d;
-}
-
-.code-text {
+.code_font {
 	font-family: 'Roboto Mono', monospace;
 }
 
-
-#jumbo {
-	padding-top: 0;
-	padding-bottom: 0;
-
+.shadow_5 {
+  font-size: 5rem;
+  font-weight: 500;
+  text-shadow: 4px 4px 0px rgb(0, 0, 0);
 }
 
-#jumbo-home {
-	padding-top: 5rem;
-	padding-bottom: 5rem;
+/* partials/background */
 
+.background_header_main {
+  background-image: linear-gradient( rgba(31, 31, 31, .7), rgba(31, 31, 31, 0.7)), url("../images/fortnite_creative_trans.jpg");
+  background-size: cover;
+  background-position: 0% 45%;
+  padding: 12rem;
+  position: absolute;
+  width: 100%;
 }
 
-.jumbotron {
-	padding-top: 3rem;
-	padding-bottom: 3rem;
-	margin-bottom: 0;
-	background-color: transparent;
+.background_header_submit {
+  background-image: linear-gradient( rgba(31, 31, 31, .7), rgba(31, 31, 31, 0.7)), url("../images/fortnite_creative_2.png");
+  background-size: cover;
+  background-position: 0% 10%;
+  padding: 12rem;
+  position: absolute;
+  width: 100%;
+}
+/* partials/navbar */
+
+.dropdown .dropdown-menu .dropdown-item {
+  color: rgba(255,255,255,.7);
 }
 
-@media (min-width: 768px) {
-	.jumbotron {
-		padding-top: 6rem;
-		padding-bottom: 6rem;
-	}
-}
-
-.jumbotron p:last-child {
-	margin-bottom: 0;
-}
-
-.jumbotron-heading {
-	font-family: 'Burbank Big Cd Bk', sans-serif;
-	font-weight: 500;
-	font-size: 5rem;
-	text-shadow: 4px 4px 0px rgb(0, 0, 0);
-	padding: 0;
-	margin: 0;
-}
-
-
-.jumbotron .container {
-	max-width: 200rem;
-}
-
-.filter-div {
-	display: none;
-}
-
-.show {
-	display: block;
-}
-
-.navbar .navbar-collapse {
-	text-align: center;
-}
-
-
-@media (min-width: 992px) {
-	.navbar .container-fluid {
-		margin: 0% 0%;
-	}
-}
-
-.hidden {
-	position: fixed;
-	visibility: hidden;
-}
-
-.creative-submit-background {
-
-	background-image: url('../images/fortnite_creative_2.png');
-	background-size: cover;
+.dropdown .dropdown-menu .dropdown-item:hover {
+  background-color: rgba(255,255,255,.1);
 }
 
 @media (max-width: 992px) {
-	.creative-submit-background {
-		background-position: 56% 0%;
-	}
-}
-
-.submit-container {
-	padding: 10% 25% 1.5%;
-	background-color: rgb(42,42,42);
-	
-}
-
-@media (max-width: 992px) {
-	.center-search {
+	.search_center {
 		margin: 0 auto;
 		padding: 0;
 	}
-
-	.submit-container {
-		padding: 10% 10% 1.5%;
-	}
-	/*#userMap .container {
-		padding: 0 10%;
-	}*/
-	/*#userMap .my-5 {
-		margin: 0;
-	}*/
-
-
 }
 
-.placeholder-center ::placeholder {
+/* partials/page_heading_filter */
+
+a:link {
+  text-decoration: none;
+}
+
+/* submit */
+
+.placeholder_center ::placeholder {
 	text-align: center;
 	font-size: 1rem;
 }
 
-
-a:link {
-	text-decoration: none;
-}
-
-.modal-body-style {
-	border: none;
-	padding: 0;
-}
-
-
-.submit-success {
-	font-family: 'Burbank Big Cd Bk', sans-serif;
-}
-
-.card-link {
-	color: white;
-}
-
-.card-link:hover {
-	color: white;
-}
-
-/*.crop-yt-thumbnail {
-	height: auto;
-	overflow: hidden;
-}
-
-.crop-yt-thumbnail img {
-	
-}*/
+/* map */
 
 #userMap .container {
 	max-width: 100%;
 	width: 1200px;
 }
 
-.dropdown .dropdown-menu .dropdown-item {
-	color: rgba(255,255,255,.7);
-	background-color: #2a2a2a;
+.island_title {
+  line-height: 1;
 }
 
-.dropdown .dropdown-menu .dropdown-item:active, .dropdown .dropdown-menu .dropdown-item:hover {
-	background-color: rgba(255,255,255,.1);
-/*	color: rgba(255,255,255,.7);*/
+.island_bio {
+  letter-spacing: 2px;
+  line-height: 1.5;
 }
 
-/*ul.navbar-nav a:hover {
-	color: yellow !important;
-}*/
-
-.fort-text-yellow {
-	color: #f1ed62;
+.island_code {
+  letter-spacing: 10px;
+  line-height: 1;
 }
 
-.text-auto-lg {
-	font-size: 4vw;
-}
-
-.text-auto-md {
-	font-size: 2.5vw;
-}
-
-.text-auto-sm {
-	font-size: 2vw;
-}
-
-.text-auto-xs {
-	font-size: 1.5vw;
-}
-
-.map-title {
-	font-size: 3.5rem;
-	margin: 0;
-	line-height: .7;
-}
-
-.map-views {
-	margin: 0;
-	line-height: .7;
-}
-
-.island-title {
-
-	
-	line-height: 1;
-
-}
-
-.island-author {
-
-	
-}
-
-.island-bio {
-
-	
-	letter-spacing: 2px;
-	line-height: 1.5;
-}
-
-.island-code {
-
-	
-	letter-spacing: 10px;
-	line-height: 1;
-}
-.island-copy {
-
-	
-}
-.island-views {
-	
-}
-
-/*.yt-div {
-	height: 180px;
-  	width: 270px;
-  	max-width: 50%;
-}
-*/
-
-@media (max-width: 992px) {
-	.island-title {
-		
-		
-		line-height: 1;
-	}
-
-	.island-author {
-		
-		
-	}
-
-	.island-bio {
-		
-		
-		letter-spacing: 2px;
-		line-height: 1.5;
-	}
-
-	.island-code {
-		
-		
-		letter-spacing: 10px;
-		line-height: 1;
-	}
-	.island-copy {
-		
-		
-	}
-	.island-views {
-		
-		
-		
-	}
-}
+/* TODO */
 
 #copy-code {
 	white-space: nowrap;
@@ -562,7 +322,7 @@ input[type="search"]:focus {
 
 
 @media (max-width: 1199px) {
-	.jumbotron-heading {
+	.burbank_font shadow_5 {
 		font-size: 4rem;
 	}
 	.mini-link {
@@ -571,7 +331,7 @@ input[type="search"]:focus {
 }
 
 @media (max-width: 992px) {
-	.jumbotron-heading {
+	.burbank_font shadow_5 {
 		font-size: 3rem;
 		padding-top: 6rem;
 	}

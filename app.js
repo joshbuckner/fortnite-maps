@@ -40,7 +40,7 @@ app.get('/', function(req, res) {
 				tilesDisplay: foundMaps, 
 				headingDisplay: "Fortnite Creative Codes", 
 				headingImage: "heading-image-default", 
-				siteBackground: "site-background" 
+				siteBackground: "background_header_main" 
 			});
 		}
 	});
@@ -54,9 +54,9 @@ app.get('/maps/:mapName', function(req, res) {
 			if (requestedMap === storedCode) {
 				Map.update({ name: map.name }, { $inc: { views: 1 }}, function(err, result) {
 				});
-				res.render('userMap', { 
+				res.render('map', { 
 					map: map, 
-					siteBackground: "site-background" 
+					siteBackground: "background_header_main" 
 				});
 			}
 		});
@@ -79,7 +79,7 @@ app.get('/all', function(req, res) {
 					tilesDisplay: newMaps, 
 					headingDisplay: "All", 
 					headingImage: "heading-image", 
-					siteBackground: "site-background" 
+					siteBackground: "background_header_main" 
 				});
 			}
 		});	
@@ -97,7 +97,7 @@ app.get('/all', function(req, res) {
 					tilesDisplay: newMaps, 
 					headingDisplay: "All", 
 					headingImage: "heading-image", 
-					siteBackground: "site-background" 
+					siteBackground: "background_header_main" 
 				});
 			}
 		});
@@ -120,7 +120,7 @@ app.get('/obstacle-parkour', function(req, res) {
 					tilesDisplay: newMaps, 
 					headingDisplay: "Obstacle & Parkour", 
 					headingImage: "heading-image-freefall", 
-					siteBackground: "site-background" 
+					siteBackground: "background_header_main" 
 				});
 			}
 		});
@@ -138,7 +138,7 @@ app.get('/obstacle-parkour', function(req, res) {
 					tilesDisplay: newMaps, 
 					headingDisplay: "Obstacle & Parkour", 
 					headingImage: "heading-image-freefall", 
-					siteBackground: "site-background" 
+					siteBackground: "background_header_main" 
 				});
 			}
 		});
@@ -161,7 +161,7 @@ app.get('/racing', function(req, res) {
 					tilesDisplay: newMaps, 
 					headingDisplay: "Racing", 
 					headingImage: "heading-image-racing", 
-					siteBackground: "site-background" 
+					siteBackground: "background_header_main" 
 				});
 			}
 		});
@@ -179,7 +179,7 @@ app.get('/racing', function(req, res) {
 					tilesDisplay: newMaps, 
 					headingDisplay: "Racing", 
 					headingImage: "heading-image-racing", 
-					siteBackground: "site-background" 
+					siteBackground: "background_header_main" 
 				});
 			}
 		});
@@ -202,7 +202,7 @@ app.get('/minigame', function(req, res) {
 					tilesDisplay: newMaps, 
 					headingDisplay: "Minigame", 
 					headingImage: "heading-image-multiplayer", 
-					siteBackground: "site-background" 
+					siteBackground: "background_header_main" 
 				});
 			}
 		});
@@ -220,7 +220,7 @@ app.get('/minigame', function(req, res) {
 					tilesDisplay: newMaps, 
 					headingDisplay: "Minigame", 
 					headingImage: "heading-image-multiplayer", 
-					siteBackground: "site-background" 
+					siteBackground: "background_header_main" 
 				});
 			}
 		});
@@ -243,7 +243,7 @@ app.get('/battle-arena', function(req, res) {
 					tilesDisplay: newMaps, 
 					headingDisplay: "Battle Arena", 
 					headingImage: "heading-image-multiplayer", 
-					siteBackground: "site-background" 
+					siteBackground: "background_header_main" 
 				});
 			}
 		});
@@ -261,7 +261,7 @@ app.get('/battle-arena', function(req, res) {
 					tilesDisplay: newMaps, 
 					headingDisplay: "Battle Arena", 
 					headingImage: "heading-image-multiplayer", 
-					siteBackground: "site-background" 
+					siteBackground: "background_header_main" 
 				});
 			}
 		});
@@ -284,7 +284,7 @@ app.get('/edit-courses', function(req, res) {
 					tilesDisplay: newMaps, 
 					headingDisplay: "Edit Courses", 
 					headingImage: "heading-image-edit", 
-					siteBackground: "site-background" 
+					siteBackground: "background_header_main" 
 				});
 			}
 		});
@@ -302,7 +302,7 @@ app.get('/edit-courses', function(req, res) {
 					tilesDisplay: newMaps, 
 					headingDisplay: "Edit Courses", 
 					headingImage: "heading-image-edit", 
-					siteBackground: "site-background" 
+					siteBackground: "background_header_main" 
 				});
 			}
 		});
@@ -325,7 +325,7 @@ app.get('/creative-builds', function(req, res) {
 					tilesDisplay: newMaps, 
 					headingDisplay: "Creative Builds", 
 					headingImage: "heading-image", 
-					siteBackground: "site-background" 
+					siteBackground: "background_header_main" 
 				});
 			}
 		});
@@ -343,7 +343,7 @@ app.get('/creative-builds', function(req, res) {
 					tilesDisplay: newMaps, 
 					headingDisplay: "Creative Builds", 
 					headingImage: "heading-image", 
-					siteBackground: "site-background" 
+					siteBackground: "background_header_main" 
 				});
 			}
 		});
@@ -358,11 +358,11 @@ app.get('/popular', function(req, res) {
 		  return a>b ? -1 : a<b ? 1 : 0;
 		});
 		if(!err) {
-			res.render('maps_filtered', { 
+			res.render('maps_filter', { 
 				tilesDisplay: newMaps, 
 				headingDisplay: "Popular", 
 				headingImage: "heading-image-sniper", 
-				siteBackground: "site-background" 
+				siteBackground: "background_header_main" 
 			});
 		}
 	});
@@ -374,11 +374,11 @@ app.get('/new', function(req, res) {
 			return b.date - a.date;
 		});
 		if(!err) {
-			res.render('maps_filtered', { 
+			res.render('maps_filter', { 
 				tilesDisplay: newMaps, 
 				headingDisplay: "New", 
 				headingImage: "heading-image-zombies", 
-				siteBackground: "site-background" 
+				siteBackground: "background_header_main" 
 			});
 		}
 	});
@@ -388,7 +388,7 @@ app.get('/submit', function(req, res) {
 	res.render('submit', { 
 		headingDisplay: "Submit An Island", 
 		headingImage: "heading-image-submit", 
-		siteBackground: "submit-background" 
+		siteBackground: "background_header_submit" 
 	});
 });
 
@@ -396,11 +396,11 @@ app.post('/search', function(req, res) {
 	searchInput = req.body.searchInput;
 	Map.find({name: {$regex: searchInput, $options: "$i"}}, function(err, foundMaps) {
 		if(!err) {
-			res.render('maps_filtered', { 
+			res.render('maps_filter', { 
 				tilesDisplay: foundMaps, 
 				headingDisplay: "Search results for: " + searchInput, 
 				headingImage: "heading-image", 
-				siteBackground: "site-background" 
+				siteBackground: "background_header_main" 
 			});
 		}
 	});

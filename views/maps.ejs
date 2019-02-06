@@ -9,9 +9,9 @@
 			<div class="row">
 				<% tilesDisplay.forEach(function(map) { -%>
 					<div class="col-lg-4 hvr-grow">
-						<a class="card-link" href="/maps/<%= map.code %>">
-						<div class="card mb-4 shadow-sm text-white lighter-gray-section">
-							<div class="card-header text-center card-heading-larger">
+						<a class="text-white" href="/maps/<%= map.code %>">
+						<div class="card mb-4 shadow-sm text-white mine_shaft_gray_bg">
+							<div class="card-header text-center h4 py-3">
 								<%= map.name %>
 							</div>
 							<img src="<%= map.photo %>" class="card-img-top" alt="...">
@@ -19,9 +19,9 @@
 							<div class="card-body">
 								<div class="row">
 									<div class="col-9">
-										<p class="card-text code-text text-left">Code: <%= map.code %> %> <br>(<%= map.author %>)</p>
+										<p class="card-text code_font text-left">Code: <%= map.code %> %> <br>(<%= map.author %>)</p>
 									</div>
-									<div class="code-text h6 pt-3 text-center col-3">
+									<div class="code_font h6 pt-3 text-center col-3">
 										<i class="far fa-eye" style="color: #f1ed62;"></i> <%= map.views %>
 									</div>
 								</div>
