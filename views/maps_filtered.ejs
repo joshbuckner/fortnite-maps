@@ -1,59 +1,38 @@
 <%- include('partials/header') -%>
-
 <%- include('partials/navbar') -%>
-
 <%- include('partials/background') %>
-
 <%- include('partials/page_heading') -%>
 
-	<!-- All Islands -->
-	
-	<section class="" id="content">
-		<!-- Modal -->
-		<div class="modal fade" id="ModalCenter" tabindex="-1" role="dialog" aria-labelledby="ModalCenterTitle" aria-hidden="true">
-			<div class="modal-dialog modal-dialog-centered" role="document">
-				<div class="modal-content text-white lighter-gray-section">
-					<button type="button" class="modal-body-style text-white lighter-gray-section" data-dismiss="modal" aria-label="Close">
-						<div id="modal-title" class="card-header text-center card-heading-larger"></div>
-						<img id="modal-image"src="" class="card-img-top" alt="...">
-						<div class="card-body">
-							<p class="card-text text-center code-text">Code: <span id="modal-code"></span> <br>(<span id="modal-author"></span>)</p>
-						</div>
-				</div>
-			</div>
-		</div>
-		<div class="album py-4">
-			<div class="container">
-				<div class="row">
-
-					<% tilesDisplay.forEach(function(map) { -%>
-						<div class="col-lg-4 hvr-grow">
-								<a class="card-link" href="/maps/<%= map.code %>">
-								<div class="card mb-4 shadow-sm text-white lighter-gray-section">
-									<div class="card-header text-center card-heading-larger"><%= map.name %></div>
-
-									<img src="<%= map.photo %>" class="card-img-top" alt="...">
-									<p class="category-tag"><%= map.category %></p>
-								</a>
-									<div class="card-body">
-										<div class="row">
-											<div class="col-9">
-												<p class="card-text code-text text-center">Code: <%= map.code %> %> <br>(<%= map.author %>)</p>
-											</div>
-											<div class="code-text h6 pt-3 text-center col-3">
-												<i class="far fa-eye" style="color: #f1ed62;"></i> <%= map.views %>
-											</div>
-										</div>
+<section class="" id="content">
+	<div class="album py-4">
+		<div class="container">
+			<div class="row">
+				<% tilesDisplay.forEach(function(map) { -%>
+					<div class="col-lg-4 hvr-grow">
+						<a class="card-link" href="/maps/<%= map.code %>">
+						<div class="card mb-4 shadow-sm text-white lighter-gray-section">
+							<div class="card-header text-center card-heading-larger">
+                <%= map.name %>
+              </div>
+							<img src="<%= map.photo %>" class="card-img-top" alt="...">
+							<p class="category-tag"><%= map.category %></p>
+						</a>
+							<div class="card-body">
+								<div class="row">
+									<div class="col-9">
+										<p class="card-text code-text text-center">Code: <%= map.code %> %> <br>(<%= map.author %>)</p>
+									</div>
+									<div class="code-text h6 pt-3 text-center col-3">
+										<i class="far fa-eye" style="color: #f1ed62;"></i> <%= map.views %>
 									</div>
 								</div>
-							<!-- </a> -->
+							</div>
 						</div>
-					<% }); -%>
-				
-				</div>
+					</div>
+				<% }); -%>
 			</div>
 		</div>
-		
-	</section>
+	</div>
+</section>
 
 <%- include('partials/footer') -%>

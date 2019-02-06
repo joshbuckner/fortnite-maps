@@ -33,36 +33,31 @@ const mapsSchema = {
 
 const Map = mongoose.model("Map", mapsSchema);
 
-
-
-
 app.get('/', function(req, res) {
 	Map.find({}, function(err, foundMaps) {
 		if(!err) {
-			
-			res.render('home', { tilesDisplay: foundMaps, headingDisplay: "Fortnite Creative Codes", headingImage: "heading-image-default", siteBackground: "site-background" });
+			res.render('home', { 
+				tilesDisplay: foundMaps, 
+				headingDisplay: "Fortnite Creative Codes", 
+				headingImage: "heading-image-default", 
+				siteBackground: "site-background" 
+			});
 		}
 	});
 });
 
 app.get('/maps/:mapName', function(req, res) {
 	const requestedMap = req.params.mapName;
-
-
 	Map.find({}, function(err, foundMaps) {
 		foundMaps.forEach(function(map) {
-			
 			const storedCode = map.code;
-			
-
 			if (requestedMap === storedCode) {
-				
 				Map.update({ name: map.name }, { $inc: { views: 1 }}, function(err, result) {
-					// console.log(result);
 				});
-				// console.log (map.views);
-				res.render('userMap', { map: map, siteBackground: "site-background" });
-				// console.log(map);
+				res.render('userMap', { 
+					map: map, 
+					siteBackground: "site-background" 
+				});
 			}
 		});
 	});
@@ -70,278 +65,305 @@ app.get('/maps/:mapName', function(req, res) {
 
 app.get('/all', function(req, res) {
 	const sortBy = req.query.sortby;
-
-		if (sortBy === "views") {
-			Map.find({}, function(err, foundMaps) {
-				const newMaps = foundMaps.sort(function(a, b) {
-				    a = a.views;
-				    b = b.views;
-				    return a>b ? -1 : a<b ? 1 : 0;
-				});
-				// console.log(newMaps);
-				if(!err) {
-					res.render('maps', { newestActive: "", viewsActive: "underline-active", tilesDisplay: newMaps, headingDisplay: "All", headingImage: "heading-image", siteBackground: "site-background" });
-				}
+	if (sortBy === "views") {
+		Map.find({}, function(err, foundMaps) {
+			const newMaps = foundMaps.sort(function(a, b) {
+			  a = a.views;
+			  b = b.views;
+			  return a>b ? -1 : a<b ? 1 : 0;
 			});
-			console.log("sort by views");
-				
-		} else {
-			Map.find({}, function(err, foundMaps) {
-				const newMaps = foundMaps.sort(function(a, b) {
-				    a = a.date;
-				    b = b.date;
-				    return a>b ? -1 : a<b ? 1 : 0;
+			if(!err) {
+				res.render('maps', { 
+					newestActive: "", 
+					viewsActive: "underline-active", 
+					tilesDisplay: newMaps, 
+					headingDisplay: "All", 
+					headingImage: "heading-image", 
+					siteBackground: "site-background" 
 				});
-				// console.log(newMaps);
-				if(!err) {
-					res.render('maps', { newestActive: "underline-active", viewsActive: "", tilesDisplay: newMaps, headingDisplay: "All", headingImage: "heading-image", siteBackground: "site-background" });
-				}
+			}
+		});	
+	} else {
+		Map.find({}, function(err, foundMaps) {
+			const newMaps = foundMaps.sort(function(a, b) {
+			  a = a.date;
+			  b = b.date;
+			  return a>b ? -1 : a<b ? 1 : 0;
 			});
-			console.log("sort by newest");
-		}
-		// if(!err) {
-		// 	res.render('maps', { tilesDisplay: foundMaps, headingDisplay: "All Maps", headingImage: "heading-image", siteBackground: "site-background" });
-		// }
+			if(!err) {
+				res.render('maps', { 
+					newestActive: "underline-active", 
+					viewsActive: "", 
+					tilesDisplay: newMaps, 
+					headingDisplay: "All", 
+					headingImage: "heading-image", 
+					siteBackground: "site-background" 
+				});
+			}
+		});
+	}
 });
 
 app.get('/obstacle-parkour', function(req, res) {
 	const sortBy = req.query.sortby;
-
-		if (sortBy === "views") {
-			Map.find({category: "obstacle-parkour"}, function(err, foundMaps) {
-				const newMaps = foundMaps.sort(function(a, b) {
-				    a = a.views;
-				    b = b.views;
-				    return a>b ? -1 : a<b ? 1 : 0;
-				});
-				// console.log(newMaps);
-				if(!err) {
-					res.render('maps', { newestActive: "", viewsActive: "underline-active", tilesDisplay: newMaps, headingDisplay: "Obstacle & Parkour", headingImage: "heading-image-freefall", siteBackground: "site-background" });
-				}
+	if (sortBy === "views") {
+		Map.find({category: "obstacle-parkour"}, function(err, foundMaps) {
+			const newMaps = foundMaps.sort(function(a, b) {
+			  a = a.views;
+			  b = b.views;
+			  return a>b ? -1 : a<b ? 1 : 0;
 			});
-			console.log("sort by views");
-				
-		} else {
-			Map.find({category: "obstacle-parkour"}, function(err, foundMaps) {
-				const newMaps = foundMaps.sort(function(a, b) {
-				    a = a.date;
-				    b = b.date;
-				    return a>b ? -1 : a<b ? 1 : 0;
+			if(!err) {
+				res.render('maps', { 
+					newestActive: "", 
+					viewsActive: "underline-active", 
+					tilesDisplay: newMaps, 
+					headingDisplay: "Obstacle & Parkour", 
+					headingImage: "heading-image-freefall", 
+					siteBackground: "site-background" 
 				});
-				// console.log(newMaps);
-				if(!err) {
-					res.render('maps', { newestActive: "underline-active", viewsActive: "", tilesDisplay: newMaps, headingDisplay: "Obstacle & Parkour", headingImage: "heading-image-freefall", siteBackground: "site-background" });
-				}
+			}
+		});
+	} else {
+		Map.find({category: "obstacle-parkour"}, function(err, foundMaps) {
+			const newMaps = foundMaps.sort(function(a, b) {
+			  a = a.date;
+			  b = b.date;
+			  return a>b ? -1 : a<b ? 1 : 0;
 			});
-			console.log("sort by newest");
-		}
-	// Map.find({category: "obstacle-parkour"}, function(err, foundMaps) {
-	// 	if(!err) {
-	// 		res.render('maps', { tilesDisplay: foundMaps, headingDisplay: "Obstacle & Parkour Maps", headingImage: "heading-image-freefall", siteBackground: "site-background" });
-	// 	}
-	// });
+			if(!err) {
+				res.render('maps', { 
+					newestActive: "underline-active", 
+					viewsActive: "", 
+					tilesDisplay: newMaps, 
+					headingDisplay: "Obstacle & Parkour", 
+					headingImage: "heading-image-freefall", 
+					siteBackground: "site-background" 
+				});
+			}
+		});
+	}
 });
 
 app.get('/racing', function(req, res) {
 	const sortBy = req.query.sortby;
-
-		if (sortBy === "views") {
-			Map.find({category: "racing"}, function(err, foundMaps) {
-				const newMaps = foundMaps.sort(function(a, b) {
-				    a = a.views;
-				    b = b.views;
-				    return a>b ? -1 : a<b ? 1 : 0;
-				});
-				// console.log(newMaps);
-				if(!err) {
-					res.render('maps', { newestActive: "", viewsActive: "underline-active", tilesDisplay: newMaps, headingDisplay: "Racing", headingImage: "heading-image-racing", siteBackground: "site-background" });
-				}
+	if (sortBy === "views") {
+		Map.find({category: "racing"}, function(err, foundMaps) {
+			const newMaps = foundMaps.sort(function(a, b) {
+			  a = a.views;
+			  b = b.views;
+			  return a>b ? -1 : a<b ? 1 : 0;
 			});
-			console.log("sort by views");
-				
-		} else {
-			Map.find({category: "racing"}, function(err, foundMaps) {
-				const newMaps = foundMaps.sort(function(a, b) {
-				    a = a.date;
-				    b = b.date;
-				    return a>b ? -1 : a<b ? 1 : 0;
+			if(!err) {
+				res.render('maps', { 
+					newestActive: "", 
+					viewsActive: "underline-active", 
+					tilesDisplay: newMaps, 
+					headingDisplay: "Racing", 
+					headingImage: "heading-image-racing", 
+					siteBackground: "site-background" 
 				});
-				// console.log(newMaps);
-				if(!err) {
-					res.render('maps', { newestActive: "underline-active", viewsActive: "", tilesDisplay: newMaps, headingDisplay: "Racing", headingImage: "heading-image-racing", siteBackground: "site-background" });
-				}
+			}
+		});
+	} else {
+		Map.find({category: "racing"}, function(err, foundMaps) {
+			const newMaps = foundMaps.sort(function(a, b) {
+			  a = a.date;
+			  b = b.date;
+			  return a>b ? -1 : a<b ? 1 : 0;
 			});
-			console.log("sort by newest");
-		}
-	// Map.find({category: "racing"}, function(err, foundMaps) {
-	// 	if(!err) {
-	// 		res.render('maps', { tilesDisplay: foundMaps, headingDisplay: "Racing Maps", headingImage: "heading-image-racing", siteBackground: "site-background" });
-	// 	}
-	// });
+			if(!err) {
+				res.render('maps', { 
+					newestActive: "underline-active", 
+					viewsActive: "", 
+					tilesDisplay: newMaps, 
+					headingDisplay: "Racing", 
+					headingImage: "heading-image-racing", 
+					siteBackground: "site-background" 
+				});
+			}
+		});
+	}
 });
 
 app.get('/minigame', function(req, res) {
 	const sortBy = req.query.sortby;
-
-		if (sortBy === "views") {
-			Map.find({category: "minigame"}, function(err, foundMaps) {
-				const newMaps = foundMaps.sort(function(a, b) {
-				    a = a.views;
-				    b = b.views;
-				    return a>b ? -1 : a<b ? 1 : 0;
-				});
-				// console.log(newMaps);
-				if(!err) {
-					res.render('maps', { newestActive: "", viewsActive: "underline-active", tilesDisplay: newMaps, headingDisplay: "Minigame", headingImage: "heading-image-multiplayer", siteBackground: "site-background" });
-				}
+	if (sortBy === "views") {
+		Map.find({category: "minigame"}, function(err, foundMaps) {
+			const newMaps = foundMaps.sort(function(a, b) {
+			  a = a.views;
+			  b = b.views;
+			  return a>b ? -1 : a<b ? 1 : 0;
 			});
-			console.log("sort by views");
-				
-		} else {
-			Map.find({category: "minigame"}, function(err, foundMaps) {
-				const newMaps = foundMaps.sort(function(a, b) {
-				    a = a.date;
-				    b = b.date;
-				    return a>b ? -1 : a<b ? 1 : 0;
+			if(!err) {
+				res.render('maps', { 
+					newestActive: "", 
+					viewsActive: "underline-active", 
+					tilesDisplay: newMaps, 
+					headingDisplay: "Minigame", 
+					headingImage: "heading-image-multiplayer", 
+					siteBackground: "site-background" 
 				});
-				// console.log(newMaps);
-				if(!err) {
-					res.render('maps', { newestActive: "underline-active", viewsActive: "", tilesDisplay: newMaps, headingDisplay: "Minigame", headingImage: "heading-image-multiplayer", siteBackground: "site-background" });
-				}
+			}
+		});
+	} else {
+		Map.find({category: "minigame"}, function(err, foundMaps) {
+			const newMaps = foundMaps.sort(function(a, b) {
+			  a = a.date;
+			  b = b.date;
+			  return a>b ? -1 : a<b ? 1 : 0;
 			});
-			console.log("sort by newest");
-		}
-	// Map.find({category: "minigame"}, function(err, foundMaps) {
-	// 	if(!err) {
-	// 		res.render('maps', { tilesDisplay: foundMaps, headingDisplay: "Minigame Maps", headingImage: "heading-image-multiplayer", siteBackground: "site-background" });
-	// 	}
-	// });
+			if(!err) {
+				res.render('maps', { 
+					newestActive: "underline-active", 
+					viewsActive: "", 
+					tilesDisplay: newMaps, 
+					headingDisplay: "Minigame", 
+					headingImage: "heading-image-multiplayer", 
+					siteBackground: "site-background" 
+				});
+			}
+		});
+	}
 });
 
 app.get('/battle-arena', function(req, res) {
 	const sortBy = req.query.sortby;
-
-		if (sortBy === "views") {
-			Map.find({category: "battle-arena"}, function(err, foundMaps) {
-				const newMaps = foundMaps.sort(function(a, b) {
-				    a = a.views;
-				    b = b.views;
-				    return a>b ? -1 : a<b ? 1 : 0;
-				});
-				// console.log(newMaps);
-				if(!err) {
-					res.render('maps', { newestActive: "", viewsActive: "underline-active", tilesDisplay: newMaps, headingDisplay: "Battle Arena", headingImage: "heading-image-multiplayer", siteBackground: "site-background" });
-				}
+	if (sortBy === "views") {
+		Map.find({category: "battle-arena"}, function(err, foundMaps) {
+			const newMaps = foundMaps.sort(function(a, b) {
+			  a = a.views;
+			  b = b.views;
+			  return a>b ? -1 : a<b ? 1 : 0;
 			});
-			console.log("sort by views");
-				
-		} else {
-			Map.find({category: "battle-arena"}, function(err, foundMaps) {
-				const newMaps = foundMaps.sort(function(a, b) {
-				    a = a.date;
-				    b = b.date;
-				    return a>b ? -1 : a<b ? 1 : 0;
+			if(!err) {
+				res.render('maps', { 
+					newestActive: "", 
+					viewsActive: "underline-active", 
+					tilesDisplay: newMaps, 
+					headingDisplay: "Battle Arena", 
+					headingImage: "heading-image-multiplayer", 
+					siteBackground: "site-background" 
 				});
-				// console.log(newMaps);
-				if(!err) {
-					res.render('maps', { newestActive: "underline-active", viewsActive: "", tilesDisplay: newMaps, headingDisplay: "Battle Arena", headingImage: "heading-image-multiplayer", siteBackground: "site-background" });
-				}
+			}
+		});
+	} else {
+		Map.find({category: "battle-arena"}, function(err, foundMaps) {
+			const newMaps = foundMaps.sort(function(a, b) {
+			  a = a.date;
+			  b = b.date;
+			  return a>b ? -1 : a<b ? 1 : 0;
 			});
-			console.log("sort by newest");
-		}
-	// Map.find({category: "battle-arena"}, function(err, foundMaps) {
-	// 	if(!err) {
-	// 		res.render('maps', { tilesDisplay: foundMaps, headingDisplay: "Battle Arena Maps", headingImage: "heading-image-multiplayer", siteBackground: "site-background" });
-	// 	}
-	// });
+			if(!err) {
+				res.render('maps', { 
+					newestActive: "underline-active", 
+					viewsActive: "", 
+					tilesDisplay: newMaps, 
+					headingDisplay: "Battle Arena", 
+					headingImage: "heading-image-multiplayer", 
+					siteBackground: "site-background" 
+				});
+			}
+		});
+	}
 });
 
 app.get('/edit-courses', function(req, res) {
 	const sortBy = req.query.sortby;
-
-		if (sortBy === "views") {
-			Map.find({category: "edit-courses"}, function(err, foundMaps) {
-				const newMaps = foundMaps.sort(function(a, b) {
-				    a = a.views;
-				    b = b.views;
-				    return a>b ? -1 : a<b ? 1 : 0;
-				});
-				// console.log(newMaps);
-				if(!err) {
-					res.render('maps', { newestActive: "", viewsActive: "underline-active", tilesDisplay: newMaps, headingDisplay: "Edit Courses", headingImage: "heading-image-edit", siteBackground: "site-background" });
-				}
+	if (sortBy === "views") {
+		Map.find({category: "edit-courses"}, function(err, foundMaps) {
+			const newMaps = foundMaps.sort(function(a, b) {
+			  a = a.views;
+			  b = b.views;
+			  return a>b ? -1 : a<b ? 1 : 0;
 			});
-			console.log("sort by views");
-				
-		} else {
-			Map.find({category: "edit-courses"}, function(err, foundMaps) {
-				const newMaps = foundMaps.sort(function(a, b) {
-				    a = a.date;
-				    b = b.date;
-				    return a>b ? -1 : a<b ? 1 : 0;
+			if(!err) {
+				res.render('maps', { 
+					newestActive: "", 
+					viewsActive: "underline-active", 
+					tilesDisplay: newMaps, 
+					headingDisplay: "Edit Courses", 
+					headingImage: "heading-image-edit", 
+					siteBackground: "site-background" 
 				});
-				// console.log(newMaps);
-				if(!err) {
-					res.render('maps', { newestActive: "underline-active", viewsActive: "", tilesDisplay: newMaps, headingDisplay: "Edit Courses", headingImage: "heading-image-edit", siteBackground: "site-background" });
-				}
+			}
+		});
+	} else {
+		Map.find({category: "edit-courses"}, function(err, foundMaps) {
+			const newMaps = foundMaps.sort(function(a, b) {
+			  a = a.date;
+			  b = b.date;
+			  return a>b ? -1 : a<b ? 1 : 0;
 			});
-			console.log("sort by newest");
-		}
-	// Map.find({category: "edit-courses"}, function(err, foundMaps) {
-	// 	if(!err) {
-	// 		res.render('maps', { tilesDisplay: foundMaps, headingDisplay: "Edit Courses", headingImage: "heading-image-edit", siteBackground: "site-background" });
-	// 	}
-	// });
+			if(!err) {
+				res.render('maps', { 
+					newestActive: "underline-active", 
+					viewsActive: "", 
+					tilesDisplay: newMaps, 
+					headingDisplay: "Edit Courses", 
+					headingImage: "heading-image-edit", 
+					siteBackground: "site-background" 
+				});
+			}
+		});
+	}
 });
 
 app.get('/creative-builds', function(req, res) {
 	const sortBy = req.query.sortby;
-
-		if (sortBy === "views") {
-			Map.find({category: "creative-builds"}, function(err, foundMaps) {
-				const newMaps = foundMaps.sort(function(a, b) {
-				    a = a.views;
-				    b = b.views;
-				    return a>b ? -1 : a<b ? 1 : 0;
-				});
-				// console.log(newMaps);
-				if(!err) {
-					res.render('maps', { newestActive: "", viewsActive: "underline-active", tilesDisplay: newMaps, headingDisplay: "Creative Builds", headingImage: "heading-image", siteBackground: "site-background" });
-				}
+	if (sortBy === "views") {
+		Map.find({category: "creative-builds"}, function(err, foundMaps) {
+			const newMaps = foundMaps.sort(function(a, b) {
+			  a = a.views;
+			  b = b.views;
+			  return a>b ? -1 : a<b ? 1 : 0;
 			});
-			console.log("sort by views");
-				
-		} else {
-			Map.find({category: "creative-builds"}, function(err, foundMaps) {
-				const newMaps = foundMaps.sort(function(a, b) {
-				    a = a.date;
-				    b = b.date;
-				    return a>b ? -1 : a<b ? 1 : 0;
+			if(!err) {
+				res.render('maps', { 
+					newestActive: "", 
+					viewsActive: "underline-active", 
+					tilesDisplay: newMaps, 
+					headingDisplay: "Creative Builds", 
+					headingImage: "heading-image", 
+					siteBackground: "site-background" 
 				});
-				// console.log(newMaps);
-				if(!err) {
-					res.render('maps', { newestActive: "underline-active", viewsActive: "", tilesDisplay: newMaps, headingDisplay: "Creative Builds", headingImage: "heading-image", siteBackground: "site-background" });
-				}
+			}
+		});
+	} else {
+		Map.find({category: "creative-builds"}, function(err, foundMaps) {
+			const newMaps = foundMaps.sort(function(a, b) {
+			  a = a.date;
+			  b = b.date;
+			  return a>b ? -1 : a<b ? 1 : 0;
 			});
-			console.log("sort by newest");
-		}
-	// Map.find({category: "creative-builds"}, function(err, foundMaps) {
-	// 	if(!err) {
-	// 		res.render('maps', { tilesDisplay: foundMaps, headingDisplay: "Creative Builds", headingImage: "heading-image", siteBackground: "site-background" });
-	// 	}
-	// });
+			if(!err) {
+				res.render('maps', { 
+					newestActive: "underline-active", 
+					viewsActive: "", 
+					tilesDisplay: newMaps, 
+					headingDisplay: "Creative Builds", 
+					headingImage: "heading-image", 
+					siteBackground: "site-background" 
+				});
+			}
+		});
+	}
 });
 
 app.get('/popular', function(req, res) {
 	Map.find({}, function(err, foundMaps) {
 		const newMaps = foundMaps.sort(function(a, b) {
-		    a = a.views;
-		    b = b.views;
-		    return a>b ? -1 : a<b ? 1 : 0;
+		  a = a.views;
+		  b = b.views;
+		  return a>b ? -1 : a<b ? 1 : 0;
 		});
-		// console.log(newMaps);
 		if(!err) {
-			res.render('maps_filtered', { tilesDisplay: newMaps, headingDisplay: "Popular", headingImage: "heading-image-sniper", siteBackground: "site-background" });
+			res.render('maps_filtered', { 
+				tilesDisplay: newMaps, 
+				headingDisplay: "Popular", 
+				headingImage: "heading-image-sniper", 
+				siteBackground: "site-background" 
+			});
 		}
 	});
 });
@@ -349,32 +371,37 @@ app.get('/popular', function(req, res) {
 app.get('/new', function(req, res) {
 	Map.find({}, function(err, foundMaps) {
 		let newMaps = foundMaps.sort(function(a, b) {
-			return  b.date - a.date;
-		    // a = a.date;
-		    // b = b.date;
-		    // return a>b ? 1 : a<b ? -1 : 0;
+			return b.date - a.date;
 		});
-		// console.log(newMaps);
 		if(!err) {
-			res.render('maps_filtered', { tilesDisplay: newMaps, headingDisplay: "New", headingImage: "heading-image-zombies", siteBackground: "site-background" });
+			res.render('maps_filtered', { 
+				tilesDisplay: newMaps, 
+				headingDisplay: "New", 
+				headingImage: "heading-image-zombies", 
+				siteBackground: "site-background" 
+			});
 		}
 	});
 });
 
 app.get('/submit', function(req, res) {
-	// console.log("submit clicked");
-	res.render('submit', {headingDisplay: "Submit An Island", headingImage: "heading-image-submit", siteBackground: "submit-background" });
+	res.render('submit', { 
+		headingDisplay: "Submit An Island", 
+		headingImage: "heading-image-submit", 
+		siteBackground: "submit-background" 
+	});
 });
 
 app.post('/search', function(req, res) {
-	// Map.createIndex( { name: "text", author: "text" } );
-
-	// console.log(req.body.searchInput);
 	searchInput = req.body.searchInput;
-
 	Map.find({name: {$regex: searchInput, $options: "$i"}}, function(err, foundMaps) {
 		if(!err) {
-			res.render('maps_filtered', { tilesDisplay: foundMaps, headingDisplay: "Search results for: " + searchInput, headingImage: "heading-image", siteBackground: "site-background" });
+			res.render('maps_filtered', { 
+				tilesDisplay: foundMaps, 
+				headingDisplay: "Search results for: " + searchInput, 
+				headingImage: "heading-image", 
+				siteBackground: "site-background" 
+			});
 		}
 	});
 });
@@ -385,19 +412,12 @@ app.post('/submit', upload.single('mapPhoto'), function(req, res) {
 	const islandCode = req.body.islandCode;
 	const category = req.body.category;
 	const date = new Date();
-
-	// const 
-	// host = req.host;
 	const filePath = req.file.path.substring(7);
-	// console.log(filePath);
-	
-
 	if (!req.file) {
 		console.log("no file recieved");
 	} else {
 		console.log('file received');
 	}
-
 	const map = new Map({
 		name: mapName,
 		author: authorName,
@@ -408,28 +428,21 @@ app.post('/submit', upload.single('mapPhoto'), function(req, res) {
 		views: 1,
 		bio: "default"
 	});
-
-	
-
 	Map.find({code: islandCode}, function(err, foundMaps) {
 		if(!err) {
 			if (foundMaps.length !== 0) {
 				console.log("Map already in database");
 			} else {
 				console.log("Map is okay to add");
-
-				// web scraper options
 				const options = {
-				  	uri: `https://fortnite.com/fn/` + islandCode,
-				  	transform: function (body) {
-				    	return cheerio.load(body);
-				  	}
+				  uri: `https://fortnite.com/fn/` + islandCode,
+				  transform: function (body) {
+				    return cheerio.load(body);
+				  }
 				};
-
 				rp(options)
 				.then(($) => {
 					const bio = $('.island-header-tagline').text();
-
 					Map.update({ code: islandCode }, { $set: { bio: bio }}, function(err, result) {
 						// console.log(result);
 					});
@@ -438,21 +451,10 @@ app.post('/submit', upload.single('mapPhoto'), function(req, res) {
 					console.log(err);
 				});
 				map.save();
-
-				console.log(map);
-				// res.redirect('/maps/' + map.code);
-				// , { map: map, headingDisplay: map.name }
 			}
 		}
 	});
 });
-
-
-
-
-
-
-
 
 app.listen(3000, function() {
   console.log("Server started on port 3000");
