@@ -314,12 +314,11 @@ input[type="search"]:focus {
   transform: translateY(0);
 }
 .underline-active {
-    border-bottom: solid 4px #f1ed62;
+    background-image: linear-gradient(to right, #f1ed62, #f1ed62);
+    background-position: bottom;
+    background-repeat: no-repeat;
+    background-size: 100% 4px;
 }
-.hvr-underline-reveal:hover:not(.active) { 
-   border-bottom: solid 4px #f1ed62;
-} 
-
 
 @media (max-width: 1199px) {
 	.burbank_font shadow_5 {

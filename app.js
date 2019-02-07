@@ -74,7 +74,7 @@ app.get('/all', function(req, res) {
 			});
 			if(!err) {
 				res.render('maps', { 
-					newestActive: "", 
+					newestActive: "hvr-underline-reveal", 
 					viewsActive: "underline-active", 
 					tilesDisplay: newMaps, 
 					headingDisplay: "All", 
@@ -93,7 +93,7 @@ app.get('/all', function(req, res) {
 			if(!err) {
 				res.render('maps', { 
 					newestActive: "underline-active", 
-					viewsActive: "", 
+					viewsActive: "hvr-underline-reveal", 
 					tilesDisplay: newMaps, 
 					headingDisplay: "All", 
 					headingImage: "heading-image", 
