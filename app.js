@@ -74,8 +74,8 @@ app.get('/all', function(req, res) {
 			});
 			if(!err) {
 				res.render('maps', { 
-					newestActive: "hvr-underline-reveal", 
-					viewsActive: "underline-active", 
+					newestActive: "hvr_underline_reveal", 
+					viewsActive: "underline_active", 
 					tilesDisplay: newMaps, 
 					headingDisplay: "All", 
 					headingImage: "heading_image", 
@@ -92,8 +92,8 @@ app.get('/all', function(req, res) {
 			});
 			if(!err) {
 				res.render('maps', { 
-					newestActive: "underline-active", 
-					viewsActive: "hvr-underline-reveal", 
+					newestActive: "underline_active", 
+					viewsActive: "hvr_underline_reveal", 
 					tilesDisplay: newMaps, 
 					headingDisplay: "All", 
 					headingImage: "heading_image", 
@@ -115,8 +115,8 @@ app.get('/obstacle-parkour', function(req, res) {
 			});
 			if(!err) {
 				res.render('maps', { 
-					newestActive: "hvr-underline-reveal", 
-					viewsActive: "underline-active", 
+					newestActive: "hvr_underline_reveal", 
+					viewsActive: "underline_active", 
 					tilesDisplay: newMaps, 
 					headingDisplay: "Obstacle & Parkour", 
 					headingImage: "heading_image_freefall", 
@@ -133,8 +133,8 @@ app.get('/obstacle-parkour', function(req, res) {
 			});
 			if(!err) {
 				res.render('maps', { 
-					newestActive: "underline-active", 
-					viewsActive: "hvr-underline-reveal", 
+					newestActive: "underline_active", 
+					viewsActive: "hvr_underline_reveal", 
 					tilesDisplay: newMaps, 
 					headingDisplay: "Obstacle & Parkour", 
 					headingImage: "heading_image_freefall", 
@@ -156,8 +156,8 @@ app.get('/racing', function(req, res) {
 			});
 			if(!err) {
 				res.render('maps', { 
-					newestActive: "hvr-underline-reveal", 
-					viewsActive: "underline-active", 
+					newestActive: "hvr_underline_reveal", 
+					viewsActive: "underline_active", 
 					tilesDisplay: newMaps, 
 					headingDisplay: "Racing", 
 					headingImage: "heading_image_racing", 
@@ -174,8 +174,8 @@ app.get('/racing', function(req, res) {
 			});
 			if(!err) {
 				res.render('maps', { 
-					newestActive: "underline-active", 
-					viewsActive: "hvr-underline-reveal", 
+					newestActive: "underline_active", 
+					viewsActive: "hvr_underline_reveal", 
 					tilesDisplay: newMaps, 
 					headingDisplay: "Racing", 
 					headingImage: "heading_image_racing", 
@@ -197,8 +197,8 @@ app.get('/minigame', function(req, res) {
 			});
 			if(!err) {
 				res.render('maps', { 
-					newestActive: "hvr-underline-reveal", 
-					viewsActive: "underline-active", 
+					newestActive: "hvr_underline_reveal", 
+					viewsActive: "underline_active", 
 					tilesDisplay: newMaps, 
 					headingDisplay: "Minigame", 
 					headingImage: "heading_image_multiplayer", 
@@ -215,8 +215,8 @@ app.get('/minigame', function(req, res) {
 			});
 			if(!err) {
 				res.render('maps', { 
-					newestActive: "underline-active", 
-					viewsActive: "hvr-underline-reveal", 
+					newestActive: "underline_active", 
+					viewsActive: "hvr_underline_reveal", 
 					tilesDisplay: newMaps, 
 					headingDisplay: "Minigame", 
 					headingImage: "heading_image_multiplayer", 
@@ -238,8 +238,8 @@ app.get('/battle-arena', function(req, res) {
 			});
 			if(!err) {
 				res.render('maps', { 
-					newestActive: "hvr-underline-reveal", 
-					viewsActive: "underline-active", 
+					newestActive: "hvr_underline_reveal", 
+					viewsActive: "underline_active", 
 					tilesDisplay: newMaps, 
 					headingDisplay: "Battle Arena", 
 					headingImage: "heading_image_multiplayer", 
@@ -256,8 +256,8 @@ app.get('/battle-arena', function(req, res) {
 			});
 			if(!err) {
 				res.render('maps', { 
-					newestActive: "underline-active", 
-					viewsActive: "hvr-underline-reveal", 
+					newestActive: "underline_active", 
+					viewsActive: "hvr_underline_reveal", 
 					tilesDisplay: newMaps, 
 					headingDisplay: "Battle Arena", 
 					headingImage: "heading_image_multiplayer", 
@@ -279,8 +279,8 @@ app.get('/edit-courses', function(req, res) {
 			});
 			if(!err) {
 				res.render('maps', { 
-					newestActive: "hvr-underline-reveal", 
-					viewsActive: "underline-active", 
+					newestActive: "hvr_underline_reveal", 
+					viewsActive: "underline_active", 
 					tilesDisplay: newMaps, 
 					headingDisplay: "Edit Courses", 
 					headingImage: "heading_image_edit", 
@@ -297,8 +297,8 @@ app.get('/edit-courses', function(req, res) {
 			});
 			if(!err) {
 				res.render('maps', { 
-					newestActive: "underline-active", 
-					viewsActive: "hvr-underline-reveal", 
+					newestActive: "underline_active", 
+					viewsActive: "hvr_underline_reveal", 
 					tilesDisplay: newMaps, 
 					headingDisplay: "Edit Courses", 
 					headingImage: "heading_image_edit", 
@@ -320,8 +320,8 @@ app.get('/creative-builds', function(req, res) {
 			});
 			if(!err) {
 				res.render('maps', { 
-					newestActive: "hvr-underline-reveal", 
-					viewsActive: "underline-active", 
+					newestActive: "hvr_underline_reveal", 
+					viewsActive: "underline_active", 
 					tilesDisplay: newMaps, 
 					headingDisplay: "Creative Builds", 
 					headingImage: "heading_image", 
@@ -338,8 +338,8 @@ app.get('/creative-builds', function(req, res) {
 			});
 			if(!err) {
 				res.render('maps', { 
-					newestActive: "underline-active", 
-					viewsActive: "hvr-underline-reveal", 
+					newestActive: "underline_active", 
+					viewsActive: "hvr_underline_reveal", 
 					tilesDisplay: newMaps, 
 					headingDisplay: "Creative Builds", 
 					headingImage: "heading_image", 

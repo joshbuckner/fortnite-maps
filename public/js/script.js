@@ -1,7 +1,7 @@
 // enable tooltips
 $(function () {
   $('[data-toggle="tooltip"]').tooltip()
-})
+});
 
 // javaScript for disabling form submissions if there are invalid fields
 $(function() {
@@ -20,7 +20,7 @@ $(function() {
 			}, false)
 		})
 	}, false)
-}())
+}());
 
 // set modal data to submission form input values
 $('#myForm').on('submit', function(e){

@@ -8,14 +8,14 @@
 		<div class="container">
 			<div class="row">
 				<% tilesDisplay.forEach(function(map) { -%>
-					<div class="col-lg-4 hvr-grow">
+					<div class="col-lg-4 hvr_grow">
 						<a class="text-white" href="/maps/<%= map.code %>">
 						<div class="card mb-4 shadow-sm text-white mine_shaft_gray_bg">
 							<div class="card-header text-center h4 py-3">
                 <%= map.name %>
               </div>
 							<img src="<%= map.photo %>" class="card-img-top" alt="...">
-							<p class="category-tag"><%= map.category %></p>
+							<p class="category_tag"><%= map.category %></p>
 						</a>
 							<div class="card-body">
 								<div class="row">
