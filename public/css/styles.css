@@ -17,7 +17,7 @@ body {
   color: #f1ed62;
 }
 
-/*fonts*/
+/*fonts & typograhy*/
 
 @font-face {
   font-family: 'Burbank Big Cd Bk';
@@ -59,6 +59,27 @@ body {
 }
 /* partials/navbar */
 
+#navbar-main input {
+  color: rgba(255,255,255,.9);
+}
+
+input[type="search"] {
+  background-color: rgba(255,255,255,.1);
+  border: none;
+}
+
+input[type="search"]:focus {
+  background-color: rgba(255,255,255,.1);
+}
+
+.search-icon {
+  color: rgba(255,255,255,.5);
+}
+
+.search-icon:hover {
+  color: rgba(255,255,255,1);
+}
+
 .dropdown .dropdown-menu .dropdown-item {
   color: rgba(255,255,255,.7);
 }
@@ -67,17 +88,174 @@ body {
   background-color: rgba(255,255,255,.1);
 }
 
-@media (max-width: 992px) {
-	.search_center {
-		margin: 0 auto;
-		padding: 0;
-	}
+/* partials/page_heading */
+
+.heading_image_default { /*Home*/
+  background-image: url("../images/fortnite_image.jpg");
+  background-position: 0% 70%;
+  background-size: cover;
+  padding: 7rem 0;
 }
 
-/* partials/page_heading_filter */
+.heading_image_sniper { /*Popular*/
+  background-image: url("../images/fortnite_sniper_image.jpg");
+  background-position: 0% 20%;
+  background-size: cover;
+  padding: 7rem 0;
+}
+
+.heading_image_zombies { /*New*/
+  background-image: url("../images/fortnite_zombies_image.jpg");
+  background-position: 0% 25%;
+  background-size: cover;
+  padding: 7rem 0;
+}
+
+.heading_image_submit { /*Submit Island*/
+  background-image: url("../images/fortnite_playground_mode.jpg");
+  background-position: 0% 50%;
+  background-size: cover;
+  padding: 7rem 0;
+}
+
+/* partials/page_heading_sort */
+
+.heading_image { /*All*/
+  background-image: url("../images/fortnite_creative_2.png");
+  background-position: 0% 10%;
+  background-size: cover;
+  padding: 7rem 0;
+}
+
+.heading_image_multiplayer { /*Minigame / Battle Arena*/
+  background-image: url("../images/fortnite_multiplayer_image.jpg");
+  background-position: 0% 40%;
+  background-size: cover;
+  padding: 7rem 0;
+}
+
+.heading_image_freefall { /*Obstacle & Parkour*/
+  background-image: url("../images/fortnite_freefall_image.jpg");
+  background-position: 0% 40%;
+  background-size: cover;
+  padding: 7rem 0;
+}
+
+.heading_image_edit { /*Edit Courses*/
+  background-image: url("../images/fortnite_edit_image.jpg");
+  background-position: 0% 60%;
+  background-size: cover;
+  padding: 7rem 0;
+}
+
+.heading_image_racing { /*Racing*/
+  background-image: url("../images/fortnite_racing_image.png");
+  background-position: 0% 50%;
+  background-size: cover;
+  padding: 7rem 0;
+}
 
 a:link {
   text-decoration: none;
+}
+
+.mini-nav {
+  list-style-type: none;
+  margin: 0;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+}
+
+.mini-nav li {
+  color: white;
+  float: left;
+  padding: 0 16px 5px;
+  text-align: center;
+  text-decoration: none;
+}
+
+.mini-nav li a {
+  color: white;
+  display: block;
+  padding: 8px;
+}
+
+.mini-link {
+  cursor: pointer;
+  margin-top: 3rem;
+}
+
+.hvr-underline-reveal { /* Underline Reveal */
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  display: inline-block;
+  overflow: hidden;
+  position: relative;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  vertical-align: middle;
+}
+
+.hvr-underline-reveal:before {
+  background: #f1ed62;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  content: "";
+  height: 4px;
+  position: absolute;
+  z-index: -1;
+  -webkit-transform: translateY(4px);
+  transform: translateY(4px);
+  -webkit-transition-property: transform;
+  transition-property: transform;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-timing-function: ease-out;
+  transition-timing-function: ease-out;
+}
+
+.hvr-underline-reveal:hover:before, .hvr-underline-reveal:focus:before, .hvr-underline-reveal:active:before {
+  -webkit-transform: translateY(0);
+  transform: translateY(0);
+}
+
+.underline-active {
+    background-image: linear-gradient(to right, #f1ed62, #f1ed62);
+    background-position: bottom;
+    background-repeat: no-repeat;
+    background-size: 100% 4px;
+}
+
+/* maps / maps_filter */
+
+.hvr-grow { /* Grow */
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-property: transform;
+  transition-property: transform;
+}
+
+.hvr-grow:hover, .hvr-grow:focus, .hvr-grow:active {
+  -webkit-transform: scale(1.05);
+  transform: scale(1.05);
+}
+
+.category-tag { /*maps_filter*/
+  background-color: rgba(42,42,42,.9);
+  border-radius: 4px;
+  color: rgba(241,237,98);
+  font-size: 1.2rem;
+  margin-left: 1rem;
+  padding: .5rem;
+  position: absolute;
+  right: 2.5%;
+  top: 57%;
 }
 
 /* submit */
@@ -88,7 +266,7 @@ a:link {
 }
 
 /* map */
-
+  
 #userMap .container {
 	max-width: 100%;
 	width: 1200px;
@@ -108,281 +286,39 @@ a:link {
   line-height: 1;
 }
 
-/* TODO */
-
-#copy-code {
-	white-space: nowrap;
-}
-
-.home-page-heading {
-	position: relative;
-	margin-top: 2rem;
-	
-}
-
-.heading-image {
-	background-image: url("../images/fortnite_creative_2.png");
-	background-position: 0% 10%;
-	background-size: cover;
-	padding: 7rem 0;
-}
-
-.heading-image-multiplayer {
-	background-image: url("../images/fortnite_multiplayer_image.jpg");
-	background-position: 0% 40%;
-	background-size: cover;
-	padding: 7rem 0;
-}
-
-.heading-image-sniper {
-	background-image: url("../images/fortnite_sniper_image.jpg");
-	background-position: 0% 20%;
-	background-size: cover;
-	padding: 7rem 0;
-}
-
-.heading-image-freefall {
-	background-image: url("../images/fortnite_freefall_image.jpg");
-	background-position: 0% 40%;
-	background-size: cover;
-	padding: 7rem 0;
-}
-
-.heading-image-zombies {
-	background-image: url("../images/fortnite_zombies_image.jpg");
-	background-position: 0% 25%;
-	background-size: cover;
-	padding: 7rem 0;
-}
-
-.heading-image-submit {
-	background-image: url("../images/fortnite_playground_mode.jpg");
-	background-position: 0% 50%;
-	background-size: cover;
-	padding: 7rem 0;
-}
-
-.heading-image-edit {
-	background-image: url("../images/fortnite_edit_image.jpg");
-	background-position: 0% 60%;
-	background-size: cover;
-	padding: 7rem 0;
-}
-
-.heading-image-creative {
-	background-image: url("../images/fortnite_block_image.png");
-	background-position: 0% 35%;
-	background-size: cover;
-	padding: 7rem 0;
-}
-
-.heading-image-racing {
-	background-image: url("../images/fortnite_racing_image.png");
-	background-position: 0% 50%;
-	background-size: cover;
-	padding: 7rem 0;
-}
-
-.heading-image-default {
-	background-image: url("../images/fortnite_image.jpg");
-	background-position: 0% 70%;
-	background-size: cover;
-	padding: 7rem 0;
-}
-
-.heading-text {
-	background-color: rgb(42,42,42);
-	padding-top: .5rem;
-}
-
-
-.mini-nav li a {
-	display: block;
-	padding: 8px;
-}
-
-.mini-nav {
-	display: inline;
-	position: absolute;
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: rgb(42,42,42);
-}
-
-.mini-nav li {
-  float: left;
-  display: block;
-  color: white;
-  text-align: center;
-  padding: 0 16px 5px;
-  text-decoration: none;
-}
-
-.mini-link {
-	margin-top: 3rem;
-	cursor: pointer;
-}
-
-
-
-.filter-display {
-	/*padding-right: 20rem;*/
-	/*padding-left: 20rem;*/
-}
-
-#navbar-main input {
-	color: rgba(255,255,255,.9);
-}
-
-input[type="search"] {
-	background-color: rgba(255,255,255,.1);
-	border: none;
-}
-
-input[type="search"]:focus {
-  background-color: rgba(255,255,255,.1);
-}
-
-.search-icon {
-	color: rgba(255,255,255,.5);
-}
-
-.search-icon:hover {
-	color: rgba(255,255,255,1);
-}
-
-/*.submit-map input {
-	color: rgba(255,255,255,.9) !important;
-}
-
-.submit-map input[type="text"] {
-	background-color: rgba(255,255,255,.1);
-	border: none;
-}
-
-.submit-map input[type="tel"] {
-	background-color: rgba(255,255,255,.1);
-	border: none;
-}
-
-.submit-map select {
-	background-color: rgba(255,255,255,.1);
-	border: none;
-}
-
-.submit-map input[type="file"] {
-	background-color: rgba(255,255,255,.1);
-	border: none;
-}*/
-
-.mini-nav a {
-	color: white;
-}
-
-/* Underline Reveal */
-.hvr-underline-reveal {
-  display: inline-block;
-  vertical-align: middle;
-  -webkit-transform: perspective(1px) translateZ(0);
-  transform: perspective(1px) translateZ(0);
-  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
-  position: relative;
-  overflow: hidden;
-}
-.hvr-underline-reveal:before {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: #f1ed62;
-  height: 4px;
-  -webkit-transform: translateY(4px);
-  transform: translateY(4px);
-  -webkit-transition-property: transform;
-  transition-property: transform;
-  -webkit-transition-duration: 0.3s;
-  transition-duration: 0.3s;
-  -webkit-transition-timing-function: ease-out;
-  transition-timing-function: ease-out;
-}
-.hvr-underline-reveal:hover:before, .hvr-underline-reveal:focus:before, .hvr-underline-reveal:active:before {
-  -webkit-transform: translateY(0);
-  transform: translateY(0);
-}
-.underline-active {
-    background-image: linear-gradient(to right, #f1ed62, #f1ed62);
-    background-position: bottom;
-    background-repeat: no-repeat;
-    background-size: 100% 4px;
-}
-
-@media (max-width: 1199px) {
-	.burbank_font shadow_5 {
-		font-size: 4rem;
-	}
-	.mini-link {
-		margin-top: 1.7rem;
-	}
-}
-
-@media (max-width: 992px) {
-	.burbank_font shadow_5 {
-		font-size: 3rem;
-		padding-top: 6rem;
-	}
-	.mini-nav {
-		position: static;
-	}
-	.mini-nav-div {
-		float: left;
-	}
-}
-
-/* Grow */
-.hvr-grow {
-  display: inline-block;
-  vertical-align: middle;
-  -webkit-transform: perspective(1px) translateZ(0);
-  transform: perspective(1px) translateZ(0);
-  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
-  -webkit-transition-duration: 0.3s;
-  transition-duration: 0.3s;
-  -webkit-transition-property: transform;
-  transition-property: transform;
-}
-.hvr-grow:hover, .hvr-grow:focus, .hvr-grow:active {
-  -webkit-transform: scale(1.05);
-  transform: scale(1.05);
-}
-
-.category-tag {
-	position: absolute;
-	top: 57%;
-	right: 2.5%;
-	background-color: rgba(42,42,42,.9);
-	margin-left: 1rem;
-	border-radius: 4px;
-	padding: .5rem;
-	color: rgba(241,237,98);
-	/*font-family: 'Burbank Big Cd Bk';*/
-	font-size: 1.2rem;
-}
+/* media queries */ 
 
 @media (max-width: 1200px) {
+  .burbank_font shadow_5 {
+    font-size: 4rem;
+  }
+  .mini-link {
+    margin-top: 1.7rem;
+  }
 	.category-tag {
+    right: 2.5%;
 		top: 53%;
-		right: 2.5%;
 	}
 }
 
 @media (max-width: 992px) {
+  .search_center {
+    margin: 0 auto;
+    padding: 0;
+  }
+  .burbank_font shadow_5 {
+    font-size: 3rem;
+    padding-top: 6rem;
+  }
+  .mini-nav {
+    position: static;
+  }
+  .mini-nav-div {
+    float: left;
+  }
 	.category-tag {
+    right: 2.5%;
 		top: 70.5%;
-		right: 2.5%;
 	}
 }
 
@@ -398,8 +334,4 @@ input[type="search"]:focus {
 		top: 62%;
 		right: 2.5%;
 	}
-}
-
-.silly-font {
-	font-family: 'Burbank Big Cd Bk';
 }

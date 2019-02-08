@@ -39,7 +39,7 @@ app.get('/', function(req, res) {
 			res.render('home', { 
 				tilesDisplay: foundMaps, 
 				headingDisplay: "Fortnite Creative Codes", 
-				headingImage: "heading-image-default", 
+				headingImage: "heading_image_default", 
 				siteBackground: "background_header_main" 
 			});
 		}
@@ -78,7 +78,7 @@ app.get('/all', function(req, res) {
 					viewsActive: "underline-active", 
 					tilesDisplay: newMaps, 
 					headingDisplay: "All", 
-					headingImage: "heading-image", 
+					headingImage: "heading_image", 
 					siteBackground: "background_header_main" 
 				});
 			}
@@ -96,7 +96,7 @@ app.get('/all', function(req, res) {
 					viewsActive: "hvr-underline-reveal", 
 					tilesDisplay: newMaps, 
 					headingDisplay: "All", 
-					headingImage: "heading-image", 
+					headingImage: "heading_image", 
 					siteBackground: "background_header_main" 
 				});
 			}
@@ -115,11 +115,11 @@ app.get('/obstacle-parkour', function(req, res) {
 			});
 			if(!err) {
 				res.render('maps', { 
-					newestActive: "", 
+					newestActive: "hvr-underline-reveal", 
 					viewsActive: "underline-active", 
 					tilesDisplay: newMaps, 
 					headingDisplay: "Obstacle & Parkour", 
-					headingImage: "heading-image-freefall", 
+					headingImage: "heading_image_freefall", 
 					siteBackground: "background_header_main" 
 				});
 			}
@@ -134,10 +134,10 @@ app.get('/obstacle-parkour', function(req, res) {
 			if(!err) {
 				res.render('maps', { 
 					newestActive: "underline-active", 
-					viewsActive: "", 
+					viewsActive: "hvr-underline-reveal", 
 					tilesDisplay: newMaps, 
 					headingDisplay: "Obstacle & Parkour", 
-					headingImage: "heading-image-freefall", 
+					headingImage: "heading_image_freefall", 
 					siteBackground: "background_header_main" 
 				});
 			}
@@ -156,11 +156,11 @@ app.get('/racing', function(req, res) {
 			});
 			if(!err) {
 				res.render('maps', { 
-					newestActive: "", 
+					newestActive: "hvr-underline-reveal", 
 					viewsActive: "underline-active", 
 					tilesDisplay: newMaps, 
 					headingDisplay: "Racing", 
-					headingImage: "heading-image-racing", 
+					headingImage: "heading_image_racing", 
 					siteBackground: "background_header_main" 
 				});
 			}
@@ -175,10 +175,10 @@ app.get('/racing', function(req, res) {
 			if(!err) {
 				res.render('maps', { 
 					newestActive: "underline-active", 
-					viewsActive: "", 
+					viewsActive: "hvr-underline-reveal", 
 					tilesDisplay: newMaps, 
 					headingDisplay: "Racing", 
-					headingImage: "heading-image-racing", 
+					headingImage: "heading_image_racing", 
 					siteBackground: "background_header_main" 
 				});
 			}
@@ -197,11 +197,11 @@ app.get('/minigame', function(req, res) {
 			});
 			if(!err) {
 				res.render('maps', { 
-					newestActive: "", 
+					newestActive: "hvr-underline-reveal", 
 					viewsActive: "underline-active", 
 					tilesDisplay: newMaps, 
 					headingDisplay: "Minigame", 
-					headingImage: "heading-image-multiplayer", 
+					headingImage: "heading_image_multiplayer", 
 					siteBackground: "background_header_main" 
 				});
 			}
@@ -216,10 +216,10 @@ app.get('/minigame', function(req, res) {
 			if(!err) {
 				res.render('maps', { 
 					newestActive: "underline-active", 
-					viewsActive: "", 
+					viewsActive: "hvr-underline-reveal", 
 					tilesDisplay: newMaps, 
 					headingDisplay: "Minigame", 
-					headingImage: "heading-image-multiplayer", 
+					headingImage: "heading_image_multiplayer", 
 					siteBackground: "background_header_main" 
 				});
 			}
@@ -238,11 +238,11 @@ app.get('/battle-arena', function(req, res) {
 			});
 			if(!err) {
 				res.render('maps', { 
-					newestActive: "", 
+					newestActive: "hvr-underline-reveal", 
 					viewsActive: "underline-active", 
 					tilesDisplay: newMaps, 
 					headingDisplay: "Battle Arena", 
-					headingImage: "heading-image-multiplayer", 
+					headingImage: "heading_image_multiplayer", 
 					siteBackground: "background_header_main" 
 				});
 			}
@@ -257,10 +257,10 @@ app.get('/battle-arena', function(req, res) {
 			if(!err) {
 				res.render('maps', { 
 					newestActive: "underline-active", 
-					viewsActive: "", 
+					viewsActive: "hvr-underline-reveal", 
 					tilesDisplay: newMaps, 
 					headingDisplay: "Battle Arena", 
-					headingImage: "heading-image-multiplayer", 
+					headingImage: "heading_image_multiplayer", 
 					siteBackground: "background_header_main" 
 				});
 			}
@@ -279,11 +279,11 @@ app.get('/edit-courses', function(req, res) {
 			});
 			if(!err) {
 				res.render('maps', { 
-					newestActive: "", 
+					newestActive: "hvr-underline-reveal", 
 					viewsActive: "underline-active", 
 					tilesDisplay: newMaps, 
 					headingDisplay: "Edit Courses", 
-					headingImage: "heading-image-edit", 
+					headingImage: "heading_image_edit", 
 					siteBackground: "background_header_main" 
 				});
 			}
@@ -298,10 +298,10 @@ app.get('/edit-courses', function(req, res) {
 			if(!err) {
 				res.render('maps', { 
 					newestActive: "underline-active", 
-					viewsActive: "", 
+					viewsActive: "hvr-underline-reveal", 
 					tilesDisplay: newMaps, 
 					headingDisplay: "Edit Courses", 
-					headingImage: "heading-image-edit", 
+					headingImage: "heading_image_edit", 
 					siteBackground: "background_header_main" 
 				});
 			}
@@ -320,11 +320,11 @@ app.get('/creative-builds', function(req, res) {
 			});
 			if(!err) {
 				res.render('maps', { 
-					newestActive: "", 
+					newestActive: "hvr-underline-reveal", 
 					viewsActive: "underline-active", 
 					tilesDisplay: newMaps, 
 					headingDisplay: "Creative Builds", 
-					headingImage: "heading-image", 
+					headingImage: "heading_image", 
 					siteBackground: "background_header_main" 
 				});
 			}
@@ -339,10 +339,10 @@ app.get('/creative-builds', function(req, res) {
 			if(!err) {
 				res.render('maps', { 
 					newestActive: "underline-active", 
-					viewsActive: "", 
+					viewsActive: "hvr-underline-reveal", 
 					tilesDisplay: newMaps, 
 					headingDisplay: "Creative Builds", 
-					headingImage: "heading-image", 
+					headingImage: "heading_image", 
 					siteBackground: "background_header_main" 
 				});
 			}
@@ -361,7 +361,7 @@ app.get('/popular', function(req, res) {
 			res.render('maps_filter', { 
 				tilesDisplay: newMaps, 
 				headingDisplay: "Popular", 
-				headingImage: "heading-image-sniper", 
+				headingImage: "heading_image_sniper", 
 				siteBackground: "background_header_main" 
 			});
 		}
@@ -377,7 +377,7 @@ app.get('/new', function(req, res) {
 			res.render('maps_filter', { 
 				tilesDisplay: newMaps, 
 				headingDisplay: "New", 
-				headingImage: "heading-image-zombies", 
+				headingImage: "heading_image_zombies", 
 				siteBackground: "background_header_main" 
 			});
 		}
@@ -387,7 +387,7 @@ app.get('/new', function(req, res) {
 app.get('/submit', function(req, res) {
 	res.render('submit', { 
 		headingDisplay: "Submit An Island", 
-		headingImage: "heading-image-submit", 
+		headingImage: "heading_image_submit", 
 		siteBackground: "background_header_submit" 
 	});
 });
@@ -399,7 +399,7 @@ app.post('/search', function(req, res) {
 			res.render('maps_filter', { 
 				tilesDisplay: foundMaps, 
 				headingDisplay: "Search results for: " + searchInput, 
-				headingImage: "heading-image", 
+				headingImage: "heading_image", 
 				siteBackground: "background_header_main" 
 			});
 		}
