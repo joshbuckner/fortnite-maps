@@ -80,11 +80,11 @@ input[type="search"]:focus {
   color: rgba(255,255,255,1);
 }
 
-.dropdown .dropdown_menu .dropdown_item {
+.dropdown .dropdown-menu .dropdown-item {
   color: rgba(255,255,255,.7);
 }
 
-.dropdown .dropdown_menu .dropdown_item:hover {
+.dropdown .dropdown-menu .dropdown-item:hover {
   background-color: rgba(255,255,255,.1);
 }
 
@@ -225,6 +225,56 @@ a:link {
     background-position: bottom;
     background-repeat: no-repeat;
     background-size: 100% 4px;
+}
+
+/*home*/
+
+#home .container {
+  max-width: 100%;
+  width: 1400px;
+}
+
+.circle {
+  margin: 0 auto;
+  width: 150px;
+  height: 150px;
+  border-radius:100%;
+}
+
+.icon_parkour {
+  font-size: 7rem;
+  padding-top: 1rem;
+  padding-bottom: .75rem;
+}
+
+.icon_racing {
+  font-size: 6.4rem;
+  padding-top: 1.5rem;
+  padding-bottom: .85rem;
+}
+
+.icon_minigame {
+  font-size: 6.4rem;
+  padding-top: 1.5rem;
+  padding-bottom: .85rem;
+}
+
+.icon_arena {
+  font-size: 7rem;
+  padding-top: 1rem;
+  padding-bottom: .75rem;
+}
+
+.icon_edit {
+  font-size: 6rem;
+  padding-top: 1.3rem;
+  padding-bottom: 1.45rem;
+}
+
+.icon_creative {
+  font-size: 6rem;
+  padding-top: 2rem;
+  padding-bottom: .75rem;
 }
 
 /* maps / maps_filter */
