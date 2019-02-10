@@ -1,49 +1,152 @@
 <section id="">
 	<div class="">
 		<!-- Nav Bar -->
-		<nav id="navbar-main" class="navbar navbar-expand-lg navbar-dark mine_shaft_gray_bg">
+		<nav id="navbar-main" class="navbar fixed-top navbar-expand-lg navbar-dark gray_trans_bg py-0">
 			<div class="container-fluid">
 				<!-- Site Title -->
-				<a class="navbar-brand" href="/">Fortnite Creative Codes</a>
+				<a class="navbar-brand display-1" href="/">Fortnite Creative Codes</a>
 				<!-- Mobile Nav Button -->
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
 				</button>
 				<!-- Navigation Links -->
 				<div class="collapse navbar-collapse text-center" id="navbarSupportedContent">
-					<ul class="navbar-nav mr-auto" id="btn-container">
-						<li class="nav-item dropdown">
-			        <a class="nav-link dropdown_toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-			          Sort Islands
-			        </a>
-			        <div class="dropdown-menu mine_shaft_gray_bg" aria-labelledby="navbarDropdown">
-			          	<a class="dropdown-item" href="/all">All</a>
-			          	<a class="dropdown-item" href="/obstacle-parkour" >Obstacle & Parkour</a>
-			          	<a class="dropdown-item" href="/racing">Racing</a>
-			          	<a class="dropdown-item" href="/minigame">Minigame</a>
-			          	<a class="dropdown-item" href="/battle-arena">Battle Arena</a>
-			          	<a class="dropdown-item" href="/edit-courses">Edit Courses</a>
-			          	<a class="dropdown-item" href="/creative-builds">Creative Builds</a>
-			        </div>
-					  </li>
-						<li class="nav-item">
-							<a class="nav-link" href="/popular">Popular</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="/new">New</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="/submit">Submit Island</a>
-						</li>
-					</ul>
-					<!-- Search Bar & Button -->
-					<form action="/search" method="POST" class="navbar-form form-inline my-2 my-lg-0">
-						<div class="input-group search_center">
-							<input class="form-control mr-sm-2 rounded-right" type="search" placeholder="Search" aria-label="Search" id="search-input" name="searchInput" autocomplete="off">
-							<button class="btn mine_shaft_gray_bg search_icon" type="submit" id="search-submit"><i class="fas fa-search"></i></button>
-						</div>
-					</form>
-				</div>
+
+          <ul class="nav navbar-nav m-auto pr-5">
+
+            <div class="container-fluid">
+
+            <div class="row">
+
+              <div class="col-lg-6 col-12 categ_icons">
+
+                <div class="row">
+
+                  <div class="col-lg-3 col-3">
+                    <li class="nav-item px-3">
+                      <a class="nav-link text-muted" href="/new">
+                        <div class="circle <%= newSort %>">
+                          <i class="fas fa-clock icon_parkour"></i>
+                          <p class="pt-3">New</p>
+                        </div>
+                      </a>
+                    </li>
+                  </div>
+
+                  <div class="col-lg-3 col-3">
+                    <li class="nav-item px-3">
+                      <a class="nav-link text-muted" href="/popular">
+                        <div class="circle <%= popularSort %>">
+                          <i class="fas fa-fire icon_parkour"></i>
+                          <p class="pt-3">Popular</p>
+                        </div>
+                      </a>
+                    </li>
+                  </div>
+
+                  <div class="col-lg-3 col-3">
+                    <li class="nav-item px-3">
+                      <a class="nav-link text-muted" href="/obstacle-parkour">
+                        <div class="circle <%= obstacleParkour %>">
+                          <i class="fas fa-running icon_parkour"></i>
+                          <p class="pt-3">Obstacle</p>
+                        </div>
+                      </a>
+                    </li>
+                  </div>
+
+                  <div class="col-lg-3 col-3">
+                    <li class="nav-item px-3">
+                      <a class="nav-link text-muted" href="/racing">
+                        <div class="circle <%= racing %>">
+                          <i class="fas fa-flag-checkered icon_racing"></i>
+                          <p class="pt-3">Racing</p>
+                        </div>
+                      </a>
+                    </li>
+                  </div>
+
+                </div>
+
+              </div>
+
+              <div class="col-lg-6 col-12">
+
+                <div class="row">
+
+                  <div class="col-lg-3 col-3">
+                    <li class="nav-item px-3">
+                      <a class="nav-link text-muted" href="/minigame">
+                        <div class="circle <%= minigame %>">
+                          <i class="fas fa-gamepad icon_minigame"></i>
+                          <p class="pt-3">Minigame</p>
+                        </div>
+                      </a>
+                    </li>
+                  </div>
+
+                  <div class="col-lg-3 col-3">
+                    <li class="nav-item px-3">
+                      <a class="nav-link text-muted" href="/battle-arena">
+                        <div class="circle <%= battleArena %>">
+                          <i class="fas fa-fist-raised icon_arena"></i>
+                          <p class="pt-3">PvP</p>
+                        </div>
+                      </a>
+                    </li>
+                  </div>
+
+                  <div class="col-lg-3 col-3">
+                    <li class="nav-item px-3">
+                      <a class="nav-link text-muted" href="/edit-courses">
+                        <div class="circle <%= editCourses %>">
+                          <i class="fas fa-pencil-alt icon_edit"></i>
+                          <p class="pt-3">Practice</p>
+                        </div>
+                      </a>
+                    </li>
+                  </div>
+
+                  <div class="col-lg-3 col-3">
+                    <li class="nav-item px-3">
+                      <a class="nav-link text-muted" href="/creative-builds">
+                        <div class="circle <%= creativeBuilds %>">
+                          <i class="fas fa-torii-gate icon_creative"></i>
+                          <p class="pt-3">Creative</p>
+                        </div>
+                      </a>
+                    </li>
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+
+        </ul>
+        <div class="nav_right">
+          <!-- Search Bar & Button -->
+          <form action="/search" method="POST" class="navbar-form form-inline my-2 my-lg-0">
+            <div class="input-group search_center ml-1 mt-1">
+              <input class="form-control mr-sm-2 rounded-right" type="search" placeholder="Search" aria-label="Search" id="search-input" name="searchInput" autocomplete="off">
+              <button class="btn mine_shaft_gray_bg search_icon" type="submit" id="search-submit"><i class="fas fa-search"></i></button>
+            </div>
+          </form>
+          <ul class="nav navbar-nav nav_btns_right" id="btn-container">
+            <li class="nav-item">
+              <a class="nav-link ml-0 p-0" href="/submit">
+                <div class="hvr_underline_reveal submit_island">Submit Island</div>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link ml-0 p-0" href="/contact">
+                <div class="hvr_underline_reveal submit_island">Contact</div>
+              </a>
+            </li>
+          </ul>
+        </div>
 			</div>
 		</nav>
 	</div>

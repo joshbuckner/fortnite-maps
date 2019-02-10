@@ -3,54 +3,56 @@
 <%- include('partials/background') %>
 <%- include('partials/page_heading') -%>
 
-<div class="submit-map text-white">
-	<div class="container pt-5">
-		<form id="myForm" method="POST" autocomplete="off" class="needs-validation placeholder_center" novalidate enctype="multipart/form-data">
-			<div class="row mine_shaft_gray_bg px-4 py-5 m-1 rounded">
-				<div class="col-lg-6 px-4">
-					<div class="mb-5 input-group input-group-md">
-						<input name="mapName" type="text" class="form-control text-center rounded" id="map-name" placeholder="Map Name (maximum 24 characters)" required maxlength="24">
-						<div class="invalid-feedback">Please enter a Map Name.</div>
-					</div>
-					<div class="mb-5 input-group input-group-md">
-						<input name="authorName" type="text" class="form-control text-center rounded" id="author" placeholder="Author" required>
-						<div class="invalid-feedback">Please enter an Author Name.</div>
-					</div>
-					<div class="mb-5 input-group input-group-md">
-						<input name="islandCode" type="tel" pattern="[0-9]{4}-[0-9]{4}-[0-9]{4}" class="form-control text-center rounded" id="island-code" placeholder="Island Code (1234-1234-1234)" required onkeyup="addHyphen();" maxlength="14">
-						<div class="invalid-feedback">Please enter a valid Island Code.</div>
-					</div>
-					<div class="mb-5 input-group input-group-md">
-						<input name="youtubeLink" type="text" class="form-control text-center rounded" id="author" placeholder="Youtube Video Link (Optional)">
-					</div>
-					<div class="input-group mb-5 custom-category">
-						<select name="category" class="form-control custom-select d-block text-center rounded-right" id="category" required>
-							<option value="">Choose Category</option class="p-4">
-							<option value="obstacle-parkour" class="p-4">Obstacle & Parkour</option>
-							<option value="racing" class="p-4">Racing</option>
-							<option value="minigame" class="p-4">Minigame</option>
-							<option value="battle-arena" class="p-4">Battle Arena</option>
-							<option value="edit-courses" class="p-4">Edit Courses</option>
-							<option value="creative-builds" class="p-4">Creative Builds</option>
-						</select>
-						<div class="invalid-feedback">Please select a Category.</div>
-					</div>
-				</div>
-				<div class="col-lg-6 px-4">
-					<div class="mb-5 input-group input-group-md custom-file">
-						<label class="custom-file-label rounded-right" for="inputGroupFile01">Choose Photo</label>
-						<input name="mapPhoto" type="file" onchange="previewFile();" class="custom-file-input rounded-left" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" required>
-						<div class="invalid-feedback ">Please upload a Photo.</div>
-					</div>
-					<div class="mb-5">
-						<img id="image-preview" src="images/fortnite_creative_2.jpg" class="file-preview ml-auto mr-auto img-fluid rounded" height="" alt="Map Photo">
-					</div>
-				</div>
-				<button class="btn btn-outline-light btn-lg btn-block p-4 mx-4" type="submit">Submit</button>
-			</div>
-		</form>
-	</div>
-</div>
+<section id="submit">
+  <div class="submit-map text-white">
+  	<div class="container pt-5">
+  		<form id="myForm" method="POST" autocomplete="off" class="needs-validation placeholder_center" novalidate enctype="multipart/form-data">
+  			<div class="row mine_shaft_gray_bg px-4 py-5 m-1 rounded">
+  				<div class="col-lg-6 px-4">
+  					<div class="mb-5 input-group input-group-md">
+  						<input name="mapName" type="text" class="form-control text-center rounded" id="map-name" placeholder="Map Name (maximum 24 characters)" required maxlength="24">
+  						<div class="invalid-feedback">Please enter a Map Name.</div>
+  					</div>
+  					<div class="mb-5 input-group input-group-md">
+  						<input name="authorName" type="text" class="form-control text-center rounded" id="author" placeholder="Author" required>
+  						<div class="invalid-feedback">Please enter an Author Name.</div>
+  					</div>
+  					<div class="mb-5 input-group input-group-md">
+  						<input name="islandCode" type="tel" pattern="[0-9]{4}-[0-9]{4}-[0-9]{4}" class="form-control text-center rounded" id="island-code" placeholder="Island Code (1234-1234-1234)" required onkeyup="addHyphen();" maxlength="14">
+  						<div class="invalid-feedback">Please enter a valid Island Code.</div>
+  					</div>
+  					<div class="mb-5 input-group input-group-md">
+  						<input name="youtubeLink" type="text" class="form-control text-center rounded" id="author" placeholder="Youtube Video Link (Optional)">
+  					</div>
+  					<div class="input-group mb-5 custom-category">
+  						<select name="category" class="form-control custom-select d-block text-center rounded-right" id="category" required>
+  							<option value="">Choose Category</option class="p-4">
+  							<option value="obstacle-parkour" class="p-4">Obstacle & Parkour</option>
+  							<option value="racing" class="p-4">Racing</option>
+  							<option value="minigame" class="p-4">Minigame</option>
+  							<option value="battle-arena" class="p-4">Battle Arena</option>
+  							<option value="edit-courses" class="p-4">Edit Courses</option>
+  							<option value="creative-builds" class="p-4">Creative Builds</option>
+  						</select>
+  						<div class="invalid-feedback">Please select a Category.</div>
+  					</div>
+  				</div>
+  				<div class="col-lg-6 px-4">
+  					<div class="mb-5 input-group input-group-md custom-file">
+  						<label class="custom-file-label rounded-right" for="inputGroupFile01">Choose Photo</label>
+  						<input name="mapPhoto" type="file" onchange="previewFile();" class="custom-file-input rounded-left" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" required>
+  						<div class="invalid-feedback ">Please upload a Photo.</div>
+  					</div>
+  					<div class="mb-5">
+  						<img id="image-preview" src="images/fortnite_creative_2.jpg" class="file-preview ml-auto mr-auto img-fluid rounded" height="" alt="Map Photo">
+  					</div>
+  				</div>
+  				<button class="btn btn-outline-light btn-lg btn-block p-4 mx-4" type="submit">Submit</button>
+  			</div>
+  		</form>
+  	</div>
+  </div>
+</section>
 
 <%- include('partials/modal') -%>
 <%- include('partials/footer') -%>

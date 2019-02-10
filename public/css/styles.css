@@ -9,6 +9,10 @@ body {
 	background-color: #2a2a2a;
 }
 
+.gray_trans_bg {
+  background-color: rgba(42, 42, 42, .6);
+}
+
 .manz_yellow_bg {
   background-color: #f1ed62;
 }
@@ -78,6 +82,7 @@ body {
 
 #navbar-main input {
   color: rgba(255,255,255,.9);
+  font-size: 1.2rem;
 }
 
 input[type="search"] {
@@ -87,6 +92,31 @@ input[type="search"] {
 
 input[type="search"]:focus {
   background-color: rgba(255,255,255,.1);
+}
+
+.navbar {
+  -webkit-transition: all 0.4s ease-out;
+  -moz-transition: all 0.4s ease-out;
+  -o-transition: all 0.4s ease-out;
+  -ms-transition: all 0.4s ease-out;
+  transition: all 0.4s ease-out;
+}
+
+.navbar.scrolled {
+  background: #2a2a2a;
+}
+
+.nav_right {
+  padding-top: .6rem;
+}
+
+.nav_btns_right {
+  padding-top: .9rem;
+}
+
+.submit_island {
+  font-size: 1.2rem;
+  padding: .4rem .7rem;
 }
 
 .search_icon {
@@ -105,6 +135,10 @@ input[type="search"]:focus {
   background-color: rgba(255,255,255,.1);
 }
 
+.navbar-brand {
+  font-size: 1.5rem;
+}
+
 /* partials/page_heading */
 
 .heading_image_default { /*Home*/
@@ -118,7 +152,7 @@ input[type="search"]:focus {
   background-image: url("../images/fortnite_sniper_image.jpg");
   background-position: 0% 20%;
   background-size: cover;
-  padding: 7rem 0;
+  padding: 2rem 0 1rem;
 }
 
 .heading_image_zombies { /*New*/
@@ -133,6 +167,150 @@ input[type="search"]:focus {
   background-position: 0% 50%;
   background-size: cover;
   padding: 7rem 0;
+}
+
+.circle {
+  margin: 0 auto;
+  width: 60px;
+  height: 60px;
+  border-radius:100%;
+}
+
+.icon_parkour {
+  font-size: 2.3rem;
+  padding-top: .7rem;
+  padding-bottom: .25rem;
+}
+
+.icon_racing {
+  font-size: 2.13rem;
+  padding-top: .7rem;
+  padding-bottom: .283rem;
+}
+
+.icon_minigame {
+  font-size: 2.13rem;
+  padding-top: .8rem;
+  padding-bottom: .283rem;
+}
+
+.icon_arena {
+  font-size: 2.3rem;
+  padding-top: .7rem;
+  padding-bottom: .25rem;
+}
+
+.icon_edit {
+  font-size: 2rem;
+  padding-top: .7rem;
+  padding-bottom: .483rem;
+}
+
+.icon_creative {
+  font-size: 2rem;
+  padding-top: 1rem;
+  padding-bottom: .25rem;
+}
+
+.categ_icons {
+  padding-bottom: 2rem;
+}
+
+.hvr-circle-to-top { /* Circle Bounce To Top */
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  position: relative;
+  -webkit-transition-property: color;
+  transition-property: color;
+  -webkit-transition-duration: 0.5s;
+  transition-duration: 0.5s;
+}
+
+.hvr-circle-to-top:before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 100px;
+  background: rgba(194,114,217,.7);
+  -webkit-transform: scaleY(0);
+  transform: scaleY(0);
+  -webkit-transform-origin: 50% 100%;
+  transform-origin: 50% 100%;
+  -webkit-transition-property: transform;
+  transition-property: transform;
+  -webkit-transition-duration: 0.5s;
+  transition-duration: 0.5s;
+  -webkit-transition-timing-function: ease-out;
+  transition-timing-function: ease-out;
+}
+
+.hvr-circle-to-top:hover, .hvr-circle-to-top:focus, .hvr-circle-to-top:active {
+  color: white;
+}
+
+.hvr-circle-to-top:hover:before, .hvr-circle-to-top:focus:before, .hvr-circle-to-top:active:before {
+  -webkit-transform: scaleY(1);
+  transform: scaleY(1);
+  -webkit-transition-timing-function: cubic-bezier(0.52, 1.64, 0.37, 0.66);
+  transition-timing-function: cubic-bezier(0.52, 1.64, 0.37, 0.66);
+}
+
+.category_active {
+  border-radius: 100px;
+  background: rgba(194,114,217,.7);
+  color: white;
+  transform: scale(1.05);
+}
+
+/* Bounce To Top */
+.hvr-bounce-to-top {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  position: relative;
+  -webkit-transition-property: color;
+  transition-property: color;
+  -webkit-transition-duration: 0.5s;
+  transition-duration: 0.5s;
+}
+.hvr-bounce-to-top:before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 5px;
+  background: rgba(23,194,254,.7);
+  -webkit-transform: scaleY(0);
+  transform: scaleY(0);
+  -webkit-transform-origin: 50% 100%;
+  transform-origin: 50% 100%;
+  -webkit-transition-property: transform;
+  transition-property: transform;
+  -webkit-transition-duration: 0.5s;
+  transition-duration: 0.5s;
+  -webkit-transition-timing-function: ease-out;
+  transition-timing-function: ease-out;
+}
+.hvr-bounce-to-top:hover, .hvr-bounce-to-top:focus, .hvr-bounce-to-top:active {
+  color: rgba(255,255,255,1);
+}
+.hvr-bounce-to-top:hover:before, .hvr-bounce-to-top:focus:before, .hvr-bounce-to-top:active:before {
+  -webkit-transform: scaleY(1);
+  transform: scaleY(1);
+  -webkit-transition-timing-function: cubic-bezier(0.52, 1.64, 0.37, 0.66);
+  transition-timing-function: cubic-bezier(0.52, 1.64, 0.37, 0.66);
 }
 
 /* partials/page_heading_sort */
@@ -251,96 +429,15 @@ a:link {
   width: 1400px;
 }
 
-.circle {
-  margin: 0 auto;
-  width: 150px;
-  height: 150px;
-  border-radius:100%;
-}
-
-.icon_parkour {
-  font-size: 7rem;
-  padding-top: 1rem;
-  padding-bottom: .75rem;
-}
-
-.icon_racing {
-  font-size: 6.4rem;
-  padding-top: 1.5rem;
-  padding-bottom: .85rem;
-}
-
-.icon_minigame {
-  font-size: 6.4rem;
-  padding-top: 1.5rem;
-  padding-bottom: .85rem;
-}
-
-.icon_arena {
-  font-size: 7rem;
-  padding-top: 1rem;
-  padding-bottom: .75rem;
-}
-
-.icon_edit {
-  font-size: 6rem;
-  padding-top: 1.3rem;
-  padding-bottom: 1.45rem;
-}
-
-.icon_creative {
-  font-size: 6rem;
-  padding-top: 2rem;
-  padding-bottom: .75rem;
-}
-
-.hvr-bounce-to-top { /* Bounce To Top */
-  display: inline-block;
-  vertical-align: middle;
-  -webkit-transform: perspective(1px) translateZ(0);
-  transform: perspective(1px) translateZ(0);
-  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
-  position: relative;
-  -webkit-transition-property: color;
-  transition-property: color;
-  -webkit-transition-duration: 0.5s;
-  transition-duration: 0.5s;
-}
-
-.hvr-bounce-to-top:before {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  border-radius: 100px;
-  background: #2a2a2a;
-  -webkit-transform: scaleY(0);
-  transform: scaleY(0);
-  -webkit-transform-origin: 50% 100%;
-  transform-origin: 50% 100%;
-  -webkit-transition-property: transform;
-  transition-property: transform;
-  -webkit-transition-duration: 0.5s;
-  transition-duration: 0.5s;
-  -webkit-transition-timing-function: ease-out;
-  transition-timing-function: ease-out;
-}
-
-.hvr-bounce-to-top:hover, .hvr-bounce-to-top:focus, .hvr-bounce-to-top:active {
-  color: white;
-}
-
-.hvr-bounce-to-top:hover:before, .hvr-bounce-to-top:focus:before, .hvr-bounce-to-top:active:before {
-  -webkit-transform: scaleY(1);
-  transform: scaleY(1);
-  -webkit-transition-timing-function: cubic-bezier(0.52, 1.64, 0.37, 0.66);
-  transition-timing-function: cubic-bezier(0.52, 1.64, 0.37, 0.66);
-}
 
 /* maps / maps_filter */
+
+#maps {
+  padding-top: 7rem;
+}
+#maps_filter {
+  padding-top: 7rem;
+}
 
 .hvr_grow { /* Grow */
   display: inline-block;
@@ -373,14 +470,25 @@ a:link {
 
 /* submit */
 
+#submit {
+  padding-top: 5rem;
+}
+
 .placeholder_center ::placeholder {
 	text-align: center;
 	font-size: 1rem;
 }
 
+.submit-map {
+  position: relative;
+}
+
 /* map */
+#user_map {
+  padding-top: 5rem;
+}
   
-#userMap .container {
+#user_map .container {
 	max-width: 100%;
 	width: 1200px;
 }
@@ -433,6 +541,9 @@ a:link {
     right: 2.5%;
 		top: 70.5%;
 	}
+  .nav_right {
+    padding-top: 2rem;
+  }
 }
 
 @media (max-width: 768px) {
