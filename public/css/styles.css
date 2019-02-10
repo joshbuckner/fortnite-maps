@@ -10,7 +10,7 @@ body {
 }
 
 .gray_trans_bg {
-  background-color: rgba(42, 42, 42, .6);
+  background-color: rgba(42, 42, 42, .5);
 }
 
 .manz_yellow_bg {
@@ -95,11 +95,10 @@ input[type="search"]:focus {
 }
 
 .navbar {
-  -webkit-transition: all 0.4s ease-out;
-  -moz-transition: all 0.4s ease-out;
-  -o-transition: all 0.4s ease-out;
-  -ms-transition: all 0.4s ease-out;
-  transition: all 0.4s ease-out;
+  top: 0;
+  /*transition: opacity 2s ease-out;*/
+  transition: top .3s ease-out;
+  transition-delay: .2s;
 }
 
 .navbar.scrolled {

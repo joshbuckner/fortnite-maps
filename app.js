@@ -36,20 +36,7 @@ const Map = mongoose.model("Map", mapsSchema);
 app.get('/', function(req, res) {
 	Map.find({}, function(err, foundMaps) {
 		if(!err) {
-			res.render('home', { 
-        newSort: "hvr-circle-to-top",
-        popularSort: "hvr-circle-to-top",
-        obstacleParkour: "hvr-circle-to-top",
-        racing: "hvr-circle-to-top",
-        minigame: "hvr-circle-to-top",
-        battleArena: "hvr-circle-to-top",
-        editCourses: "hvr-circle-to-top",
-        creativeBuilds: "hvr-circle-to-top",
-				tilesDisplay: foundMaps, 
-				headingDisplay: "Fortnite Creative Codes", 
-				headingImage: "heading_image_default", 
-				siteBackground: "background_header_main" 
-			});
+			res.redirect('/popular');
 		}
 	});
 });

@@ -71,9 +71,19 @@ const copyToClipboard = () => {
   document.body.removeChild(el);
 };
 
+/* When the user scrolls down, hide the navbar. When the user scrolls up, show the navbar */
+let prevScrollpos = window.pageYOffset;
+window.onscroll = function() {
+  let currentScrollPos = window.pageYOffset;
+  if (prevScrollpos > currentScrollPos) {
+    $('#navbar-main')[0].style.top = "0";
+  } else {
+    $('#navbar-main')[0].style.top = "-9.5rem";
+  }
+  prevScrollpos = currentScrollPos;
+}
 
 // Listen to scroll to change header opacity class
- 
 function checkScroll(){
   var startY = $('.navbar').height() * 2; //The point where the navbar changes in px
   if ($(window).scrollTop() > startY){
@@ -88,3 +98,4 @@ if ($('.navbar').length > 0){
     checkScroll();
   });
 }
+
