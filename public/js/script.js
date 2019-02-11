@@ -79,6 +79,7 @@ window.onscroll = function() {
     $('#navbar-main')[0].style.top = "0";
   } else {
     $('#navbar-main')[0].style.top = "-9.5rem";
+    $('.navbar-collapse')[0].classList.value = 'navbar-collapse text-center collapse';
   }
   prevScrollpos = currentScrollPos;
 }

@@ -66,46 +66,46 @@ app.get('/maps/:mapName', function(req, res) {
 	});
 });
 
-app.get('/all', function(req, res) {
-	const sortBy = req.query.sortby;
-	if (sortBy === "views") {
-		Map.find({}, function(err, foundMaps) {
-			const newMaps = foundMaps.sort(function(a, b) {
-			  a = a.views;
-			  b = b.views;
-			  return a>b ? -1 : a<b ? 1 : 0;
-			});
-			if(!err) {
-				res.render('maps', { 
-					newestActive: "hvr_underline_reveal", 
-					viewsActive: "underline_active", 
-					tilesDisplay: newMaps, 
-					headingDisplay: "All", 
-					headingImage: "heading_image", 
-					siteBackground: "background_header_main" 
-				});
-			}
-		});	
-	} else {
-		Map.find({}, function(err, foundMaps) {
-			const newMaps = foundMaps.sort(function(a, b) {
-			  a = a.date;
-			  b = b.date;
-			  return a>b ? -1 : a<b ? 1 : 0;
-			});
-			if(!err) {
-				res.render('maps', { 
-					newestActive: "underline_active", 
-					viewsActive: "hvr_underline_reveal", 
-					tilesDisplay: newMaps, 
-					headingDisplay: "All", 
-					headingImage: "heading_image", 
-					siteBackground: "background_header_main" 
-				});
-			}
-		});
-	}
-});
+// app.get('/all', function(req, res) {
+// 	const sortBy = req.query.sortby;
+// 	if (sortBy === "views") {
+// 		Map.find({}, function(err, foundMaps) {
+// 			const newMaps = foundMaps.sort(function(a, b) {
+// 			  a = a.views;
+// 			  b = b.views;
+// 			  return a>b ? -1 : a<b ? 1 : 0;
+// 			});
+// 			if(!err) {
+// 				res.render('maps', { 
+// 					newestActive: "hvr_underline_reveal", 
+// 					viewsActive: "underline_active", 
+// 					tilesDisplay: newMaps, 
+// 					headingDisplay: "All", 
+// 					headingImage: "heading_image", 
+// 					siteBackground: "background_header_main" 
+// 				});
+// 			}
+// 		});	
+// 	} else {
+// 		Map.find({}, function(err, foundMaps) {
+// 			const newMaps = foundMaps.sort(function(a, b) {
+// 			  a = a.date;
+// 			  b = b.date;
+// 			  return a>b ? -1 : a<b ? 1 : 0;
+// 			});
+// 			if(!err) {
+// 				res.render('maps', { 
+// 					newestActive: "underline_active", 
+// 					viewsActive: "hvr_underline_reveal", 
+// 					tilesDisplay: newMaps, 
+// 					headingDisplay: "All", 
+// 					headingImage: "heading_image", 
+// 					siteBackground: "background_header_main" 
+// 				});
+// 			}
+// 		});
+// 	}
+// });
 
 app.get('/obstacle-parkour', function(req, res) {
 	const sortBy = req.query.sortby;
@@ -120,12 +120,14 @@ app.get('/obstacle-parkour', function(req, res) {
 				res.render('maps', {
           newSort: "hvr_grow hvr-circle-to-top",
           popularSort: "hvr_grow hvr-circle-to-top",
-          obstacleParkour: "category_active",
+          obstacleParkour: "category_active rotate",
           racing: "hvr_grow hvr-circle-to-top",
           minigame: "hvr_grow hvr-circle-to-top",
           battleArena: "hvr_grow hvr-circle-to-top",
           editCourses: "hvr_grow hvr-circle-to-top",
           creativeBuilds: "hvr_grow hvr-circle-to-top",
+          submitIsland: "hvr_underline_reveal",
+          contact: "hvr_underline_reveal",
 					newestActive: "hvr_underline_reveal", 
 					viewsActive: "underline_active", 
 					tilesDisplay: newMaps, 
@@ -146,12 +148,14 @@ app.get('/obstacle-parkour', function(req, res) {
 				res.render('maps', { 
           newSort: "hvr_grow hvr-circle-to-top",
           popularSort: "hvr_grow hvr-circle-to-top",
-          obstacleParkour: "category_active",
+          obstacleParkour: "category_active rotate",
           racing: "hvr_grow hvr-circle-to-top",
           minigame: "hvr_grow hvr-circle-to-top",
           battleArena: "hvr_grow hvr-circle-to-top",
           editCourses: "hvr_grow hvr-circle-to-top",
           creativeBuilds: "hvr_grow hvr-circle-to-top",
+          submitIsland: "hvr_underline_reveal",
+          contact: "hvr_underline_reveal",
 					newestActive: "underline_active", 
 					viewsActive: "hvr_underline_reveal", 
 					tilesDisplay: newMaps, 
@@ -178,11 +182,13 @@ app.get('/racing', function(req, res) {
           newSort: "hvr_grow hvr-circle-to-top",
           popularSort: "hvr_grow hvr-circle-to-top",
           obstacleParkour: "hvr_grow hvr-circle-to-top",
-          racing: "category_active",
+          racing: "category_active rotate",
           minigame: "hvr_grow hvr-circle-to-top",
           battleArena: "hvr_grow hvr-circle-to-top",
           editCourses: "hvr_grow hvr-circle-to-top",
           creativeBuilds: "hvr_grow hvr-circle-to-top",
+          submitIsland: "hvr_underline_reveal",
+          contact: "hvr_underline_reveal",
 					newestActive: "hvr_underline_reveal", 
 					viewsActive: "underline_active", 
 					tilesDisplay: newMaps, 
@@ -204,11 +210,13 @@ app.get('/racing', function(req, res) {
           newSort: "hvr_grow hvr-circle-to-top",
           popularSort: "hvr_grow hvr-circle-to-top", 
           obstacleParkour: "hvr_grow hvr-circle-to-top",
-          racing: "category_active",
+          racing: "category_active rotate",
           minigame: "hvr_grow hvr-circle-to-top",
           battleArena: "hvr_grow hvr-circle-to-top",
           editCourses: "hvr_grow hvr-circle-to-top",
           creativeBuilds: "hvr_grow hvr-circle-to-top",
+          submitIsland: "hvr_underline_reveal",
+          contact: "hvr_underline_reveal",
 					newestActive: "underline_active", 
 					viewsActive: "hvr_underline_reveal", 
 					tilesDisplay: newMaps, 
@@ -236,10 +244,12 @@ app.get('/minigame', function(req, res) {
           popularSort: "hvr_grow hvr-circle-to-top",
           obstacleParkour: "hvr_grow hvr-circle-to-top",
           racing: "hvr_grow hvr-circle-to-top",
-          minigame: "category_active",
+          minigame: "category_active rotate",
           battleArena: "hvr_grow hvr-circle-to-top",
           editCourses: "hvr_grow hvr-circle-to-top",
           creativeBuilds: "hvr_grow hvr-circle-to-top",
+          submitIsland: "hvr_underline_reveal",
+          contact: "hvr_underline_reveal",
 					newestActive: "hvr_underline_reveal", 
 					viewsActive: "underline_active", 
 					tilesDisplay: newMaps, 
@@ -262,10 +272,12 @@ app.get('/minigame', function(req, res) {
           popularSort: "hvr_grow hvr-circle-to-top", 
           obstacleParkour: "hvr_grow hvr-circle-to-top",
           racing: "hvr_grow hvr-circle-to-top",
-          minigame: "category_active",
+          minigame: "category_active rotate",
           battleArena: "hvr_grow hvr-circle-to-top",
           editCourses: "hvr_grow hvr-circle-to-top",
           creativeBuilds: "hvr_grow hvr-circle-to-top",
+          submitIsland: "hvr_underline_reveal",
+          contact: "hvr_underline_reveal",
 					newestActive: "underline_active", 
 					viewsActive: "hvr_underline_reveal", 
 					tilesDisplay: newMaps, 
@@ -294,9 +306,11 @@ app.get('/battle-arena', function(req, res) {
           obstacleParkour: "hvr_grow hvr-circle-to-top",
           racing: "hvr_grow hvr-circle-to-top",
           minigame: "hvr_grow hvr-circle-to-top",
-          battleArena: "category_active",
+          battleArena: "category_active rotate",
           editCourses: "hvr_grow hvr-circle-to-top",
           creativeBuilds: "hvr_grow hvr-circle-to-top",
+          submitIsland: "hvr_underline_reveal",
+          contact: "hvr_underline_reveal",
 					newestActive: "hvr_underline_reveal", 
 					viewsActive: "underline_active", 
 					tilesDisplay: newMaps, 
@@ -320,9 +334,11 @@ app.get('/battle-arena', function(req, res) {
           obstacleParkour: "hvr_grow hvr-circle-to-top",
           racing: "hvr_grow hvr-circle-to-top",
           minigame: "hvr_grow hvr-circle-to-top",
-          battleArena: "category_active",
+          battleArena: "category_active rotate",
           editCourses: "hvr_grow hvr-circle-to-top",
           creativeBuilds: "hvr_grow hvr-circle-to-top",
+          submitIsland: "hvr_underline_reveal",
+          contact: "hvr_underline_reveal",
 					newestActive: "underline_active", 
 					viewsActive: "hvr_underline_reveal", 
 					tilesDisplay: newMaps, 
@@ -352,8 +368,10 @@ app.get('/edit-courses', function(req, res) {
           racing: "hvr_grow hvr-circle-to-top",
           minigame: "hvr_grow hvr-circle-to-top",
           battleArena: "hvr_grow hvr-circle-to-top",
-          editCourses: "category_active",
+          editCourses: "category_active rotate",
           creativeBuilds: "hvr_grow hvr-circle-to-top",
+          submitIsland: "hvr_underline_reveal",
+          contact: "hvr_underline_reveal",
 					newestActive: "hvr_underline_reveal", 
 					viewsActive: "underline_active", 
 					tilesDisplay: newMaps, 
@@ -378,8 +396,10 @@ app.get('/edit-courses', function(req, res) {
           racing: "hvr_grow hvr-circle-to-top",
           minigame: "hvr_grow hvr-circle-to-top",
           battleArena: "hvr_grow hvr-circle-to-top",
-          editCourses: "category_active",
+          editCourses: "category_active rotate",
           creativeBuilds: "hvr_grow hvr-circle-to-top",
+          submitIsland: "hvr_underline_reveal",
+          contact: "hvr_underline_reveal",
 					newestActive: "underline_active", 
 					viewsActive: "hvr_underline_reveal", 
 					tilesDisplay: newMaps, 
@@ -410,7 +430,7 @@ app.get('/creative-builds', function(req, res) {
           minigame: "hvr_grow hvr-circle-to-top",
           battleArena: "hvr_grow hvr-circle-to-top",
           editCourses: "hvr_grow hvr-circle-to-top",
-          creativeBuilds: "category_active",
+          creativeBuilds: "category_active rotate",
 					newestActive: "hvr_underline_reveal", 
 					viewsActive: "underline_active", 
 					tilesDisplay: newMaps, 
@@ -436,7 +456,9 @@ app.get('/creative-builds', function(req, res) {
           minigame: "hvr_grow hvr-circle-to-top",
           battleArena: "hvr_grow hvr-circle-to-top",
           editCourses: "hvr_grow hvr-circle-to-top",
-          creativeBuilds: "category_active",
+          creativeBuilds: "category_active rotate",
+          submitIsland: "hvr_underline_reveal",
+          contact: "hvr_underline_reveal",
 					newestActive: "underline_active", 
 					viewsActive: "hvr_underline_reveal", 
 					tilesDisplay: newMaps, 
@@ -459,13 +481,15 @@ app.get('/popular', function(req, res) {
 		if(!err) {
 			res.render('maps_filter', { 
         newSort: "hvr_grow hvr-circle-to-top",
-        popularSort: "category_active",
+        popularSort: "category_active rotate",
         obstacleParkour: "hvr_grow hvr-circle-to-top",
         racing: "hvr_grow hvr-circle-to-top",
         minigame: "hvr_grow hvr-circle-to-top",
         battleArena: "hvr_grow hvr-circle-to-top",
         editCourses: "hvr_grow hvr-circle-to-top",
         creativeBuilds: "hvr_grow hvr-circle-to-top",
+        submitIsland: "hvr_underline_reveal",
+        contact: "hvr_underline_reveal",
 				tilesDisplay: newMaps, 
 				headingDisplay: "Popular", 
 				headingImage: "heading_image_sniper", 
@@ -482,7 +506,7 @@ app.get('/new', function(req, res) {
 		});
 		if(!err) {
 			res.render('maps_filter', { 
-        newSort: "category_active",
+        newSort: "category_active rotate",
         popularSort: "hvr_grow hvr-circle-to-top",
         obstacleParkour: "hvr_grow hvr-circle-to-top",
         racing: "hvr_grow hvr-circle-to-top",
@@ -490,6 +514,8 @@ app.get('/new', function(req, res) {
         battleArena: "hvr_grow hvr-circle-to-top",
         editCourses: "hvr_grow hvr-circle-to-top",
         creativeBuilds: "hvr_grow hvr-circle-to-top",
+        submitIsland: "hvr_underline_reveal",
+        contact: "hvr_underline_reveal",
 				tilesDisplay: newMaps, 
 				headingDisplay: "New", 
 				headingImage: "heading_image_zombies", 
@@ -508,7 +534,9 @@ app.get('/submit', function(req, res) {
     minigame: "hvr-circle-to-top",
     battleArena: "hvr-circle-to-top",
     editCourses: "hvr-circle-to-top",
-    creativeBuilds: "hvr-circle-to-top", 
+    creativeBuilds: "hvr-circle-to-top",
+    submitIsland: "underline_active",
+    contact: "hvr_underline_reveal", 
 		headingDisplay: "Submit An Island", 
 		headingImage: "heading_image_submit", 
 		siteBackground: "background_header_submit" 
