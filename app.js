@@ -58,6 +58,8 @@ app.get('/maps/:mapName', function(req, res) {
           battleArena: "hvr-circle-to-top",
           editCourses: "hvr-circle-to-top",
           creativeBuilds: "hvr-circle-to-top",
+          submitIsland: "hvr_underline_reveal",
+          contact: "hvr_underline_reveal",
 					map: map, 
 					siteBackground: "background_header_main" 
 				});
