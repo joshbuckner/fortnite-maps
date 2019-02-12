@@ -10,7 +10,7 @@ body {
 }
 
 .gray_trans_bg {
-  background-color: rgba(42, 42, 42, .5);
+  background-color: rgba(42, 42, 42, .8);
 }
 
 .manz_yellow_bg {
@@ -526,6 +526,13 @@ a:link {
   .tablet_mt {
     margin-top: 2.5rem;
   }
+  #navbar-main .container-fluid {
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+  }
+  .icon_pad_r {
+    padding-right: 4rem;
+  }
 }
 
 @media (max-width: 1200px) {
@@ -539,7 +546,6 @@ a:link {
     right: 2.5%;
 		top: 53%;
 	}
-  
 }
 
 @media (max-width: 992px) {
@@ -566,6 +572,9 @@ a:link {
   }
   .tablet_mt {
     margin-top: 0;
+  }
+  .icon_pad_r {
+    padding-right: 0;
   }
 }
 
