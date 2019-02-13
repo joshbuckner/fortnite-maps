@@ -78,6 +78,7 @@ body {
   position: absolute;
   width: 100%;
 }
+
 /* partials/navbar */
 
 #navbar-main input {
@@ -142,6 +143,26 @@ input[type="search"]:focus {
   font-size: 1.5rem;
 }
 
+/*sort nav*/
+
+.nav_hide {
+  visibility: hidden;
+}
+
+.navbar_sort {
+  margin: 6.7rem auto 0;
+  max-width: 280px;
+  border-radius: 0 0 50px 50px;
+}
+
+.navbar_sort_links {
+  margin: 0 auto;
+}
+
+.navbar_sort_links a {
+  padding-top: 0;
+}
+
 /* partials/page_heading */
 
 .heading_image_default { /*Home*/
@@ -170,6 +191,10 @@ input[type="search"]:focus {
   background-position: 0% 50%;
   background-size: cover;
   padding: 7rem 0;
+}
+
+.heading_mt {
+  padding-top: 11rem;
 }
 
 .circle {
@@ -448,8 +473,13 @@ a:link {
 #maps {
   padding-top: 7rem;
 }
+
 #maps_filter {
   padding-top: 7rem;
+}
+
+.tablet_mt {
+  margin-top: 2.5rem;
 }
 
 .hvr_grow { /* Grow */
@@ -518,6 +548,12 @@ a:link {
 .island_code {
   letter-spacing: 10px;
   line-height: 1;
+}
+
+/*maps_search*/
+
+#maps_search {
+  padding-top: 1.5rem;
 }
 
 /* media queries */ 

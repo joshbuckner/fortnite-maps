@@ -77,26 +77,28 @@ window.onscroll = function() {
   let currentScrollPos = window.pageYOffset;
   if (prevScrollpos > currentScrollPos) {
     $('#navbar-main')[0].style.top = "0";
+    $('#navbar_sort')[0].style.top = "0";
   } else {
     $('#navbar-main')[0].style.top = "-9.5rem";
+    $('#navbar_sort')[0].style.top = "-10rem";
     $('.navbar-collapse')[0].classList.value = 'navbar-collapse text-center collapse';
   }
   prevScrollpos = currentScrollPos;
 }
 
-// Listen to scroll to change header opacity class
-function checkScroll(){
-  var startY = $('.navbar').height() * 2; //The point where the navbar changes in px
-  if ($(window).scrollTop() > startY){
-    $('.navbar').addClass("scrolled");
-  } else{
-    $('.navbar').removeClass("scrolled");
-  }
-}
+// // Listen to scroll to change header opacity class
+// function checkScroll(){
+//   var startY = $('.navbar').height() * 2; //The point where the navbar changes in px
+//   if ($(window).scrollTop() > startY){
+//     $('.navbar').addClass("scrolled");
+//   } else{
+//     $('.navbar').removeClass("scrolled");
+//   }
+// }
 
-if ($('.navbar').length > 0){
-  $(window).on("scroll load resize", function(){
-    checkScroll();
-  });
-}
+// if ($('.navbar').length > 0){
+//   $(window).on("scroll load resize", function(){
+//     checkScroll();
+//   });
+// }
 

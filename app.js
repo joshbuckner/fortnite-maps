@@ -60,6 +60,9 @@ app.get('/maps/:mapName', function(req, res) {
           creativeBuilds: "hvr-circle-to-top",
           submitIsland: "hvr_underline_reveal",
           contact: "hvr_underline_reveal",
+          hide_navbar_sort: "nav_hide",
+          newestActive: "hvr_underline_reveal", 
+          viewsActive: "underline_active",
 					map: map, 
 					siteBackground: "background_header_main" 
 				});
@@ -130,6 +133,7 @@ app.get('/obstacle-parkour', function(req, res) {
           creativeBuilds: "hvr_grow hvr-circle-to-top",
           submitIsland: "hvr_underline_reveal",
           contact: "hvr_underline_reveal",
+          hide_navbar_sort: "",
 					newestActive: "hvr_underline_reveal", 
 					viewsActive: "underline_active", 
 					tilesDisplay: newMaps, 
@@ -158,6 +162,7 @@ app.get('/obstacle-parkour', function(req, res) {
           creativeBuilds: "hvr_grow hvr-circle-to-top",
           submitIsland: "hvr_underline_reveal",
           contact: "hvr_underline_reveal",
+          hide_navbar_sort: "",
 					newestActive: "underline_active", 
 					viewsActive: "hvr_underline_reveal", 
 					tilesDisplay: newMaps, 
@@ -191,6 +196,7 @@ app.get('/racing', function(req, res) {
           creativeBuilds: "hvr_grow hvr-circle-to-top",
           submitIsland: "hvr_underline_reveal",
           contact: "hvr_underline_reveal",
+          hide_navbar_sort: "",
 					newestActive: "hvr_underline_reveal", 
 					viewsActive: "underline_active", 
 					tilesDisplay: newMaps, 
@@ -219,6 +225,7 @@ app.get('/racing', function(req, res) {
           creativeBuilds: "hvr_grow hvr-circle-to-top",
           submitIsland: "hvr_underline_reveal",
           contact: "hvr_underline_reveal",
+          hide_navbar_sort: "",
 					newestActive: "underline_active", 
 					viewsActive: "hvr_underline_reveal", 
 					tilesDisplay: newMaps, 
@@ -252,6 +259,7 @@ app.get('/minigame', function(req, res) {
           creativeBuilds: "hvr_grow hvr-circle-to-top",
           submitIsland: "hvr_underline_reveal",
           contact: "hvr_underline_reveal",
+          hide_navbar_sort: "",
 					newestActive: "hvr_underline_reveal", 
 					viewsActive: "underline_active", 
 					tilesDisplay: newMaps, 
@@ -280,6 +288,7 @@ app.get('/minigame', function(req, res) {
           creativeBuilds: "hvr_grow hvr-circle-to-top",
           submitIsland: "hvr_underline_reveal",
           contact: "hvr_underline_reveal",
+          hide_navbar_sort: "",
 					newestActive: "underline_active", 
 					viewsActive: "hvr_underline_reveal", 
 					tilesDisplay: newMaps, 
@@ -313,6 +322,7 @@ app.get('/battle-arena', function(req, res) {
           creativeBuilds: "hvr_grow hvr-circle-to-top",
           submitIsland: "hvr_underline_reveal",
           contact: "hvr_underline_reveal",
+          hide_navbar_sort: "",
 					newestActive: "hvr_underline_reveal", 
 					viewsActive: "underline_active", 
 					tilesDisplay: newMaps, 
@@ -341,6 +351,7 @@ app.get('/battle-arena', function(req, res) {
           creativeBuilds: "hvr_grow hvr-circle-to-top",
           submitIsland: "hvr_underline_reveal",
           contact: "hvr_underline_reveal",
+          hide_navbar_sort: "",
 					newestActive: "underline_active", 
 					viewsActive: "hvr_underline_reveal", 
 					tilesDisplay: newMaps, 
@@ -374,6 +385,7 @@ app.get('/edit-courses', function(req, res) {
           creativeBuilds: "hvr_grow hvr-circle-to-top",
           submitIsland: "hvr_underline_reveal",
           contact: "hvr_underline_reveal",
+          hide_navbar_sort: "",
 					newestActive: "hvr_underline_reveal", 
 					viewsActive: "underline_active", 
 					tilesDisplay: newMaps, 
@@ -402,6 +414,7 @@ app.get('/edit-courses', function(req, res) {
           creativeBuilds: "hvr_grow hvr-circle-to-top",
           submitIsland: "hvr_underline_reveal",
           contact: "hvr_underline_reveal",
+          hide_navbar_sort: "",
 					newestActive: "underline_active", 
 					viewsActive: "hvr_underline_reveal", 
 					tilesDisplay: newMaps, 
@@ -433,6 +446,9 @@ app.get('/creative-builds', function(req, res) {
           battleArena: "hvr_grow hvr-circle-to-top",
           editCourses: "hvr_grow hvr-circle-to-top",
           creativeBuilds: "category_active rotate",
+          submitIsland: "hvr_underline_reveal",
+          contact: "hvr_underline_reveal",
+          hide_navbar_sort: "",
 					newestActive: "hvr_underline_reveal", 
 					viewsActive: "underline_active", 
 					tilesDisplay: newMaps, 
@@ -461,6 +477,7 @@ app.get('/creative-builds', function(req, res) {
           creativeBuilds: "category_active rotate",
           submitIsland: "hvr_underline_reveal",
           contact: "hvr_underline_reveal",
+          hide_navbar_sort: "",
 					newestActive: "underline_active", 
 					viewsActive: "hvr_underline_reveal", 
 					tilesDisplay: newMaps, 
@@ -492,6 +509,9 @@ app.get('/popular', function(req, res) {
         creativeBuilds: "hvr_grow hvr-circle-to-top",
         submitIsland: "hvr_underline_reveal",
         contact: "hvr_underline_reveal",
+        hide_navbar_sort: "nav_hide",
+        newestActive: "", 
+        viewsActive: "",
 				tilesDisplay: newMaps, 
 				headingDisplay: "Popular", 
 				headingImage: "heading_image_sniper", 
@@ -518,6 +538,9 @@ app.get('/new', function(req, res) {
         creativeBuilds: "hvr_grow hvr-circle-to-top",
         submitIsland: "hvr_underline_reveal",
         contact: "hvr_underline_reveal",
+        hide_navbar_sort: "nav_hide",
+        newestActive: "", 
+        viewsActive: "",
 				tilesDisplay: newMaps, 
 				headingDisplay: "New", 
 				headingImage: "heading_image_zombies", 
@@ -529,7 +552,7 @@ app.get('/new', function(req, res) {
 
 app.get('/submit', function(req, res) {
 	res.render('submit', {
-  newSort: "hvr-circle-to-top",
+    newSort: "hvr-circle-to-top",
     popularSort: "hvr-circle-to-top",
     obstacleParkour: "hvr-circle-to-top",
     racing: "hvr-circle-to-top",
@@ -539,21 +562,37 @@ app.get('/submit', function(req, res) {
     creativeBuilds: "hvr-circle-to-top",
     submitIsland: "underline_active",
     contact: "hvr_underline_reveal", 
-		headingDisplay: "Submit An Island", 
-		headingImage: "heading_image_submit", 
-		siteBackground: "background_header_submit" 
+    hide_navbar_sort: "nav_hide",
+    newestActive: "", 
+    viewsActive: "",
+  	headingDisplay: "Submit An Island", 
+  	headingImage: "heading_image_submit", 
+  	siteBackground: "background_header_submit"
 	});
 });
 
 app.post('/search', function(req, res) {
 	searchInput = req.body.searchInput;
 	Map.find({name: {$regex: searchInput, $options: "$i"}}, function(err, foundMaps) {
-		if(!err) {
-			res.render('maps_filter', { 
-				tilesDisplay: foundMaps, 
-				headingDisplay: "Search results for: " + searchInput, 
-				headingImage: "heading_image", 
-				siteBackground: "background_header_main" 
+		if(!err && searchInput !== "") {
+			res.render('maps_search', { 
+        newSort: "hvr_grow hvr-circle-to-top",
+        popularSort: "hvr_grow hvr-circle-to-top",
+        obstacleParkour: "hvr_grow hvr-circle-to-top",
+        racing: "hvr_grow hvr-circle-to-top",
+        minigame: "hvr_grow hvr-circle-to-top",
+        battleArena: "hvr_grow hvr-circle-to-top",
+        editCourses: "hvr_grow hvr-circle-to-top",
+        creativeBuilds: "hvr_grow hvr-circle-to-top",
+        submitIsland: "hvr_underline_reveal",
+        contact: "hvr_underline_reveal",
+        hide_navbar_sort: "",
+        newestActive: "underline_active", 
+        viewsActive: "hvr_underline_reveal", 
+        tilesDisplay: foundMaps, 
+        headingDisplay: "Search results for: " + searchInput, 
+        headingImage: "heading_image", 
+        siteBackground: "background_header_main" 
 			});
 		}
 	});

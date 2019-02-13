@@ -1,0 +1,38 @@
+<%- include('partials/header') -%>
+<%- include('partials/navbar') -%>
+<%- include('partials/background') %>
+<%- include('partials/page_heading') -%>
+
+<section class="" id="maps_search">
+  <div class="album pb-4">
+    <div class="container">
+      <div class="row">
+        <% tilesDisplay.forEach(function(map) { -%>
+          <div class="col-lg-4 hvr_grow">
+            <a class="text-white" href="/maps/<%= map.code %>">
+            <div class="card mb-4 shadow-sm text-white mine_shaft_gray_bg">
+              <div class="card-header text-center h4 py-3">
+                <%= map.name %>
+              </div>
+              <img src="<%= map.photo %>" class="card-img-top" alt="...">
+              <p class="category_tag"><%= map.category %></p>
+            </a>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-9">
+                    <p class="card-text code_font text-left">Code: <%= map.code %> %> <br>(<%= map.author %>)</p>
+                  </div>
+                  <div class="code_font h6 pt-3 text-center col-3">
+                    <i class="far fa-eye manz_yellow"></i> <%= map.views %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% }); -%>
+      </div>
+    </div>
+  </div>
+</section>
+
+<%- include('partials/footer') -%>
