@@ -6,6 +6,7 @@ const _ = require('lodash');
 const multer = require('multer');
 const rp = require("request-promise");
 const cheerio = require("cheerio");
+const nodeMailer = require('nodemailer');
 
 const upload = multer({ dest: 'public/uploads'});
 
@@ -70,47 +71,6 @@ app.get('/maps/:mapName', function(req, res) {
 		});
 	});
 });
-
-// app.get('/all', function(req, res) {
-// 	const sortBy = req.query.sortby;
-// 	if (sortBy === "views") {
-// 		Map.find({}, function(err, foundMaps) {
-// 			const newMaps = foundMaps.sort(function(a, b) {
-// 			  a = a.views;
-// 			  b = b.views;
-// 			  return a>b ? -1 : a<b ? 1 : 0;
-// 			});
-// 			if(!err) {
-// 				res.render('maps', { 
-// 					newestActive: "hvr_underline_reveal", 
-// 					viewsActive: "underline_active", 
-// 					tilesDisplay: newMaps, 
-// 					headingDisplay: "All", 
-// 					headingImage: "heading_image", 
-// 					siteBackground: "background_header_main" 
-// 				});
-// 			}
-// 		});	
-// 	} else {
-// 		Map.find({}, function(err, foundMaps) {
-// 			const newMaps = foundMaps.sort(function(a, b) {
-// 			  a = a.date;
-// 			  b = b.date;
-// 			  return a>b ? -1 : a<b ? 1 : 0;
-// 			});
-// 			if(!err) {
-// 				res.render('maps', { 
-// 					newestActive: "underline_active", 
-// 					viewsActive: "hvr_underline_reveal", 
-// 					tilesDisplay: newMaps, 
-// 					headingDisplay: "All", 
-// 					headingImage: "heading_image", 
-// 					siteBackground: "background_header_main" 
-// 				});
-// 			}
-// 		});
-// 	}
-// });
 
 app.get('/obstacle-parkour', function(req, res) {
 	const sortBy = req.query.sortby;
@@ -571,10 +531,31 @@ app.get('/submit', function(req, res) {
 	});
 });
 
+app.get('/contact', function(req, res) {
+  res.render('contact', {
+    newSort: "hvr-circle-to-top",
+    popularSort: "hvr-circle-to-top",
+    obstacleParkour: "hvr-circle-to-top",
+    racing: "hvr-circle-to-top",
+    minigame: "hvr-circle-to-top",
+    battleArena: "hvr-circle-to-top",
+    editCourses: "hvr-circle-to-top",
+    creativeBuilds: "hvr-circle-to-top",
+    submitIsland: "hvr_underline_reveal",
+    contact: "underline_active", 
+    hide_navbar_sort: "nav_hide",
+    newestActive: "", 
+    viewsActive: "",
+    headingDisplay: "Submit An Island", 
+    headingImage: "heading_image_submit", 
+    siteBackground: "background_header_submit"
+  });
+});
+
 app.post('/search', function(req, res) {
 	searchInput = req.body.searchInput;
 	Map.find({name: {$regex: searchInput, $options: "$i"}}, function(err, foundMaps) {
-		if(!err && searchInput !== "") {
+		if(!err && searchInput !== "" && foundMaps.length !== 0) {
 			res.render('maps_search', { 
         newSort: "hvr_grow hvr-circle-to-top",
         popularSort: "hvr_grow hvr-circle-to-top",
@@ -586,16 +567,68 @@ app.post('/search', function(req, res) {
         creativeBuilds: "hvr_grow hvr-circle-to-top",
         submitIsland: "hvr_underline_reveal",
         contact: "hvr_underline_reveal",
-        hide_navbar_sort: "",
+        hide_navbar_sort: "nav_hide",
         newestActive: "underline_active", 
         viewsActive: "hvr_underline_reveal", 
         tilesDisplay: foundMaps, 
         headingDisplay: "Search results for: " + searchInput, 
         headingImage: "heading_image", 
         siteBackground: "background_header_main" 
-			});
-		}
+      });
+		} else if(!err && searchInput!== "") {
+      res.render('no_results', { 
+        newSort: "hvr_grow hvr-circle-to-top",
+        popularSort: "hvr_grow hvr-circle-to-top",
+        obstacleParkour: "hvr_grow hvr-circle-to-top",
+        racing: "hvr_grow hvr-circle-to-top",
+        minigame: "hvr_grow hvr-circle-to-top",
+        battleArena: "hvr_grow hvr-circle-to-top",
+        editCourses: "hvr_grow hvr-circle-to-top",
+        creativeBuilds: "hvr_grow hvr-circle-to-top",
+        submitIsland: "hvr_underline_reveal",
+        contact: "hvr_underline_reveal",
+        hide_navbar_sort: "nav_hide",
+        newestActive: "", 
+        viewsActive: "",
+        tilesDisplay: foundMaps, 
+        headingDisplay: "No results for: " + searchInput, 
+        headingImage: "heading_image", 
+        siteBackground: "background_header_main" 
+      });
+    }
 	});
+});
+
+app.post('/contact', function(req, res) {
+  const contactName = req.body.contactName;
+  const contactEmail = req.body.contactEmail;
+  const contactSubject = req.body.contactSubject;
+  const contactMessage = req.body.contactMessage;
+
+  let transporter = nodeMailer.createTransport({
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true,
+    auth: {
+      user: 'fortnitecreativecodes1@gmail.com',
+      pass: 'welikefortnite'
+    }
+  });
+  let mailOptions = {
+    from: contactEmail, // sender address
+    to: 'joshgbuckner@gmail.com', // list of receivers
+    subject: contactSubject, // Subject line
+    text: contactMessage, // plain text body
+    html: '<b>NodeJS Email Tutorial</b>' // html body
+  };
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      return console.log(error);
+    }
+    console.log('Message %s sent: %s', info.messageId, info.response);
+      res.redirect('contact');
+    });
+  // console.log(req.body.contactName, req.body.contactEmail, req.body.contactSubject, req.body.contactMessage);
 });
 
 app.post('/submit', upload.single('mapPhoto'), function(req, res) {

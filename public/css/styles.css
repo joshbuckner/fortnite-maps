@@ -194,7 +194,7 @@ input[type="search"]:focus {
 }
 
 .heading_mt {
-  padding-top: 11rem;
+  padding-top: 8rem;
 }
 
 .circle {
@@ -526,6 +526,16 @@ a:link {
   position: relative;
 }
 
+/*contact*/
+
+#contact {
+  padding-top: 5rem;
+}
+
+.contact {
+  max-width: 35rem;
+}
+
 /* map */
 #user_map {
   padding-top: 5rem;
@@ -554,6 +564,10 @@ a:link {
 
 #maps_search {
   padding-top: 1.5rem;
+}
+
+.darken_img {
+  filter: brightness(80%);
 }
 
 /* media queries */ 

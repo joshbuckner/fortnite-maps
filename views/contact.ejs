@@ -1,0 +1,38 @@
+<%- include('partials/header') -%>
+<%- include('partials/navbar') -%>
+<%- include('partials/background') %>
+
+<section id="contact">
+  <div class="submit-map text-white">
+    <div class="container tablet_mt contact">
+      <form id="myForm" method="POST" autocomplete="off" class="needs-validation placeholder_center" novalidate>
+        <div class="py-5 m-1 rounded">
+          <div class="px-4">
+            <div class="mb-5 input-group input-group-md">
+              <input name="contactName" type="text" class="form-control text-center rounded" id="contact-name" placeholder="Name" required>
+              <div class="invalid-feedback">Please enter a Name.</div>
+            </div>
+            <div class="mb-5 input-group input-group-md">
+              <input name="contactEmail" type="email" class="form-control text-center rounded" id="contact-email" placeholder="Email" required>
+              <div class="invalid-feedback">Please enter an Email Address.</div>
+            </div>
+            <div class="mb-5 input-group input-group-md">
+              <input name="contactSubject" type="text" class="form-control text-center rounded" id="contact-subject" placeholder="Subject" required>
+              <div class="invalid-feedback">Please enter a Subject.</div>
+            </div>
+            <div class="mb-5 input-group input-group-md">
+              <textarea rows="6" name="contactMessage" type="text" class="form-control text-center rounded" id="contact-message" placeholder="Message" required></textarea>
+              <div class="invalid-feedback">Please enter a Message.</div>
+            </div>
+          </div>
+          <div class="px-4">
+            <button class="btn btn-outline-light btn-lg btn-block p-4" type="submit">Submit</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<%- include('partials/modal') -%>
+<%- include('partials/footer') -%>
