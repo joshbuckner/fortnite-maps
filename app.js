@@ -29,7 +29,8 @@ const mapsSchema = {
 	category: String,
 	date: Date,
 	views: Number,
-	bio: String
+	bio: String,
+  youtubeLink: String
 };
 
 const Map = mongoose.model("Map", mapsSchema);
@@ -286,119 +287,65 @@ app.get('/new', function(req, res) {
 
 app.get('/maps/:mapName', function(req, res) {
   const requestedMap = req.params.mapName;
+  const currentMaps = [];
+  renderOptions.hide_navbar_sort = "nav_hide";
   Map.find({}, function(err, foundMaps) {
     foundMaps.forEach(function(map) {
       const storedCode = map.code;
       if (requestedMap === storedCode) {
         Map.update({ name: map.name }, { $inc: { views: 1 }}, function(err, result) {
         });
-        res.render('map', { 
-          newSort: "hvr-circle-to-top",
-          popularSort: "hvr-circle-to-top",
-          obstacleParkour: "hvr-circle-to-top",
-          racing: "hvr-circle-to-top",
-          minigame: "hvr-circle-to-top",
-          battleArena: "hvr-circle-to-top",
-          editCourses: "hvr-circle-to-top",
-          creativeBuilds: "hvr-circle-to-top",
-          submitIsland: "hvr_underline_reveal",
-          contact: "hvr_underline_reveal",
-          hide_navbar_sort: "nav_hide",
-          newestActive: "hvr_underline_reveal", 
-          viewsActive: "underline_active",
-          map: map, 
-          siteBackground: "background_header_main" 
-        });
+        currentMaps.push(map);
+        renderOptions.map = map;
+        console.log(map.youtubeLink);
+        renderOptions.youtubeLink = map.youtubeLink;
+        res.render('map', renderOptions);
       }
     });
+    if (currentMaps.length === 0) {
+        res.render('404', renderOptions);
+      }
   });
+  setTimeout(function() {
+    renderOptions.hide_navbar_sort = "";
+  }, 10);
 });
 
 app.get('/submit', function(req, res) {
-	res.render('submit', {
-    newSort: "hvr-circle-to-top",
-    popularSort: "hvr-circle-to-top",
-    obstacleParkour: "hvr-circle-to-top",
-    racing: "hvr-circle-to-top",
-    minigame: "hvr-circle-to-top",
-    battleArena: "hvr-circle-to-top",
-    editCourses: "hvr-circle-to-top",
-    creativeBuilds: "hvr-circle-to-top",
-    submitIsland: "underline_active",
-    contact: "hvr_underline_reveal", 
-    hide_navbar_sort: "nav_hide",
-    newestActive: "", 
-    viewsActive: "",
-  	headingDisplay: "Submit An Island", 
-  	headingImage: "heading_image_submit", 
-  	siteBackground: "background_header_submit"
-	});
+  renderOptions.hide_navbar_sort = "nav_hide";
+  renderOptions.submitIsland = "underline_active";
+  renderOptions.siteBackground = "background_header_submit";
+  res.render('submit', renderOptions);
+  setTimeout(function() {
+    renderOptions.hide_navbar_sort = "";
+    renderOptions.siteBackground = "background_header_main";
+    renderOptions.submitIsland = "hvr_underline_reveal";
+  }, 10);
 });
 
 app.get('/contact', function(req, res) {
-  res.render('contact', {
-    newSort: "hvr-circle-to-top",
-    popularSort: "hvr-circle-to-top",
-    obstacleParkour: "hvr-circle-to-top",
-    racing: "hvr-circle-to-top",
-    minigame: "hvr-circle-to-top",
-    battleArena: "hvr-circle-to-top",
-    editCourses: "hvr-circle-to-top",
-    creativeBuilds: "hvr-circle-to-top",
-    submitIsland: "hvr_underline_reveal",
-    contact: "underline_active", 
-    hide_navbar_sort: "nav_hide",
-    newestActive: "", 
-    viewsActive: "",
-    headingDisplay: "Submit An Island", 
-    headingImage: "heading_image_submit", 
-    siteBackground: "background_header_submit"
-  });
+  renderOptions.hide_navbar_sort = "nav_hide";
+  renderOptions.contact = "underline_active";
+  renderOptions.siteBackground = "background_header_submit";
+  res.render('contact', renderOptions);
+  setTimeout(function() {
+    renderOptions.hide_navbar_sort = "";
+    renderOptions.siteBackground = "background_header_main";
+    renderOptions.contact = "hvr_underline_reveal";
+  }, 10);
 });
 
 app.post('/search', function(req, res) {
 	searchInput = req.body.searchInput;
 	Map.find({name: {$regex: searchInput, $options: "$i"}}, function(err, foundMaps) {
+    renderOptions.hide_navbar_sort = "nav_hide";
+    renderOptions.tilesDisplay = foundMaps;
 		if(!err && searchInput !== "" && foundMaps.length !== 0) {
-			res.render('maps_search', { 
-        newSort: "hvr_grow hvr-circle-to-top",
-        popularSort: "hvr_grow hvr-circle-to-top",
-        obstacleParkour: "hvr_grow hvr-circle-to-top",
-        racing: "hvr_grow hvr-circle-to-top",
-        minigame: "hvr_grow hvr-circle-to-top",
-        battleArena: "hvr_grow hvr-circle-to-top",
-        editCourses: "hvr_grow hvr-circle-to-top",
-        creativeBuilds: "hvr_grow hvr-circle-to-top",
-        submitIsland: "hvr_underline_reveal",
-        contact: "hvr_underline_reveal",
-        hide_navbar_sort: "nav_hide",
-        newestActive: "underline_active", 
-        viewsActive: "hvr_underline_reveal", 
-        tilesDisplay: foundMaps, 
-        headingDisplay: "Search results for: " + searchInput, 
-        headingImage: "heading_image", 
-        siteBackground: "background_header_main" 
-      });
+      renderOptions.headingDisplay = "Search results for: " + searchInput;
+      res.render('maps_search', renderOptions);
 		} else if(!err && searchInput!== "") {
-      res.render('no_results', { 
-        newSort: "hvr_grow hvr-circle-to-top",
-        popularSort: "hvr_grow hvr-circle-to-top",
-        obstacleParkour: "hvr_grow hvr-circle-to-top",
-        racing: "hvr_grow hvr-circle-to-top",
-        minigame: "hvr_grow hvr-circle-to-top",
-        battleArena: "hvr_grow hvr-circle-to-top",
-        editCourses: "hvr_grow hvr-circle-to-top",
-        creativeBuilds: "hvr_grow hvr-circle-to-top",
-        submitIsland: "hvr_underline_reveal",
-        contact: "hvr_underline_reveal",
-        hide_navbar_sort: "nav_hide",
-        newestActive: "", 
-        viewsActive: "",
-        tilesDisplay: foundMaps, 
-        headingDisplay: "No results for: " + searchInput, 
-        headingImage: "heading_image", 
-        siteBackground: "background_header_main" 
-      });
+      renderOptions.headingDisplay = "No results for: " + searchInput;
+      res.render('no_results', renderOptions);
     }
 	});
 });
@@ -408,7 +355,6 @@ app.post('/contact', function(req, res) {
   const contactEmail = req.body.contactEmail;
   const contactSubject = req.body.contactSubject;
   const contactMessage = req.body.contactMessage;
-
   let transporter = nodeMailer.createTransport({
     host: 'smtp.gmail.com',
     port: 465,
@@ -432,7 +378,6 @@ app.post('/contact', function(req, res) {
     console.log('Message %s sent: %s', info.messageId, info.response);
       res.redirect('contact');
     });
-  // console.log(req.body.contactName, req.body.contactEmail, req.body.contactSubject, req.body.contactMessage);
 });
 
 app.post('/submit', upload.single('mapPhoto'), function(req, res) {
@@ -440,6 +385,8 @@ app.post('/submit', upload.single('mapPhoto'), function(req, res) {
 	const authorName = req.body.authorName;
 	const islandCode = req.body.islandCode;
 	const category = req.body.category;
+  const youtubeLink = req.body.youtubeLink;
+  const youtubeUrl = youtubeLink.slice(32, youtubeLink.length);
 	const date = new Date();
 	const filePath = req.file.path.substring(7);
 	if (!req.file) {
@@ -455,7 +402,8 @@ app.post('/submit', upload.single('mapPhoto'), function(req, res) {
 		category: category,
 		date: date,
 		views: 1,
-		bio: "default"
+		bio: "default",
+    youtubeLink: youtubeUrl
 	});
 	Map.find({code: islandCode}, function(err, foundMaps) {
 		if(!err) {
