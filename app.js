@@ -42,15 +42,257 @@ app.get('/', function(req, res) {
 	});
 });
 
-app.get('/maps/:mapName', function(req, res) {
-	const requestedMap = req.params.mapName;
+let renderOptions = {
+  newSort: "hvr_grow hvr-circle-to-top",
+  popularSort: "hvr_grow hvr-circle-to-top",
+  obstacleParkour: "hvr_grow hvr-circle-to-top", // category_active rotate
+  racing: "hvr_grow hvr-circle-to-top",
+  minigame: "hvr_grow hvr-circle-to-top",
+  battleArena: "hvr_grow hvr-circle-to-top",
+  editCourses: "hvr_grow hvr-circle-to-top",
+  creativeBuilds: "hvr_grow hvr-circle-to-top",
+  submitIsland: "hvr_underline_reveal",
+  contact: "hvr_underline_reveal",
+  hide_navbar_sort: "",
+  newestActive: "underline_active", // underline_active
+  viewsActive: "hvr_underline_reveal", //hvr_underline_reveal
+  tilesDisplay: [], // newMaps
+  headingDisplay: "", // Obstacle & Parkour
+  headingImage: "heading_image_freefall", 
+  siteBackground: "background_header_main"
+}
+
+function sortPopular(e) {
+  return e.sort(function(a, b) {
+    a = a.views;
+    b = b.views;
+    return a>b ? -1 : a<b ? 1 : 0;
+  });
+}
+
+function sortNew(e) {
+  return e.sort(function(a, b) {
+    a = a.date;
+    b = b.date;
+    return a>b ? -1 : a<b ? 1 : 0;
+  });
+}
+
+app.get('/obstacle-parkour', function(req, res) {
+	const sortBy = req.query.sortby;
+  renderOptions.obstacleParkour = "category_active rotate";
+	if (sortBy === "views") {
+		Map.find({category: "obstacle-parkour"}, function(err, foundMaps) {
+			const newMaps = sortPopular(foundMaps);
+			if(!err) {
+        renderOptions.tilesDisplay = newMaps;
+        renderOptions.viewsActive = "underline_active";
+        renderOptions.newestActive = "hvr_underline_reveal";
+				res.render('maps', renderOptions);
+			}
+		});
+	} else {
+		Map.find({category: "obstacle-parkour"}, function(err, foundMaps) {
+			const newMaps = sortNew(foundMaps);
+			if(!err) {
+        renderOptions.tilesDisplay = newMaps;
+        renderOptions.viewsActive = "hvr_underline_reveal";
+        renderOptions.newestActive = "underline_active";
+				res.render('maps', renderOptions);
+			}
+		});
+	} 
+  setTimeout(function() {
+    renderOptions.obstacleParkour = "hvr_grow hvr-circle-to-top";
+  }, 10);
+});
+
+app.get('/racing', function(req, res) {
+	const sortBy = req.query.sortby;
+  renderOptions.racing = "category_active rotate";
+	if (sortBy === "views") {
+		Map.find({category: "racing"}, function(err, foundMaps) {
+			const newMaps = sortPopular(foundMaps);
+			if(!err) {
+        renderOptions.tilesDisplay = newMaps;
+        renderOptions.viewsActive = "underline_active";
+        renderOptions.newestActive = "hvr_underline_reveal";
+        res.render('maps', renderOptions);
+			}
+		});
+	} else {
+		Map.find({category: "racing"}, function(err, foundMaps) {
+			const newMaps = sortNew(foundMaps);
+			if(!err) {
+        renderOptions.tilesDisplay = newMaps;
+        renderOptions.viewsActive = "hvr_underline_reveal";
+        renderOptions.newestActive = "underline_active";
+        res.render('maps', renderOptions);
+			}
+		});
+	}
+  setTimeout(function() {
+    renderOptions.racing = "hvr_grow hvr-circle-to-top";
+  }, 10);
+});
+
+app.get('/minigame', function(req, res) {
+	const sortBy = req.query.sortby;
+  renderOptions.minigame = "category_active rotate";
+  if (sortBy === "views") {
+    Map.find({category: "minigame"}, function(err, foundMaps) {
+      const newMaps = sortPopular(foundMaps);
+      if(!err) {
+        renderOptions.tilesDisplay = newMaps;
+        renderOptions.viewsActive = "underline_active";
+        renderOptions.newestActive = "hvr_underline_reveal";
+        res.render('maps', renderOptions);
+      }
+    });
+  } else {
+    Map.find({category: "minigame"}, function(err, foundMaps) {
+      const newMaps = sortNew(foundMaps);
+      if(!err) {
+        renderOptions.tilesDisplay = newMaps;
+        renderOptions.viewsActive = "hvr_underline_reveal";
+        renderOptions.newestActive = "underline_active";
+        res.render('maps', renderOptions);
+      }
+    });
+  }
+  setTimeout(function() {
+    renderOptions.minigame = "hvr_grow hvr-circle-to-top";
+  }, 10);
+});
+
+app.get('/battle-arena', function(req, res) {
+	const sortBy = req.query.sortby;
+  renderOptions.battleArena = "category_active rotate";
+  if (sortBy === "views") {
+    Map.find({category: "battle-arena"}, function(err, foundMaps) {
+      const newMaps = sortPopular(foundMaps);
+      if(!err) {
+        renderOptions.tilesDisplay = newMaps;
+        renderOptions.viewsActive = "underline_active";
+        renderOptions.newestActive = "hvr_underline_reveal";
+        res.render('maps', renderOptions);
+      }
+    });
+  } else {
+    Map.find({category: "battle-arena"}, function(err, foundMaps) {
+      const newMaps = sortNew(foundMaps);
+      if(!err) {
+        renderOptions.tilesDisplay = newMaps;
+        renderOptions.viewsActive = "hvr_underline_reveal";
+        renderOptions.newestActive = "underline_active";
+        res.render('maps', renderOptions);
+      }
+    });
+  }
+  setTimeout(function() {
+    renderOptions.battleArena = "hvr_grow hvr-circle-to-top";
+  }, 10);
+});
+
+app.get('/edit-courses', function(req, res) {
+	const sortBy = req.query.sortby;
+  renderOptions.editCourses = "category_active rotate";
+  if (sortBy === "views") {
+    Map.find({category: "edit-courses"}, function(err, foundMaps) {
+      const newMaps = sortPopular(foundMaps);
+      if(!err) {
+        renderOptions.tilesDisplay = newMaps;
+        renderOptions.viewsActive = "underline_active";
+        renderOptions.newestActive = "hvr_underline_reveal";
+        res.render('maps', renderOptions);
+      }
+    });
+  } else {
+    Map.find({category: "edit-courses"}, function(err, foundMaps) {
+      const newMaps = sortNew(foundMaps);
+      if(!err) {
+        renderOptions.tilesDisplay = newMaps;
+        renderOptions.viewsActive = "hvr_underline_reveal";
+        renderOptions.newestActive = "underline_active";
+        res.render('maps', renderOptions);
+      }
+    });
+  }
+  setTimeout(function() {
+    renderOptions.editCourses = "hvr_grow hvr-circle-to-top";
+  }, 10);
+});
+
+app.get('/creative-builds', function(req, res) {
+	const sortBy = req.query.sortby;
+  renderOptions.creativeBuilds = "category_active rotate";
+  if (sortBy === "views") {
+    Map.find({category: "creative-builds"}, function(err, foundMaps) {
+      const newMaps = sortPopular(foundMaps);
+      if(!err) {
+        renderOptions.tilesDisplay = newMaps;
+        renderOptions.viewsActive = "underline_active";
+        renderOptions.newestActive = "hvr_underline_reveal";
+        res.render('maps', renderOptions);
+      }
+    });
+  } else {
+    Map.find({category: "creative-builds"}, function(err, foundMaps) {
+      const newMaps = sortNew(foundMaps);
+      if(!err) {
+        renderOptions.tilesDisplay = newMaps;
+        renderOptions.viewsActive = "hvr_underline_reveal";
+        renderOptions.newestActive = "underline_active";
+        res.render('maps', renderOptions);
+      }
+    });
+  }
+  setTimeout(function() {
+    renderOptions.creativeBuilds = "hvr_grow hvr-circle-to-top";
+  }, 10);
+});
+
+app.get('/popular', function(req, res) {
+  renderOptions.popularSort = "category_active rotate";
+  renderOptions.hide_navbar_sort = "nav_hide";
 	Map.find({}, function(err, foundMaps) {
-		foundMaps.forEach(function(map) {
-			const storedCode = map.code;
-			if (requestedMap === storedCode) {
-				Map.update({ name: map.name }, { $inc: { views: 1 }}, function(err, result) {
-				});
-				res.render('map', { 
+		const newMaps = sortPopular(foundMaps);
+		if(!err) {
+      renderOptions.tilesDisplay = newMaps;
+      res.render('maps_filter', renderOptions);
+		}
+	});
+  setTimeout(function() {
+    renderOptions.popularSort = "hvr_grow hvr-circle-to-top";
+    renderOptions.hide_navbar_sort = "";
+  }, 10);
+});
+
+app.get('/new', function(req, res) {
+	renderOptions.newSort = "category_active rotate";
+  renderOptions.hide_navbar_sort = "nav_hide";
+  Map.find({}, function(err, foundMaps) {
+    const newMaps = sortNew(foundMaps);
+    if(!err) {
+      renderOptions.tilesDisplay = newMaps;
+      res.render('maps_filter', renderOptions);
+    }
+  });
+  setTimeout(function() {
+    renderOptions.newSort = "hvr_grow hvr-circle-to-top";
+    renderOptions.hide_navbar_sort = "";
+  }, 10);
+});
+
+app.get('/maps/:mapName', function(req, res) {
+  const requestedMap = req.params.mapName;
+  Map.find({}, function(err, foundMaps) {
+    foundMaps.forEach(function(map) {
+      const storedCode = map.code;
+      if (requestedMap === storedCode) {
+        Map.update({ name: map.name }, { $inc: { views: 1 }}, function(err, result) {
+        });
+        res.render('map', { 
           newSort: "hvr-circle-to-top",
           popularSort: "hvr-circle-to-top",
           obstacleParkour: "hvr-circle-to-top",
@@ -64,450 +306,12 @@ app.get('/maps/:mapName', function(req, res) {
           hide_navbar_sort: "nav_hide",
           newestActive: "hvr_underline_reveal", 
           viewsActive: "underline_active",
-					map: map, 
-					siteBackground: "background_header_main" 
-				});
-			}
-		});
-	});
-});
-
-app.get('/obstacle-parkour', function(req, res) {
-	const sortBy = req.query.sortby;
-	if (sortBy === "views") {
-		Map.find({category: "obstacle-parkour"}, function(err, foundMaps) {
-			const newMaps = foundMaps.sort(function(a, b) {
-			  a = a.views;
-			  b = b.views;
-			  return a>b ? -1 : a<b ? 1 : 0;
-			});
-			if(!err) {
-				res.render('maps', {
-          newSort: "hvr_grow hvr-circle-to-top",
-          popularSort: "hvr_grow hvr-circle-to-top",
-          obstacleParkour: "category_active rotate",
-          racing: "hvr_grow hvr-circle-to-top",
-          minigame: "hvr_grow hvr-circle-to-top",
-          battleArena: "hvr_grow hvr-circle-to-top",
-          editCourses: "hvr_grow hvr-circle-to-top",
-          creativeBuilds: "hvr_grow hvr-circle-to-top",
-          submitIsland: "hvr_underline_reveal",
-          contact: "hvr_underline_reveal",
-          hide_navbar_sort: "",
-					newestActive: "hvr_underline_reveal", 
-					viewsActive: "underline_active", 
-					tilesDisplay: newMaps, 
-					headingDisplay: "Obstacle & Parkour", 
-					headingImage: "heading_image_freefall", 
-					siteBackground: "background_header_main" 
-				});
-			}
-		});
-	} else {
-		Map.find({category: "obstacle-parkour"}, function(err, foundMaps) {
-			const newMaps = foundMaps.sort(function(a, b) {
-			  a = a.date;
-			  b = b.date;
-			  return a>b ? -1 : a<b ? 1 : 0;
-			});
-			if(!err) {
-				res.render('maps', { 
-          newSort: "hvr_grow hvr-circle-to-top",
-          popularSort: "hvr_grow hvr-circle-to-top",
-          obstacleParkour: "category_active rotate",
-          racing: "hvr_grow hvr-circle-to-top",
-          minigame: "hvr_grow hvr-circle-to-top",
-          battleArena: "hvr_grow hvr-circle-to-top",
-          editCourses: "hvr_grow hvr-circle-to-top",
-          creativeBuilds: "hvr_grow hvr-circle-to-top",
-          submitIsland: "hvr_underline_reveal",
-          contact: "hvr_underline_reveal",
-          hide_navbar_sort: "",
-					newestActive: "underline_active", 
-					viewsActive: "hvr_underline_reveal", 
-					tilesDisplay: newMaps, 
-					headingDisplay: "Obstacle & Parkour", 
-					headingImage: "heading_image_freefall", 
-					siteBackground: "background_header_main" 
-				});
-			}
-		});
-	}
-});
-
-app.get('/racing', function(req, res) {
-	const sortBy = req.query.sortby;
-	if (sortBy === "views") {
-		Map.find({category: "racing"}, function(err, foundMaps) {
-			const newMaps = foundMaps.sort(function(a, b) {
-			  a = a.views;
-			  b = b.views;
-			  return a>b ? -1 : a<b ? 1 : 0;
-			});
-			if(!err) {
-				res.render('maps', { 
-          newSort: "hvr_grow hvr-circle-to-top",
-          popularSort: "hvr_grow hvr-circle-to-top",
-          obstacleParkour: "hvr_grow hvr-circle-to-top",
-          racing: "category_active rotate",
-          minigame: "hvr_grow hvr-circle-to-top",
-          battleArena: "hvr_grow hvr-circle-to-top",
-          editCourses: "hvr_grow hvr-circle-to-top",
-          creativeBuilds: "hvr_grow hvr-circle-to-top",
-          submitIsland: "hvr_underline_reveal",
-          contact: "hvr_underline_reveal",
-          hide_navbar_sort: "",
-					newestActive: "hvr_underline_reveal", 
-					viewsActive: "underline_active", 
-					tilesDisplay: newMaps, 
-					headingDisplay: "Racing", 
-					headingImage: "heading_image_racing", 
-					siteBackground: "background_header_main" 
-				});
-			}
-		});
-	} else {
-		Map.find({category: "racing"}, function(err, foundMaps) {
-			const newMaps = foundMaps.sort(function(a, b) {
-			  a = a.date;
-			  b = b.date;
-			  return a>b ? -1 : a<b ? 1 : 0;
-			});
-			if(!err) {
-				res.render('maps', {
-          newSort: "hvr_grow hvr-circle-to-top",
-          popularSort: "hvr_grow hvr-circle-to-top", 
-          obstacleParkour: "hvr_grow hvr-circle-to-top",
-          racing: "category_active rotate",
-          minigame: "hvr_grow hvr-circle-to-top",
-          battleArena: "hvr_grow hvr-circle-to-top",
-          editCourses: "hvr_grow hvr-circle-to-top",
-          creativeBuilds: "hvr_grow hvr-circle-to-top",
-          submitIsland: "hvr_underline_reveal",
-          contact: "hvr_underline_reveal",
-          hide_navbar_sort: "",
-					newestActive: "underline_active", 
-					viewsActive: "hvr_underline_reveal", 
-					tilesDisplay: newMaps, 
-					headingDisplay: "Racing", 
-					headingImage: "heading_image_racing", 
-					siteBackground: "background_header_main" 
-				});
-			}
-		});
-	}
-});
-
-app.get('/minigame', function(req, res) {
-	const sortBy = req.query.sortby;
-	if (sortBy === "views") {
-		Map.find({category: "minigame"}, function(err, foundMaps) {
-			const newMaps = foundMaps.sort(function(a, b) {
-			  a = a.views;
-			  b = b.views;
-			  return a>b ? -1 : a<b ? 1 : 0;
-			});
-			if(!err) {
-				res.render('maps', { 
-          newSort: "hvr_grow hvr-circle-to-top",
-          popularSort: "hvr_grow hvr-circle-to-top",
-          obstacleParkour: "hvr_grow hvr-circle-to-top",
-          racing: "hvr_grow hvr-circle-to-top",
-          minigame: "category_active rotate",
-          battleArena: "hvr_grow hvr-circle-to-top",
-          editCourses: "hvr_grow hvr-circle-to-top",
-          creativeBuilds: "hvr_grow hvr-circle-to-top",
-          submitIsland: "hvr_underline_reveal",
-          contact: "hvr_underline_reveal",
-          hide_navbar_sort: "",
-					newestActive: "hvr_underline_reveal", 
-					viewsActive: "underline_active", 
-					tilesDisplay: newMaps, 
-					headingDisplay: "Minigame", 
-					headingImage: "heading_image_multiplayer", 
-					siteBackground: "background_header_main" 
-				});
-			}
-		});
-	} else {
-		Map.find({category: "minigame"}, function(err, foundMaps) {
-			const newMaps = foundMaps.sort(function(a, b) {
-			  a = a.date;
-			  b = b.date;
-			  return a>b ? -1 : a<b ? 1 : 0;
-			});
-			if(!err) {
-				res.render('maps', {
-          newSort: "hvr_grow hvr-circle-to-top",
-          popularSort: "hvr_grow hvr-circle-to-top", 
-          obstacleParkour: "hvr_grow hvr-circle-to-top",
-          racing: "hvr_grow hvr-circle-to-top",
-          minigame: "category_active rotate",
-          battleArena: "hvr_grow hvr-circle-to-top",
-          editCourses: "hvr_grow hvr-circle-to-top",
-          creativeBuilds: "hvr_grow hvr-circle-to-top",
-          submitIsland: "hvr_underline_reveal",
-          contact: "hvr_underline_reveal",
-          hide_navbar_sort: "",
-					newestActive: "underline_active", 
-					viewsActive: "hvr_underline_reveal", 
-					tilesDisplay: newMaps, 
-					headingDisplay: "Minigame", 
-					headingImage: "heading_image_multiplayer", 
-					siteBackground: "background_header_main" 
-				});
-			}
-		});
-	}
-});
-
-app.get('/battle-arena', function(req, res) {
-	const sortBy = req.query.sortby;
-	if (sortBy === "views") {
-		Map.find({category: "battle-arena"}, function(err, foundMaps) {
-			const newMaps = foundMaps.sort(function(a, b) {
-			  a = a.views;
-			  b = b.views;
-			  return a>b ? -1 : a<b ? 1 : 0;
-			});
-			if(!err) {
-				res.render('maps', {
-          newSort: "hvr_grow hvr-circle-to-top",
-          popularSort: "hvr_grow hvr-circle-to-top", 
-          obstacleParkour: "hvr_grow hvr-circle-to-top",
-          racing: "hvr_grow hvr-circle-to-top",
-          minigame: "hvr_grow hvr-circle-to-top",
-          battleArena: "category_active rotate",
-          editCourses: "hvr_grow hvr-circle-to-top",
-          creativeBuilds: "hvr_grow hvr-circle-to-top",
-          submitIsland: "hvr_underline_reveal",
-          contact: "hvr_underline_reveal",
-          hide_navbar_sort: "",
-					newestActive: "hvr_underline_reveal", 
-					viewsActive: "underline_active", 
-					tilesDisplay: newMaps, 
-					headingDisplay: "Battle Arena", 
-					headingImage: "heading_image_multiplayer", 
-					siteBackground: "background_header_main" 
-				});
-			}
-		});
-	} else {
-		Map.find({category: "battle-arena"}, function(err, foundMaps) {
-			const newMaps = foundMaps.sort(function(a, b) {
-			  a = a.date;
-			  b = b.date;
-			  return a>b ? -1 : a<b ? 1 : 0;
-			});
-			if(!err) {
-				res.render('maps', { 
-          newSort: "hvr_grow hvr-circle-to-top",
-          popularSort: "hvr_grow hvr-circle-to-top",
-          obstacleParkour: "hvr_grow hvr-circle-to-top",
-          racing: "hvr_grow hvr-circle-to-top",
-          minigame: "hvr_grow hvr-circle-to-top",
-          battleArena: "category_active rotate",
-          editCourses: "hvr_grow hvr-circle-to-top",
-          creativeBuilds: "hvr_grow hvr-circle-to-top",
-          submitIsland: "hvr_underline_reveal",
-          contact: "hvr_underline_reveal",
-          hide_navbar_sort: "",
-					newestActive: "underline_active", 
-					viewsActive: "hvr_underline_reveal", 
-					tilesDisplay: newMaps, 
-					headingDisplay: "Battle Arena", 
-					headingImage: "heading_image_multiplayer", 
-					siteBackground: "background_header_main" 
-				});
-			}
-		});
-	}
-});
-
-app.get('/edit-courses', function(req, res) {
-	const sortBy = req.query.sortby;
-	if (sortBy === "views") {
-		Map.find({category: "edit-courses"}, function(err, foundMaps) {
-			const newMaps = foundMaps.sort(function(a, b) {
-			  a = a.views;
-			  b = b.views;
-			  return a>b ? -1 : a<b ? 1 : 0;
-			});
-			if(!err) {
-				res.render('maps', { 
-          newSort: "hvr_grow hvr-circle-to-top",
-          popularSort: "hvr_grow hvr-circle-to-top",
-          obstacleParkour: "hvr_grow hvr-circle-to-top",
-          racing: "hvr_grow hvr-circle-to-top",
-          minigame: "hvr_grow hvr-circle-to-top",
-          battleArena: "hvr_grow hvr-circle-to-top",
-          editCourses: "category_active rotate",
-          creativeBuilds: "hvr_grow hvr-circle-to-top",
-          submitIsland: "hvr_underline_reveal",
-          contact: "hvr_underline_reveal",
-          hide_navbar_sort: "",
-					newestActive: "hvr_underline_reveal", 
-					viewsActive: "underline_active", 
-					tilesDisplay: newMaps, 
-					headingDisplay: "Edit Courses", 
-					headingImage: "heading_image_edit", 
-					siteBackground: "background_header_main" 
-				});
-			}
-		});
-	} else {
-		Map.find({category: "edit-courses"}, function(err, foundMaps) {
-			const newMaps = foundMaps.sort(function(a, b) {
-			  a = a.date;
-			  b = b.date;
-			  return a>b ? -1 : a<b ? 1 : 0;
-			});
-			if(!err) {
-				res.render('maps', { 
-          newSort: "hvr_grow hvr-circle-to-top",
-          popularSort: "hvr_grow hvr-circle-to-top",
-          obstacleParkour: "hvr_grow hvr-circle-to-top",
-          racing: "hvr_grow hvr-circle-to-top",
-          minigame: "hvr_grow hvr-circle-to-top",
-          battleArena: "hvr_grow hvr-circle-to-top",
-          editCourses: "category_active rotate",
-          creativeBuilds: "hvr_grow hvr-circle-to-top",
-          submitIsland: "hvr_underline_reveal",
-          contact: "hvr_underline_reveal",
-          hide_navbar_sort: "",
-					newestActive: "underline_active", 
-					viewsActive: "hvr_underline_reveal", 
-					tilesDisplay: newMaps, 
-					headingDisplay: "Edit Courses", 
-					headingImage: "heading_image_edit", 
-					siteBackground: "background_header_main" 
-				});
-			}
-		});
-	}
-});
-
-app.get('/creative-builds', function(req, res) {
-	const sortBy = req.query.sortby;
-	if (sortBy === "views") {
-		Map.find({category: "creative-builds"}, function(err, foundMaps) {
-			const newMaps = foundMaps.sort(function(a, b) {
-			  a = a.views;
-			  b = b.views;
-			  return a>b ? -1 : a<b ? 1 : 0;
-			});
-			if(!err) {
-				res.render('maps', { 
-          newSort: "hvr_grow hvr-circle-to-top",
-          popularSort: "hvr_grow hvr-circle-to-top",
-          obstacleParkour: "hvr_grow hvr-circle-to-top",
-          racing: "hvr_grow hvr-circle-to-top",
-          minigame: "hvr_grow hvr-circle-to-top",
-          battleArena: "hvr_grow hvr-circle-to-top",
-          editCourses: "hvr_grow hvr-circle-to-top",
-          creativeBuilds: "category_active rotate",
-          submitIsland: "hvr_underline_reveal",
-          contact: "hvr_underline_reveal",
-          hide_navbar_sort: "",
-					newestActive: "hvr_underline_reveal", 
-					viewsActive: "underline_active", 
-					tilesDisplay: newMaps, 
-					headingDisplay: "Creative Builds", 
-					headingImage: "heading_image", 
-					siteBackground: "background_header_main" 
-				});
-			}
-		});
-	} else {
-		Map.find({category: "creative-builds"}, function(err, foundMaps) {
-			const newMaps = foundMaps.sort(function(a, b) {
-			  a = a.date;
-			  b = b.date;
-			  return a>b ? -1 : a<b ? 1 : 0;
-			});
-			if(!err) {
-				res.render('maps', { 
-          newSort: "hvr_grow hvr-circle-to-top",
-          popularSort: "hvr_grow hvr-circle-to-top",
-          obstacleParkour: "hvr_grow hvr-circle-to-top",
-          racing: "hvr_grow hvr-circle-to-top",
-          minigame: "hvr_grow hvr-circle-to-top",
-          battleArena: "hvr_grow hvr-circle-to-top",
-          editCourses: "hvr_grow hvr-circle-to-top",
-          creativeBuilds: "category_active rotate",
-          submitIsland: "hvr_underline_reveal",
-          contact: "hvr_underline_reveal",
-          hide_navbar_sort: "",
-					newestActive: "underline_active", 
-					viewsActive: "hvr_underline_reveal", 
-					tilesDisplay: newMaps, 
-					headingDisplay: "Creative Builds", 
-					headingImage: "heading_image", 
-					siteBackground: "background_header_main" 
-				});
-			}
-		});
-	}
-});
-
-app.get('/popular', function(req, res) {
-	Map.find({}, function(err, foundMaps) {
-		const newMaps = foundMaps.sort(function(a, b) {
-		  a = a.views;
-		  b = b.views;
-		  return a>b ? -1 : a<b ? 1 : 0;
-		});
-		if(!err) {
-			res.render('maps_filter', { 
-        newSort: "hvr_grow hvr-circle-to-top",
-        popularSort: "category_active rotate",
-        obstacleParkour: "hvr_grow hvr-circle-to-top",
-        racing: "hvr_grow hvr-circle-to-top",
-        minigame: "hvr_grow hvr-circle-to-top",
-        battleArena: "hvr_grow hvr-circle-to-top",
-        editCourses: "hvr_grow hvr-circle-to-top",
-        creativeBuilds: "hvr_grow hvr-circle-to-top",
-        submitIsland: "hvr_underline_reveal",
-        contact: "hvr_underline_reveal",
-        hide_navbar_sort: "nav_hide",
-        newestActive: "", 
-        viewsActive: "",
-				tilesDisplay: newMaps, 
-				headingDisplay: "Popular", 
-				headingImage: "heading_image_sniper", 
-				siteBackground: "background_header_main" 
-			});
-		}
-	});
-});
-
-app.get('/new', function(req, res) {
-	Map.find({}, function(err, foundMaps) {
-		let newMaps = foundMaps.sort(function(a, b) {
-			return b.date - a.date;
-		});
-		if(!err) {
-			res.render('maps_filter', { 
-        newSort: "category_active rotate",
-        popularSort: "hvr_grow hvr-circle-to-top",
-        obstacleParkour: "hvr_grow hvr-circle-to-top",
-        racing: "hvr_grow hvr-circle-to-top",
-        minigame: "hvr_grow hvr-circle-to-top",
-        battleArena: "hvr_grow hvr-circle-to-top",
-        editCourses: "hvr_grow hvr-circle-to-top",
-        creativeBuilds: "hvr_grow hvr-circle-to-top",
-        submitIsland: "hvr_underline_reveal",
-        contact: "hvr_underline_reveal",
-        hide_navbar_sort: "nav_hide",
-        newestActive: "", 
-        viewsActive: "",
-				tilesDisplay: newMaps, 
-				headingDisplay: "New", 
-				headingImage: "heading_image_zombies", 
-				siteBackground: "background_header_main" 
-			});
-		}
-	});
+          map: map, 
+          siteBackground: "background_header_main" 
+        });
+      }
+    });
+  });
 });
 
 app.get('/submit', function(req, res) {
