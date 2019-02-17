@@ -34,6 +34,7 @@ const mapsSchema = {
 };
 
 const Map = mongoose.model("Map", mapsSchema);
+const Submission = mongoose.model("Submission", mapsSchema);
 
 let renderOptions = {
   newSort: "hvr_grow hvr-circle-to-top",
@@ -359,6 +360,7 @@ app.get('/admin', function(req, res) {
 
 app.get('/admin/livemaps', function(req, res) {
   if (loginStatus) {
+    renderOptions.adminTitle = "Live Maps";
     Map.find({}, function(err, foundMaps) {
       const newMaps = sortNew(foundMaps);
       if(!err) {
@@ -374,7 +376,7 @@ app.get('/admin/livemaps', function(req, res) {
 app.get('/admin/submittedmaps', function(req, res) {
   if (loginStatus) {
     renderOptions.adminTitle = "Submitted Maps";
-    Map.find({}, function(err, foundMaps) {
+    Submission.find({}, function(err, foundMaps) {
       const newMaps = sortNew(foundMaps);
       if(!err) {
         renderOptions.tilesDisplay = newMaps;
@@ -384,9 +386,25 @@ app.get('/admin/submittedmaps', function(req, res) {
   } else {
     res.redirect('/admin');
   }
-  setTimeout(function() {
-    renderOptions.adminTitle = "Live Maps";
-  }, 10);
+});
+
+app.get('/admin/:mapName', function(req, res) {
+  const requestedMap = req.params.mapName;
+  const currentMaps = [];
+  Submission.find({}, function(err, foundMaps) {
+    foundMaps.forEach(function(map) {
+      const storedCode = map.code;
+      if (requestedMap === storedCode) {
+        // Submission.update({ name: map.name }, { $inc: { views: 1 }}, function(err, result) {
+        // });
+        renderOptions.adminTitle = "Submitted Maps";
+        currentMaps.push(map);
+        renderOptions.map = map;
+        renderOptions.youtubeLink = map.youtubeLink;
+        res.render('admin_map', renderOptions);
+      }
+    });
+  });
 });
 
 app.post('/admin', function(req,res) {
@@ -442,7 +460,7 @@ app.post('/contact', function(req, res) {
     to: 'joshgbuckner@gmail.com', // list of receivers
     subject: contactSubject, // Subject line
     text: contactMessage, // plain text body
-    html: '<b>NodeJS Email Tutorial</b>' // html body
+    html: "from: " + contactName + '<br> (' + contactEmail + ') <br>' + contactMessage // html body
   };
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
@@ -467,7 +485,7 @@ app.post('/submit', upload.single('mapPhoto'), function(req, res) {
 	} else {
 		console.log('file received');
 	}
-	const map = new Map({
+	const submission = new Submission({
 		name: mapName,
 		author: authorName,
 		code: islandCode,
@@ -493,14 +511,14 @@ app.post('/submit', upload.single('mapPhoto'), function(req, res) {
 				rp(options)
 				.then(($) => {
 					const bio = $('.island-header-tagline').text();
-					Map.update({ code: islandCode }, { $set: { bio: bio }}, function(err, result) {
+					Submission.update({ code: islandCode }, { $set: { bio: bio }}, function(err, result) {
 						// console.log(result);
 					});
 				})
 				.catch((err) => {
 					console.log(err);
 				});
-				map.save();
+				submission.save();
 			}
 		}
 	});

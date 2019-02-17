@@ -1,0 +1,107 @@
+<%- include('partials/header') -%>
+
+  <nav class="navbar navbar-dark fixed-top mine_shaft_gray_bg flex-md-nowrap p-0 shadow">
+    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="/">Fortnite Creative Codes</a>
+    
+    <ul class="navbar-nav px-3">
+      <li class="nav-item text-nowrap">
+        <a class="nav-link" href="/signout">Sign out</a>
+      </li>
+    </ul>
+  </nav>
+
+  <div class="container-fluid text-white">
+    <div class="row">
+
+      <nav class="col-md-2 d-none d-md-block mine_shaft_gray_bg sidebar">
+        <div class="sidebar-sticky">
+          <ul class="nav flex-column">
+            <li class="nav-item">
+              <a class="nav-link" href="/admin/livemaps">
+                Live Maps
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/admin/submittedmaps">
+                <span data-feather="file"></span>
+                Submitted Maps
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+          <h1 class="h2"><%= adminTitle %></h1>
+          <!-- <div class="btn-toolbar mb-2 mb-md-0">
+            <div class="btn-group mr-2">
+              <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
+              <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
+            </div>
+            <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
+              <span data-feather="calendar"></span>
+              This week
+            </button>
+          </div> -->
+        </div>
+
+        <div class="user_map container py-5">
+    <div class="row gray_trans_bg rounded rounded px-3">
+      <div class="col-xl-6 col-lg-5">
+        <div class="text-white">
+          <div class="card-body pt-5">
+            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="false">
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <img class="d-block w-100" src="<%= map.photo %>" alt="First slide">
+                </div>
+                <div class="carousel-item">
+                  <div class="embed-responsive embed-responsive-16by9">
+                    <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/<%= map.youtubeLink %>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                  </div>
+                </div>
+              </div>
+            </div>
+              <div class="row pt-1">
+                <div class="col-3 my-3" data-target="#carouselExampleIndicators" data-slide-to="0">
+                  <img class="img-fluid" src="<%= map.photo %>">
+                </div>
+                <div class="col-3 my-3 yt-div" data-target="#carouselExampleIndicators" data-slide-to="1">
+                  <img class="img-fluid" src="https://img.youtube.com/vi/<%= map.youtubeLink %>/hqdefault.jpg">
+                </div>
+              </div>
+            </div>    
+          </div>
+        </div>
+        <div class="col-xl-6 col-lg-7">
+          <div class="text-white h-100">
+            <div class="card-body">
+              <h1 class="display-3 burbank_font island_title pt-4 text-center"><%= map.name %></h1>
+              <div class="row">
+                <div class="col-6">
+                  <h5 class="island-author pb-2 text-center">By <%= map.author %></h5>
+                </div>
+                <div class="col-6">
+                  <h5 class="island-views pb-2 text-center"><%= map.views %> <span class="h6">VIEWS</span></h5>
+                </div>
+              </div>
+              <h3 class="island_bio burbank_font manz_yellow pb-2 mx-5"><%= map.bio %></h3>
+              <h6 class="island-author pb-2 text-center">ISLAND CODE</h6>
+              <a id="copy-code" onclick="copyToClipboard()" data-toggle="tooltip" data-placement="top" title="Click to Copy">
+              <h3 id="map-code-text" class="display-4 island_code burbank_font pb-0 mb-0 text-center"><%= map.code %></h3></a>
+            </div> 
+          </div>        
+        </div>
+      </div>
+    </div>
+  </div>
+        
+        
+      </main>
+    </div>
+  </div>
+
+      
+
+<%- include('partials/footer') -%>
