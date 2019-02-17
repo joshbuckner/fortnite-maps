@@ -1,0 +1,15 @@
+<%- include('partials/header') -%>
+<section class="admin_login">
+    <form class="form-signin gray_trans_bg rounded p-4" method="POST">
+      <div class="">
+      <h1 class="h3 mb-3 font-weight-normal text-white text-center">Admin sign in <i class="fas fa-sign-in-alt"></i></h1>
+      <label for="inputEmail" class="sr-only">Email address</label>
+      <input type="email" name="adminEmail" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+      <label for="inputPassword" class="sr-only">Password</label>
+      <input type="password" name="adminPassword" id="inputPassword" class="form-control" placeholder="Password" required>
+      <button class="btn btn-lg btn-primary btn-block mt-4 submit_button" type="submit">Sign in</button>
+        </div>
+    </form>
+</section>
+
+<%- include('partials/footer') -%>

@@ -513,12 +513,90 @@ a:link {
 
 /* submit */
 
+/*#navbar-main input {
+  color: rgba(255,255,255,.9);
+  font-size: 1.2rem;
+}
+
+input[type="search"] {
+  background-color: rgba(255,255,255,.1);
+  border: none;
+}
+
+input[type="search"]:focus {
+  background-color: rgba(255,255,255,.1);
+}*/
+
 #submit {
   padding-top: 8rem;
 }
 
+#submit input {
+  color: rgba(255,255,255,.9);
+  /*font-size: 1.2rem;*/
+}
+
+#contact input {
+  color: rgba(255,255,255,.9);
+}
+
+input[type="text"], input[type="tel"], input[type="file"], #category, input[type="email"], textarea[type="text"], input[type="password"] {
+  background-color: rgb(32,32,32);
+  color: white;
+  border: none;
+  border: 1px solid rgba(255,255,255,.1);
+}
+
+input[type="text"]::placeholder, input[type="tel"]::placeholder, input[type="file"]::placeholder, input[type="email"]::placeholder, textarea[type="text"]::placeholder, input[type="password"]::placeholder {
+  color: rgba(255,255,255,.5);
+}
+
+input[type="text"]:focus, input[type="tel"]:focus, input[type="email"]:focus, textarea[type="text"]:focus, input[type="password"]:focus {
+  background-color: rgb(32,32,32);
+  color: white;
+}
+
+.upload_btn_wrapper {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+  margin-bottom: 2.7rem;
+  margin-left: 8rem;
+  margin-right: 8rem;
+}
+
+.upload_btn_wrapper input[type=file] {
+  font-size: 100px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+}
+
+.photo_btn {
+  background-color: rgb(32,32,32);
+  border: 1px solid rgba(255,255,255,.1);
+}
+
 .submit_button {
+  background-color: rgb(32,32,32);
+  border: 1px solid rgba(255,255,255,.5);
+  /*border-color: gray;*/
+ /* margin: 0 18rem 0;*/
+}
+
+.btn_center_submit {
   margin: 0 18rem 0;
+}
+
+.btn_center_contact {
+  margin: 0 3.3rem 0;
+  max-width: 80%;
+}
+
+.submit_button:hover {
+  background-color: rgba(255,255,255,1);
+  color: black;
 }
 
 .placeholder_center ::placeholder {
@@ -576,6 +654,46 @@ a:link {
 
 .darken_img {
   filter: brightness(80%);
+}
+
+/*admin_login*/
+.admin_tile {
+ margin: 5rem;
+}
+
+.admin_login {
+  padding-top: 12%;
+  padding-bottom: 6%;
+}
+
+.form-signin {
+  width: 100%;
+  max-width: 330px;
+  padding: 15px;
+  margin: auto;
+}
+.form-signin .checkbox {
+  font-weight: 400;
+}
+.form-signin .form-control {
+  position: relative;
+  box-sizing: border-box;
+  height: auto;
+  padding: 10px;
+  font-size: 16px;
+}
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
 }
 
 /*404*/

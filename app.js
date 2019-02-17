@@ -35,14 +35,6 @@ const mapsSchema = {
 
 const Map = mongoose.model("Map", mapsSchema);
 
-app.get('/', function(req, res) {
-	Map.find({}, function(err, foundMaps) {
-		if(!err) {
-			res.redirect('/popular');
-		}
-	});
-});
-
 let renderOptions = {
   newSort: "hvr_grow hvr-circle-to-top",
   popularSort: "hvr_grow hvr-circle-to-top",
@@ -78,6 +70,14 @@ function sortNew(e) {
     return a>b ? -1 : a<b ? 1 : 0;
   });
 }
+
+app.get('/', function(req, res) {
+	Map.find({}, function(err, foundMaps) {
+		if(!err) {
+			res.redirect('/popular');
+		}
+	});
+});
 
 app.get('/obstacle-parkour', function(req, res) {
 	const sortBy = req.query.sortby;
@@ -333,6 +333,22 @@ app.get('/contact', function(req, res) {
     renderOptions.siteBackground = "background_header_main";
     renderOptions.contact = "hvr_underline_reveal";
   }, 10);
+});
+
+app.get('/admin', function(req, res) {
+ res.render('admin_login');
+});
+
+app.post('/admin', function(req,res) {
+  const adminEmail = "billybob@gmail.com";
+  const adminPassword = "billy";
+  const inputEmail = req.body.adminEmail;
+  const inputPassword = req.body.adminPassword;
+  if (inputEmail === adminEmail && inputPassword === adminPassword) {
+    res.render('admin_portal');
+  }
+  console.log(req.body.adminEmail);
+  console.log(req.body.adminPassword);
 });
 
 app.post('/search', function(req, res) {

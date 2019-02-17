@@ -25,28 +25,33 @@
   					</div>
   					<div class="input-group mb-5 custom-category">
   						<select name="category" class="form-control custom-select d-block text-center rounded-right" id="category" required>
-  							<option value="">Choose Category</option class="p-4">
-  							<option value="obstacle-parkour" class="p-4">Obstacle & Parkour</option>
-  							<option value="racing" class="p-4">Racing</option>
-  							<option value="minigame" class="p-4">Minigame</option>
-  							<option value="battle-arena" class="p-4">Battle Arena</option>
-  							<option value="edit-courses" class="p-4">Edit Courses</option>
-  							<option value="creative-builds" class="p-4">Creative Builds</option>
+  							<option value="">Choose Category</option class="p-4 categ_option">
+  							<option value="obstacle-parkour" class="p-4 categ_option">Obstacle & Parkour</option>
+  							<option value="racing" class="p-4 categ_option">Racing</option>
+  							<option value="minigame" class="p-4 categ_option">Minigame</option>
+  							<option value="battle-arena" class="p-4 categ_option">Battle Arena</option>
+  							<option value="edit-courses" class="p-4 categ_option">Edit Courses</option>
+  							<option value="creative-builds" class="p-4 categ_option">Creative Builds</option>
   						</select>
   						<div class="invalid-feedback">Please select a Category.</div>
   					</div>
   				</div>
-  				<div class="col-lg-6 px-4">
-  					<div class="mb-5 input-group input-group-md custom-file">
+  				<div class="col-lg-6 px-4 px-auto">
+            <div class="upload_btn_wrapper col-6 mb-4">
+              <button class="btn btn-outline-light btn-lg btn-block p-1 py-2 photo_btn"><i class="fas fa-upload"></i> Upload a photo</button>
+              <input name="mapPhoto" type="file" onchange="previewFile();" id="inputGroupFile01" name="mapPhoto" aria-describedby="inputGroupFileAddon01" required>
+              <div class="invalid-feedback">Please upload a Photo.</div>
+            </div>
+  					<!-- <div class="mb-5 input-group input-group-md custom-file">
   						<label class="custom-file-label rounded-right" for="inputGroupFile01">Choose Photo</label>
   						<input name="mapPhoto" type="file" onchange="previewFile();" class="custom-file-input rounded-left" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" required>
   						<div class="invalid-feedback ">Please upload a Photo.</div>
-  					</div>
+  					</div> -->
   					<div class="mb-5">
   						<img id="image-preview" src="images/fortnite_creative_2.jpg" class="file-preview ml-auto mr-auto img-fluid rounded" height="" alt="Map Photo">
   					</div>
   				</div>
-  				<button class="btn btn-outline-light btn-lg btn-block p-4 submit_button" type="submit">Submit</button>
+  				<button class="btn btn-outline-light btn-lg btn-block p-4 submit_button btn_center_submit" type="submit">Submit</button>
   			</div>
   		</form>
   	</div>
