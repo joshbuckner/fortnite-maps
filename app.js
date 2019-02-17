@@ -17,7 +17,7 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static('public'));
 app.use('/maps', express.static('public'));
-app.use('/all', express.static('public'));
+app.use('/admin', express.static('public'));
 
 mongoose.connect('mongodb://localhost:27017/fortniteMapsDB', {useNewUrlParser: true});
 
@@ -52,7 +52,8 @@ let renderOptions = {
   tilesDisplay: [], // newMaps
   headingDisplay: "", // Obstacle & Parkour
   headingImage: "heading_image_freefall", 
-  siteBackground: "background_header_main"
+  siteBackground: "background_header_main",
+  adminTitle: "Live Maps"
 }
 
 function sortPopular(e) {
@@ -335,8 +336,57 @@ app.get('/contact', function(req, res) {
   }, 10);
 });
 
+let loginStatus = false;
+
+app.get('/signout', function(req, res) {
+  loginStatus = false;
+  res.redirect('admin');
+});
+
 app.get('/admin', function(req, res) {
- res.render('admin_login');
+  if (loginStatus) {
+    Map.find({}, function(err, foundMaps) {
+      const newMaps = sortNew(foundMaps);
+      if(!err) {
+        renderOptions.tilesDisplay = newMaps;
+        res.render('admin_portal', renderOptions);
+      }
+    });
+  } else {
+    res.render('admin_login', renderOptions);
+  }
+});
+
+app.get('/admin/livemaps', function(req, res) {
+  if (loginStatus) {
+    Map.find({}, function(err, foundMaps) {
+      const newMaps = sortNew(foundMaps);
+      if(!err) {
+        renderOptions.tilesDisplay = newMaps;
+        res.render('admin_portal', renderOptions);
+      }
+    });
+  } else {
+    res.redirect('/admin');
+  }
+});
+
+app.get('/admin/submittedmaps', function(req, res) {
+  if (loginStatus) {
+    renderOptions.adminTitle = "Submitted Maps";
+    Map.find({}, function(err, foundMaps) {
+      const newMaps = sortNew(foundMaps);
+      if(!err) {
+        renderOptions.tilesDisplay = newMaps;
+        res.render('admin_portal', renderOptions);
+      }
+    });
+  } else {
+    res.redirect('/admin');
+  }
+  setTimeout(function() {
+    renderOptions.adminTitle = "Live Maps";
+  }, 10);
 });
 
 app.post('/admin', function(req,res) {
@@ -345,7 +395,14 @@ app.post('/admin', function(req,res) {
   const inputEmail = req.body.adminEmail;
   const inputPassword = req.body.adminPassword;
   if (inputEmail === adminEmail && inputPassword === adminPassword) {
-    res.render('admin_portal');
+    loginStatus = true;
+    Map.find({}, function(err, foundMaps) {
+      const newMaps = sortNew(foundMaps);
+      if(!err) {
+        renderOptions.tilesDisplay = newMaps;
+        res.render('admin_portal', renderOptions);
+      }
+    });
   }
   console.log(req.body.adminEmail);
   console.log(req.body.adminPassword);
