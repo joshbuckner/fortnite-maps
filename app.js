@@ -54,7 +54,13 @@ let renderOptions = {
   headingDisplay: "", // Obstacle & Parkour
   headingImage: "heading_image_freefall", 
   siteBackground: "background_header_main",
-  adminTitle: "Live Maps"
+  adminTitle: "Live Maps",
+  selectOp: "",
+  selectRacing: "",
+  selectMg: "",
+  selectBa: "",
+  selectEc: "",
+  selectCb: ""
 }
 
 function sortPopular(e) {
@@ -337,15 +343,15 @@ app.get('/contact', function(req, res) {
   }, 10);
 });
 
-let loginStatus = false;
+let loggedIn = false;
 
 app.get('/signout', function(req, res) {
-  loginStatus = false;
+  loggedIn = false;
   res.redirect('admin');
 });
 
 app.get('/admin', function(req, res) {
-  if (loginStatus) {
+  if (loggedIn) {
     Map.find({}, function(err, foundMaps) {
       const newMaps = sortNew(foundMaps);
       if(!err) {
@@ -359,7 +365,7 @@ app.get('/admin', function(req, res) {
 });
 
 app.get('/admin/livemaps', function(req, res) {
-  if (loginStatus) {
+  if (loggedIn) {
     renderOptions.adminTitle = "Live Maps";
     Map.find({}, function(err, foundMaps) {
       const newMaps = sortNew(foundMaps);
@@ -374,7 +380,7 @@ app.get('/admin/livemaps', function(req, res) {
 });
 
 app.get('/admin/submittedmaps', function(req, res) {
-  if (loginStatus) {
+  if (loggedIn) {
     renderOptions.adminTitle = "Submitted Maps";
     Submission.find({}, function(err, foundMaps) {
       const newMaps = sortNew(foundMaps);
@@ -397,6 +403,19 @@ app.get('/admin/:mapName', function(req, res) {
       if (requestedMap === storedCode) {
         // Submission.update({ name: map.name }, { $inc: { views: 1 }}, function(err, result) {
         // });
+        if (map.category === "obstacle-parkour") {
+          renderOptions.selectOp = "selected";
+        } else if (map.category === "racing") {
+          renderOptions.selectRacing = "selected";
+        } else if (map.category === "minigame") {
+          renderOptions.selectMg = "selected";
+        } else if (map.category === "battle-arena") {
+          renderOptions.selectBa = "selected";
+        } else if (map.category === "edit-courses") {
+          renderOptions.selectEc = "selected";
+        } else if (map.category === "creative-builds") {
+          renderOptions.selectCb = "selected";
+        }
         renderOptions.adminTitle = "Submitted Maps";
         currentMaps.push(map);
         renderOptions.map = map;
@@ -413,7 +432,7 @@ app.post('/admin', function(req,res) {
   const inputEmail = req.body.adminEmail;
   const inputPassword = req.body.adminPassword;
   if (inputEmail === adminEmail && inputPassword === adminPassword) {
-    loginStatus = true;
+    loggedIn = true;
     Map.find({}, function(err, foundMaps) {
       const newMaps = sortNew(foundMaps);
       if(!err) {
@@ -424,6 +443,34 @@ app.post('/admin', function(req,res) {
   }
   console.log(req.body.adminEmail);
   console.log(req.body.adminPassword);
+});
+
+app.post('/admin/:mapName', upload.single('mapPhoto'), function(req, res) {
+  const requestedMap = req.params.mapName;
+  const mapName = req.body.mapName;
+  const authorName = req.body.authorName;
+  const islandCode = req.body.islandCode;
+  const category = req.body.category;
+  const youtubeLink = req.body.youtubeLink;
+  const youtubeUrl = youtubeLink.slice(32, youtubeLink.length);
+  const date = new Date();
+  
+  if (!req.file) {
+    console.log("no file recieved");
+    Submission.update({ code: requestedMap }, { name: mapName, author: authorName, code: islandCode, category: category, youtubeLink: youtubeUrl}, function(err, result) {
+    });
+  } else {
+    console.log('file received');
+    const filePath = req.file.path.substring(7);
+    Submission.update({ code: requestedMap }, { name: mapName, author: authorName, code: islandCode, category: category, youtubeLink: youtubeUrl, photo: filePath}, function(err, result) {
+    });
+  }
+  // let photoUpdate = filePath;
+  // if (filePath === undefined) {
+  //   photoUpdate = "";
+  // } 
+  res.redirect('/admin/' + requestedMap);
+  // res.redirect('/admin/:mapName', renderOptions);
 });
 
 app.post('/search', function(req, res) {
