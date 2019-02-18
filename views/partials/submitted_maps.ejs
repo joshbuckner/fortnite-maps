@@ -1,0 +1,46 @@
+<div class="album py-4 tablet_mt">
+          <div class="container">
+            <div class="row">
+              <% tilesDisplay.forEach(function(map) { -%>
+                <div class="col-lg-4 hvr_grow">
+                  <a class="text-white" href="/admin/<%= map.code %>">
+                  <div class="card mb-4 shadow-sm text-white mine_shaft_gray_bg">
+                    <div class="card-header text-center h4 py-3">
+                      <%= map.name %>
+                    </div>
+                    <img src="<%= map.photo %>" class="card-img-top" alt="...">
+                  </a>
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col-9">
+                          <p class="card-text code_font text-left">Code: <%= map.code %> %> <br>(<%= map.author %>)</p>
+                        </div>
+                        <div class="code_font h6 pt-3 text-center col-3">
+                          <i class="far fa-eye manz_yellow"></i> <%= map.views %>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <div class="col-4">
+                      <!-- <a class="btn btn-sm btn-dark w-100" href="/admin/approve/<%= map.code %>">Approve</a> -->
+                                                                <!-- /admin/approve/<%= map.code %> -->
+                      <form action="/admin/approve/<%= map.code %>" method="POST">
+                        <input class="btn btn-sm btn-dark w-100" type="submit" name="approve" value="Approve" />
+                      </form>
+                    </div>
+                    <div class="col-4">
+                      <a class="btn btn-sm btn-dark w-100" href="/admin/<%= map.code %>">Edit</a>
+                    </div>
+                    <div class="col-4">
+                      <!-- <a class="btn btn-sm btn-dark w-100" href="/admin/delete/<%= map.code %>">Delete</a> -->
+                      <form action="/admin/deletesubmission/<%= map.code %>" method="POST">
+                        <input class="btn btn-sm btn-dark w-100" type="submit" name="delete" value="Delete" />
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              <% }); -%>
+            </div>
+          </div>
+        </div>

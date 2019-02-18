@@ -60,7 +60,8 @@ let renderOptions = {
   selectMg: "",
   selectBa: "",
   selectEc: "",
-  selectCb: ""
+  selectCb: "",
+  adminView: ""
 }
 
 function sortPopular(e) {
@@ -371,6 +372,7 @@ app.get('/admin/livemaps', function(req, res) {
       const newMaps = sortNew(foundMaps);
       if(!err) {
         renderOptions.tilesDisplay = newMaps;
+        renderOptions.adminView = "live_maps";
         res.render('admin_portal', renderOptions);
       }
     });
@@ -386,6 +388,7 @@ app.get('/admin/submittedmaps', function(req, res) {
       const newMaps = sortNew(foundMaps);
       if(!err) {
         renderOptions.tilesDisplay = newMaps;
+        renderOptions.adminView = "submitted_maps";
         res.render('admin_portal', renderOptions);
       }
     });
@@ -433,13 +436,7 @@ app.post('/admin', function(req,res) {
   const inputPassword = req.body.adminPassword;
   if (inputEmail === adminEmail && inputPassword === adminPassword) {
     loggedIn = true;
-    Map.find({}, function(err, foundMaps) {
-      const newMaps = sortNew(foundMaps);
-      if(!err) {
-        renderOptions.tilesDisplay = newMaps;
-        res.render('admin_portal', renderOptions);
-      }
-    });
+    res.redirect('/admin/livemaps');
   }
   console.log(req.body.adminEmail);
   console.log(req.body.adminPassword);
@@ -505,7 +502,7 @@ app.post('/admin/approve/:mapName', upload.single('mapPhoto'), function(req, res
   res.redirect('/admin/submittedmaps');
 });
 
-app.post('/admin/delete/:mapName', function(req, res) {
+app.post('/admin/deletesubmission/:mapName', function(req, res) {
   const requestedMap = req.params.mapName;
   Submission.find({}, function(err, foundMaps) {
     foundMaps.forEach(function(map) {
@@ -518,6 +515,22 @@ app.post('/admin/delete/:mapName', function(req, res) {
     });
   });
 });
+
+app.post('/admin/deletelive/:mapName', function(req, res) {
+  const requestedMap = req.params.mapName;
+  Map.find({}, function(err, foundMaps) {
+    foundMaps.forEach(function(map) {
+      const storedCode = map.code;
+      if (requestedMap === storedCode) {
+        Map.remove({ name: map.name }, function(err, result) {
+        });
+        res.redirect('/admin/livemaps');
+      }
+    });
+  });
+});
+
+
 
 app.post('/search', function(req, res) {
 	searchInput = req.body.searchInput;
