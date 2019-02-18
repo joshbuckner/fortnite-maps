@@ -473,6 +473,52 @@ app.post('/admin/:mapName', upload.single('mapPhoto'), function(req, res) {
   // res.redirect('/admin/:mapName', renderOptions);
 });
 
+app.post('/admin/approve/:mapName', upload.single('mapPhoto'), function(req, res) {
+  const requestedMap = req.params.mapName;
+  // copy
+  Submission.find({}, function(err, foundMaps) {
+    foundMaps.forEach(function(map) {
+      const storedCode = map.code;
+      if (requestedMap === storedCode) {
+        console.log (map.name);
+        Submission.find({ name: map.name }, function(err, result) {
+          const results = result[0];
+          const approved = new Map({
+            name: results.name,
+            author: results.author,
+            code: results.code,
+            photo: results.photo,
+            category: results.category,
+            date: results.date,
+            views: results.views,
+            bio: results.bio,
+            youtubeLink: results.youtubeLink
+          });
+          approved.save();
+        });
+        Submission.remove({ name: map.name }, function(err, result) {
+          console.log(result);
+        });
+      }
+    });
+  });
+  res.redirect('/admin/submittedmaps');
+});
+
+app.post('/admin/delete/:mapName', function(req, res) {
+  const requestedMap = req.params.mapName;
+  Submission.find({}, function(err, foundMaps) {
+    foundMaps.forEach(function(map) {
+      const storedCode = map.code;
+      if (requestedMap === storedCode) {
+        Submission.remove({ name: map.name }, function(err, result) {
+        });
+        res.redirect('/admin/submittedmaps');
+      }
+    });
+  });
+});
+
 app.post('/search', function(req, res) {
 	searchInput = req.body.searchInput;
 	Map.find({name: {$regex: searchInput, $options: "$i"}}, function(err, foundMaps) {
