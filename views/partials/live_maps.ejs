@@ -3,7 +3,7 @@
             <div class="row">
               <% tilesDisplay.forEach(function(map) { -%>
                 <div class="col-lg-4 hvr_grow">
-                  <a class="text-white" href="/admin/<%= map.code %>">
+                  <a class="text-white" href="/admin/editlive/<%= map.code %>">
                   <div class="card mb-4 shadow-sm text-white mine_shaft_gray_bg">
                     <div class="card-header text-center h4 py-3">
                       <%= map.name %>
@@ -23,13 +23,8 @@
                   </div>
                   <div class="container w-75">
                   <div class="row mb-3">
-                    <!-- <div class="col-4">
-                      <form action="/admin/approve/<%= map.code %>" method="POST">
-                        <input class="btn btn-sm btn-dark w-100" type="submit" name="approve" value="Approve" />
-                      </form>
-                    </div> -->
                     <div class="col-6">
-                      <a class="btn btn-sm btn-dark w-100" href="/admin/<%= map.code %>">Edit</a>
+                      <a class="btn btn-sm btn-dark w-100" href="/admin/editlive/<%= map.code %>">Edit</a>
                     </div>
                     <div class="col-6">
                       <form action="/admin/deletelive/<%= map.code %>" method="POST">

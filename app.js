@@ -18,6 +18,8 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static('public'));
 app.use('/maps', express.static('public'));
 app.use('/admin', express.static('public'));
+app.use('/admin/editlive', express.static('public'));
+app.use('/admin/editsubmission', express.static('public'));
 
 mongoose.connect('mongodb://localhost:27017/fortniteMapsDB', {useNewUrlParser: true});
 
@@ -397,7 +399,7 @@ app.get('/admin/submittedmaps', function(req, res) {
   }
 });
 
-app.get('/admin/:mapName', function(req, res) {
+app.get('/admin/editsubmission/:mapName', function(req, res) {
   const requestedMap = req.params.mapName;
   const currentMaps = [];
   Submission.find({}, function(err, foundMaps) {
@@ -429,6 +431,39 @@ app.get('/admin/:mapName', function(req, res) {
   });
 });
 
+app.get('/admin/editlive/:mapName', function(req, res) {
+  const requestedMap = req.params.mapName;
+  const currentMaps = [];
+  Map.find({}, function(err, foundMaps) {
+    foundMaps.forEach(function(map) {
+      const storedCode = map.code;
+      if (requestedMap === storedCode) {
+        // Map.update({ name: map.name }, { $inc: { views: 1 }}, function(err, result) {
+        // });
+        if (map.category === "obstacle-parkour") {
+          renderOptions.selectOp = "selected";
+        } else if (map.category === "racing") {
+          renderOptions.selectRacing = "selected";
+        } else if (map.category === "minigame") {
+          renderOptions.selectMg = "selected";
+        } else if (map.category === "battle-arena") {
+          renderOptions.selectBa = "selected";
+        } else if (map.category === "edit-courses") {
+          renderOptions.selectEc = "selected";
+        } else if (map.category === "creative-builds") {
+          renderOptions.selectCb = "selected";
+        }
+        renderOptions.adminTitle = "Submitted Maps";
+        currentMaps.push(map);
+        renderOptions.map = map;
+        renderOptions.youtubeLink = map.youtubeLink;
+        renderOptions.adminTitle = "Live Maps";
+        res.render('admin_map', renderOptions);
+      }
+    });
+  });
+});
+
 app.post('/admin', function(req,res) {
   const adminEmail = "billybob@gmail.com";
   const adminPassword = "billy";
@@ -442,7 +477,7 @@ app.post('/admin', function(req,res) {
   console.log(req.body.adminPassword);
 });
 
-app.post('/admin/:mapName', upload.single('mapPhoto'), function(req, res) {
+app.post('/admin/editsubmission/:mapName', upload.single('mapPhoto'), function(req, res) {
   const requestedMap = req.params.mapName;
   const mapName = req.body.mapName;
   const authorName = req.body.authorName;
@@ -466,7 +501,35 @@ app.post('/admin/:mapName', upload.single('mapPhoto'), function(req, res) {
   // if (filePath === undefined) {
   //   photoUpdate = "";
   // } 
-  res.redirect('/admin/' + requestedMap);
+  res.redirect('/admin/editsubmission/' + requestedMap);
+  // res.redirect('/admin/:mapName', renderOptions);
+});
+
+app.post('/admin/editlive/:mapName', upload.single('mapPhoto'), function(req, res) {
+  const requestedMap = req.params.mapName;
+  const mapName = req.body.mapName;
+  const authorName = req.body.authorName;
+  const islandCode = req.body.islandCode;
+  const category = req.body.category;
+  const youtubeLink = req.body.youtubeLink;
+  const youtubeUrl = youtubeLink.slice(32, youtubeLink.length);
+  const date = new Date();
+  
+  if (!req.file) {
+    console.log("no file recieved");
+    Map.update({ code: requestedMap }, { name: mapName, author: authorName, code: islandCode, category: category, youtubeLink: youtubeUrl}, function(err, result) {
+    });
+  } else {
+    console.log('file received');
+    const filePath = req.file.path.substring(7);
+    Map.update({ code: requestedMap }, { name: mapName, author: authorName, code: islandCode, category: category, youtubeLink: youtubeUrl, photo: filePath}, function(err, result) {
+    });
+  }
+  // let photoUpdate = filePath;
+  // if (filePath === undefined) {
+  //   photoUpdate = "";
+  // } 
+  res.redirect('/admin/editlive/' + requestedMap);
   // res.redirect('/admin/:mapName', renderOptions);
 });
 
@@ -529,8 +592,6 @@ app.post('/admin/deletelive/:mapName', function(req, res) {
     });
   });
 });
-
-
 
 app.post('/search', function(req, res) {
 	searchInput = req.body.searchInput;
