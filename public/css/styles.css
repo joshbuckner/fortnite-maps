@@ -520,6 +520,18 @@ a:link {
   top: 57%;
 }
 
+.crop_thumbnail {
+  display: inline-block;
+  height: 59px;
+  overflow: hidden;
+}
+
+.crop_thumbnail img {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
 /* submit */
 
 /*#navbar-main input {
@@ -820,6 +832,11 @@ input[type="text"]:focus, input[type="tel"]:focus, input[type="email"]:focus, te
     right: 2.5%;
 		top: 53%;
 	}
+  .crop_thumbnail {
+    display: inline-block;
+    height: 38px;
+    overflow: hidden;
+  }
 }
 
 @media (max-width: 992px) {
@@ -849,6 +866,11 @@ input[type="text"]:focus, input[type="tel"]:focus, input[type="email"]:focus, te
   }
   .icon_pad_r {
     padding-right: 0;
+  }
+  .crop_thumbnail {
+    display: inline-block;
+    height: 79px;
+    overflow: hidden;
   }
 }
 
