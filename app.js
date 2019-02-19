@@ -91,11 +91,11 @@ app.get('/', function(req, res) {
 	});
 });
 
-app.get('/obstacle-parkour', function(req, res) {
+app.get('/obstacle', function(req, res) {
 	const sortBy = req.query.sortby;
   renderOptions.obstacleParkour = "category_active rotate";
 	if (sortBy === "views") {
-		Map.find({category: "obstacle-parkour"}, function(err, foundMaps) {
+		Map.find({category: "Obstacle"}, function(err, foundMaps) {
 			const newMaps = sortPopular(foundMaps);
 			if(!err) {
         renderOptions.tilesDisplay = newMaps;
@@ -105,7 +105,7 @@ app.get('/obstacle-parkour', function(req, res) {
 			}
 		});
 	} else {
-		Map.find({category: "obstacle-parkour"}, function(err, foundMaps) {
+		Map.find({category: "Obstacle"}, function(err, foundMaps) {
 			const newMaps = sortNew(foundMaps);
 			if(!err) {
         renderOptions.tilesDisplay = newMaps;
@@ -124,7 +124,7 @@ app.get('/racing', function(req, res) {
 	const sortBy = req.query.sortby;
   renderOptions.racing = "category_active rotate";
 	if (sortBy === "views") {
-		Map.find({category: "racing"}, function(err, foundMaps) {
+		Map.find({category: "Racing"}, function(err, foundMaps) {
 			const newMaps = sortPopular(foundMaps);
 			if(!err) {
         renderOptions.tilesDisplay = newMaps;
@@ -134,7 +134,7 @@ app.get('/racing', function(req, res) {
 			}
 		});
 	} else {
-		Map.find({category: "racing"}, function(err, foundMaps) {
+		Map.find({category: "Racing"}, function(err, foundMaps) {
 			const newMaps = sortNew(foundMaps);
 			if(!err) {
         renderOptions.tilesDisplay = newMaps;
@@ -153,7 +153,7 @@ app.get('/minigame', function(req, res) {
 	const sortBy = req.query.sortby;
   renderOptions.minigame = "category_active rotate";
   if (sortBy === "views") {
-    Map.find({category: "minigame"}, function(err, foundMaps) {
+    Map.find({category: "Minigame"}, function(err, foundMaps) {
       const newMaps = sortPopular(foundMaps);
       if(!err) {
         renderOptions.tilesDisplay = newMaps;
@@ -163,7 +163,7 @@ app.get('/minigame', function(req, res) {
       }
     });
   } else {
-    Map.find({category: "minigame"}, function(err, foundMaps) {
+    Map.find({category: "Minigame"}, function(err, foundMaps) {
       const newMaps = sortNew(foundMaps);
       if(!err) {
         renderOptions.tilesDisplay = newMaps;
@@ -178,11 +178,11 @@ app.get('/minigame', function(req, res) {
   }, 10);
 });
 
-app.get('/battle-arena', function(req, res) {
+app.get('/pvp', function(req, res) {
 	const sortBy = req.query.sortby;
   renderOptions.battleArena = "category_active rotate";
   if (sortBy === "views") {
-    Map.find({category: "battle-arena"}, function(err, foundMaps) {
+    Map.find({category: "PvP"}, function(err, foundMaps) {
       const newMaps = sortPopular(foundMaps);
       if(!err) {
         renderOptions.tilesDisplay = newMaps;
@@ -192,7 +192,7 @@ app.get('/battle-arena', function(req, res) {
       }
     });
   } else {
-    Map.find({category: "battle-arena"}, function(err, foundMaps) {
+    Map.find({category: "PvP"}, function(err, foundMaps) {
       const newMaps = sortNew(foundMaps);
       if(!err) {
         renderOptions.tilesDisplay = newMaps;
@@ -207,11 +207,11 @@ app.get('/battle-arena', function(req, res) {
   }, 10);
 });
 
-app.get('/edit-courses', function(req, res) {
+app.get('/practice', function(req, res) {
 	const sortBy = req.query.sortby;
   renderOptions.editCourses = "category_active rotate";
   if (sortBy === "views") {
-    Map.find({category: "edit-courses"}, function(err, foundMaps) {
+    Map.find({category: "Practice"}, function(err, foundMaps) {
       const newMaps = sortPopular(foundMaps);
       if(!err) {
         renderOptions.tilesDisplay = newMaps;
@@ -221,7 +221,7 @@ app.get('/edit-courses', function(req, res) {
       }
     });
   } else {
-    Map.find({category: "edit-courses"}, function(err, foundMaps) {
+    Map.find({category: "Practice"}, function(err, foundMaps) {
       const newMaps = sortNew(foundMaps);
       if(!err) {
         renderOptions.tilesDisplay = newMaps;
@@ -236,11 +236,11 @@ app.get('/edit-courses', function(req, res) {
   }, 10);
 });
 
-app.get('/creative-builds', function(req, res) {
+app.get('/creative', function(req, res) {
 	const sortBy = req.query.sortby;
   renderOptions.creativeBuilds = "category_active rotate";
   if (sortBy === "views") {
-    Map.find({category: "creative-builds"}, function(err, foundMaps) {
+    Map.find({category: "Creative"}, function(err, foundMaps) {
       const newMaps = sortPopular(foundMaps);
       if(!err) {
         renderOptions.tilesDisplay = newMaps;
@@ -250,7 +250,7 @@ app.get('/creative-builds', function(req, res) {
       }
     });
   } else {
-    Map.find({category: "creative-builds"}, function(err, foundMaps) {
+    Map.find({category: "Creative"}, function(err, foundMaps) {
       const newMaps = sortNew(foundMaps);
       if(!err) {
         renderOptions.tilesDisplay = newMaps;
@@ -528,17 +528,17 @@ app.get('/admin/editsubmission/:mapName', function(req, res) {
         if (requestedMap === storedCode) {
           // Submission.update({ name: map.name }, { $inc: { views: 1 }}, function(err, result) {
           // });
-          if (map.category === "obstacle-parkour") {
+          if (map.category === "Obstacle") {
             renderOptions.selectOp = "selected";
-          } else if (map.category === "racing") {
+          } else if (map.category === "Racing") {
             renderOptions.selectRacing = "selected";
-          } else if (map.category === "minigame") {
+          } else if (map.category === "Minigame") {
             renderOptions.selectMg = "selected";
-          } else if (map.category === "battle-arena") {
+          } else if (map.category === "PvP") {
             renderOptions.selectBa = "selected";
-          } else if (map.category === "edit-courses") {
+          } else if (map.category === "Practice") {
             renderOptions.selectEc = "selected";
-          } else if (map.category === "creative-builds") {
+          } else if (map.category === "Creative") {
             renderOptions.selectCb = "selected";
           }
           renderOptions.adminTitle = "Submitted Maps";
@@ -564,17 +564,17 @@ app.get('/admin/editlive/:mapName', function(req, res) {
         if (requestedMap === storedCode) {
           // Map.update({ name: map.name }, { $inc: { views: 1 }}, function(err, result) {
           // });
-          if (map.category === "obstacle-parkour") {
+          if (map.category === "Obstacle") {
             renderOptions.selectOp = "selected";
-          } else if (map.category === "racing") {
+          } else if (map.category === "Racing") {
             renderOptions.selectRacing = "selected";
-          } else if (map.category === "minigame") {
+          } else if (map.category === "Minigame") {
             renderOptions.selectMg = "selected";
-          } else if (map.category === "battle-arena") {
+          } else if (map.category === "PvP") {
             renderOptions.selectBa = "selected";
-          } else if (map.category === "edit-courses") {
+          } else if (map.category === "Practice") {
             renderOptions.selectEc = "selected";
-          } else if (map.category === "creative-builds") {
+          } else if (map.category === "Creative") {
             renderOptions.selectCb = "selected";
           }
           renderOptions.adminTitle = "Submitted Maps";
