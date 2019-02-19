@@ -22,22 +22,6 @@ $(function() {
 	}, false)
 }());
 
-// set modal data to submission form input values
-$('#myForm').on('submit', function(e){
-	$('#modal-title')[0].innerHTML = $('#map-name')[0].value;
-	$('#modal-author')[0].innerHTML = $('#author')[0].value;
-	$('#modal-code')[0].innerHTML = $('#island-code')[0].value;
-	$('#modal-image').attr("src", $('#image-preview')[0].src);
-	// display modal if all input field requirements pass
-  if ($('#map-name')[0].checkValidity() && 
-  	$('#author')[0].checkValidity() && 
-  	$('#island-code')[0].checkValidity() && 
-  	$('#inputGroupFile01')[0].checkValidity() && 
-  	$('#category')[0].checkValidity()) {
-			$('#myModal').modal('show');
-		}
-});
-
 // add a hyphen after every 4 characters in code input of submission form
 function addHyphen() {
 	let ele = $('#island-code')[0];

@@ -323,6 +323,19 @@ app.get('/maps/:mapName', function(req, res) {
   }, 10);
 });
 
+app.get('/contact', function(req, res) {
+  renderOptions.hide_navbar_sort = "nav_hide";
+  renderOptions.contact = "underline_active";
+  renderOptions.siteBackground = "background_header_submit";
+  renderOptions.headingDisplay = "Contact";
+  res.render('contact', renderOptions);
+  setTimeout(function() {
+    renderOptions.hide_navbar_sort = "";
+    renderOptions.siteBackground = "background_header_main";
+    renderOptions.contact = "hvr_underline_reveal";
+  }, 10);
+});
+
 app.get('/submit', function(req, res) {
   renderOptions.hide_navbar_sort = "nav_hide";
   renderOptions.submitIsland = "underline_active";
@@ -336,18 +349,19 @@ app.get('/submit', function(req, res) {
   }, 10);
 });
 
-app.get('/contact', function(req, res) {
+app.get('/submitsuccess', function(req, res) {
   renderOptions.hide_navbar_sort = "nav_hide";
-  renderOptions.contact = "underline_active";
+  renderOptions.submitIsland = "underline_active";
   renderOptions.siteBackground = "background_header_submit";
-  renderOptions.headingDisplay = "Contact";
-  res.render('contact', renderOptions);
+  renderOptions.headingDisplay = "Map Successfully Submitted!";
+  res.render('submit_success', renderOptions);
   setTimeout(function() {
     renderOptions.hide_navbar_sort = "";
     renderOptions.siteBackground = "background_header_main";
-    renderOptions.contact = "hvr_underline_reveal";
+    renderOptions.submitIsland = "hvr_underline_reveal";
   }, 10);
 });
+
 
 app.post('/search', function(req, res) {
   searchInput = req.body.searchInput;
@@ -442,6 +456,7 @@ app.post('/submit', upload.single('mapPhoto'), function(req, res) {
           console.log(err);
         });
         submission.save();
+        res.redirect('submitSuccess');
       }
     }
   });
