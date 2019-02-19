@@ -566,16 +566,22 @@ app.get('/admin/editlive/:mapName', function(req, res) {
           // });
           if (map.category === "Obstacle") {
             renderOptions.selectOp = "selected";
+            console.log('obstacle');
           } else if (map.category === "Racing") {
             renderOptions.selectRacing = "selected";
+            console.log('racing');
           } else if (map.category === "Minigame") {
             renderOptions.selectMg = "selected";
+            console.log('minigame');
           } else if (map.category === "PvP") {
             renderOptions.selectBa = "selected";
+            console.log('pvp');
           } else if (map.category === "Practice") {
             renderOptions.selectEc = "selected";
+            console.log('practice');
           } else if (map.category === "Creative") {
             renderOptions.selectCb = "selected";
+            console.log('creative');
           }
           renderOptions.adminTitle = "Submitted Maps";
           currentMaps.push(map);
@@ -643,7 +649,7 @@ app.post('/admin/editlive/:mapName', upload.single('mapPhoto'), function(req, re
   const youtubeLink = req.body.youtubeLink;
   const youtubeUrl = youtubeLink.slice(32, youtubeLink.length);
   const date = new Date();
-  
+
   if (!req.file) {
     console.log("no file recieved");
     Map.update({ code: requestedMap }, { name: mapName, author: authorName, code: islandCode, category: category, youtubeLink: youtubeUrl}, function(err, result) {
@@ -692,6 +698,38 @@ app.post('/admin/approve/:mapName', upload.single('mapPhoto'), function(req, res
     });
   });
   res.redirect('/admin/submittedmaps');
+});
+
+app.post('/admin/archive/:mapName', upload.single('mapPhoto'), function(req, res) {
+  const requestedMap = req.params.mapName;
+  // copy
+  Map.find({}, function(err, foundMaps) {
+    foundMaps.forEach(function(map) {
+      const storedCode = map.code;
+      if (requestedMap === storedCode) {
+        console.log (map.name);
+        Map.find({ name: map.name }, function(err, result) {
+          const results = result[0];
+          const approved = new Submission({
+            name: results.name,
+            author: results.author,
+            code: results.code,
+            photo: results.photo,
+            category: results.category,
+            date: results.date,
+            views: results.views,
+            bio: results.bio,
+            youtubeLink: results.youtubeLink
+          });
+          approved.save();
+        });
+        Map.remove({ name: map.name }, function(err, result) {
+          console.log(result);
+        });
+      }
+    });
+  });
+  res.redirect('/admin/livemaps');
 });
 
 app.post('/admin/deletesubmission/:mapName', function(req, res) {

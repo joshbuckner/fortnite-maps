@@ -21,18 +21,21 @@
                       </div>
                     </div>
                   </div>
-                  <div class="container w-75">
-                  <div class="row mb-3">
-                    <div class="col-6">
-                      <a class="btn btn-sm btn-dark w-100" href="/admin/editlive/<%= map.code %>">Edit</a>
-                    </div>
-                    <div class="col-6">
-                      <form action="/admin/deletelive/<%= map.code %>" method="POST">
-                        <input class="btn btn-sm btn-dark w-100" type="submit" name="delete" value="Delete" />
-                      </form>
-                    </div>
+                    <div class="row mb-3">
+                      <div class="col-4">
+                        <form action="/admin/archive/<%= map.code %>" method="POST">
+                          <input class="btn btn-sm btn-dark w-100" type="submit" name="archive" value="Archive" />
+                        </form>
+                      </div>
+                      <div class="col-4">
+                        <a class="btn btn-sm btn-dark w-100" href="/admin/editlive/<%= map.code %>">Edit</a>
+                      </div>
+                      <div class="col-4">
+                        <form action="/admin/deletelive/<%= map.code %>" method="POST">
+                          <input class="btn btn-sm btn-dark w-100" type="submit" name="delete" value="Delete" />
+                        </form>
+                      </div>
                   </div>
-                </div>
                 </div>
               <% }); -%>
             </div>
