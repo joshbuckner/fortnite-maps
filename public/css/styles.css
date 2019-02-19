@@ -666,6 +666,10 @@ input[type="text"]:focus, input[type="tel"]:focus, input[type="email"]:focus, te
   transform: translate(-50%, -50%);
 }
 
+.c_slide {
+  cursor: pointer;
+}
+
 /*maps_search*/
 
 #maps_search {
