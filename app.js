@@ -63,7 +63,8 @@ let renderOptions = {
   selectBa: "",
   selectEc: "",
   selectCb: "",
-  adminView: ""
+  adminView: "",
+  adminLoginMessage: ""
 }
 
 function sortPopular(e) {
@@ -326,6 +327,7 @@ app.get('/submit', function(req, res) {
   renderOptions.hide_navbar_sort = "nav_hide";
   renderOptions.submitIsland = "underline_active";
   renderOptions.siteBackground = "background_header_submit";
+  renderOptions.headingDisplay = "Submit Island";
   res.render('submit', renderOptions);
   setTimeout(function() {
     renderOptions.hide_navbar_sort = "";
@@ -338,6 +340,7 @@ app.get('/contact', function(req, res) {
   renderOptions.hide_navbar_sort = "nav_hide";
   renderOptions.contact = "underline_active";
   renderOptions.siteBackground = "background_header_submit";
+  renderOptions.headingDisplay = "Contact";
   res.render('contact', renderOptions);
   setTimeout(function() {
     renderOptions.hide_navbar_sort = "";
@@ -345,6 +348,106 @@ app.get('/contact', function(req, res) {
     renderOptions.contact = "hvr_underline_reveal";
   }, 10);
 });
+
+app.post('/search', function(req, res) {
+  searchInput = req.body.searchInput;
+  Map.find({name: {$regex: searchInput, $options: "$i"}}, function(err, foundMaps) {
+    renderOptions.hide_navbar_sort = "nav_hide";
+    renderOptions.tilesDisplay = foundMaps;
+    if(!err && searchInput !== "" && foundMaps.length !== 0) {
+      renderOptions.headingDisplay = "Search results for: " + searchInput;
+      res.render('maps_search', renderOptions);
+    } else if(!err && searchInput!== "") {
+      renderOptions.headingDisplay = "No results for: " + searchInput;
+      res.render('no_results', renderOptions);
+    }
+  });
+});
+
+app.post('/contact', function(req, res) {
+  const contactName = req.body.contactName;
+  const contactEmail = req.body.contactEmail;
+  const contactSubject = req.body.contactSubject;
+  const contactMessage = req.body.contactMessage;
+  let transporter = nodeMailer.createTransport({
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true,
+    auth: {
+      user: 'fortnitecreativecodes1@gmail.com',
+      pass: 'welikefortnite'
+    }
+  });
+  let mailOptions = {
+    from: contactEmail, // sender address
+    to: 'joshgbuckner@gmail.com', // list of receivers
+    subject: contactSubject, // Subject line
+    text: contactMessage, // plain text body
+    html: "from: " + contactName + '<br> (' + contactEmail + ') <br>' + contactMessage // html body
+  };
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      return console.log(error);
+    }
+    console.log('Message %s sent: %s', info.messageId, info.response);
+      res.redirect('contact');
+    });
+});
+
+app.post('/submit', upload.single('mapPhoto'), function(req, res) {
+  const mapName = req.body.mapName;
+  const authorName = req.body.authorName;
+  const islandCode = req.body.islandCode;
+  const category = req.body.category;
+  const youtubeLink = req.body.youtubeLink;
+  const youtubeUrl = youtubeLink.slice(32, youtubeLink.length);
+  const date = new Date();
+  const filePath = req.file.path.substring(7);
+  if (!req.file) {
+    console.log("no file recieved");
+  } else {
+    console.log('file received');
+  }
+  const submission = new Submission({
+    name: mapName,
+    author: authorName,
+    code: islandCode,
+    photo: filePath,
+    category: category,
+    date: date,
+    views: 1,
+    bio: "default",
+    youtubeLink: youtubeUrl
+  });
+  Map.find({code: islandCode}, function(err, foundMaps) {
+    if(!err) {
+      if (foundMaps.length !== 0) {
+        console.log("Map already in database");
+      } else {
+        console.log("Map is okay to add");
+        const options = {
+          uri: `https://fortnite.com/fn/` + islandCode,
+          transform: function (body) {
+            return cheerio.load(body);
+          }
+        };
+        rp(options)
+        .then(($) => {
+          const bio = $('.island-header-tagline').text();
+          Submission.update({ code: islandCode }, { $set: { bio: bio }}, function(err, result) {
+            // console.log(result);
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+        submission.save();
+      }
+    }
+  });
+});
+
+// ADMIN PORTAL
 
 let loggedIn = false;
 
@@ -359,6 +462,7 @@ app.get('/admin', function(req, res) {
       const newMaps = sortNew(foundMaps);
       if(!err) {
         renderOptions.tilesDisplay = newMaps;
+        renderOptions.adminLoginMessage = "";
         res.render('admin_portal', renderOptions);
       }
     });
@@ -400,71 +504,80 @@ app.get('/admin/submittedmaps', function(req, res) {
 });
 
 app.get('/admin/editsubmission/:mapName', function(req, res) {
-  const requestedMap = req.params.mapName;
-  const currentMaps = [];
-  Submission.find({}, function(err, foundMaps) {
-    foundMaps.forEach(function(map) {
-      const storedCode = map.code;
-      if (requestedMap === storedCode) {
-        // Submission.update({ name: map.name }, { $inc: { views: 1 }}, function(err, result) {
-        // });
-        if (map.category === "obstacle-parkour") {
-          renderOptions.selectOp = "selected";
-        } else if (map.category === "racing") {
-          renderOptions.selectRacing = "selected";
-        } else if (map.category === "minigame") {
-          renderOptions.selectMg = "selected";
-        } else if (map.category === "battle-arena") {
-          renderOptions.selectBa = "selected";
-        } else if (map.category === "edit-courses") {
-          renderOptions.selectEc = "selected";
-        } else if (map.category === "creative-builds") {
-          renderOptions.selectCb = "selected";
+  if (loggedIn) {
+    const requestedMap = req.params.mapName;
+    const currentMaps = [];
+    Submission.find({}, function(err, foundMaps) {
+      foundMaps.forEach(function(map) {
+        const storedCode = map.code;
+        if (requestedMap === storedCode) {
+          // Submission.update({ name: map.name }, { $inc: { views: 1 }}, function(err, result) {
+          // });
+          if (map.category === "obstacle-parkour") {
+            renderOptions.selectOp = "selected";
+          } else if (map.category === "racing") {
+            renderOptions.selectRacing = "selected";
+          } else if (map.category === "minigame") {
+            renderOptions.selectMg = "selected";
+          } else if (map.category === "battle-arena") {
+            renderOptions.selectBa = "selected";
+          } else if (map.category === "edit-courses") {
+            renderOptions.selectEc = "selected";
+          } else if (map.category === "creative-builds") {
+            renderOptions.selectCb = "selected";
+          }
+          renderOptions.adminTitle = "Submitted Maps";
+          currentMaps.push(map);
+          renderOptions.map = map;
+          renderOptions.youtubeLink = map.youtubeLink;
+          res.render('admin_map', renderOptions);
         }
-        renderOptions.adminTitle = "Submitted Maps";
-        currentMaps.push(map);
-        renderOptions.map = map;
-        renderOptions.youtubeLink = map.youtubeLink;
-        res.render('admin_map', renderOptions);
-      }
+      });
     });
-  });
+  } else {
+    res.redirect('/admin');
+  }
 });
 
 app.get('/admin/editlive/:mapName', function(req, res) {
-  const requestedMap = req.params.mapName;
-  const currentMaps = [];
-  Map.find({}, function(err, foundMaps) {
-    foundMaps.forEach(function(map) {
-      const storedCode = map.code;
-      if (requestedMap === storedCode) {
-        // Map.update({ name: map.name }, { $inc: { views: 1 }}, function(err, result) {
-        // });
-        if (map.category === "obstacle-parkour") {
-          renderOptions.selectOp = "selected";
-        } else if (map.category === "racing") {
-          renderOptions.selectRacing = "selected";
-        } else if (map.category === "minigame") {
-          renderOptions.selectMg = "selected";
-        } else if (map.category === "battle-arena") {
-          renderOptions.selectBa = "selected";
-        } else if (map.category === "edit-courses") {
-          renderOptions.selectEc = "selected";
-        } else if (map.category === "creative-builds") {
-          renderOptions.selectCb = "selected";
+  if (loggedIn) {
+    const requestedMap = req.params.mapName;
+    const currentMaps = [];
+    Map.find({}, function(err, foundMaps) {
+      foundMaps.forEach(function(map) {
+        const storedCode = map.code;
+        if (requestedMap === storedCode) {
+          // Map.update({ name: map.name }, { $inc: { views: 1 }}, function(err, result) {
+          // });
+          if (map.category === "obstacle-parkour") {
+            renderOptions.selectOp = "selected";
+          } else if (map.category === "racing") {
+            renderOptions.selectRacing = "selected";
+          } else if (map.category === "minigame") {
+            renderOptions.selectMg = "selected";
+          } else if (map.category === "battle-arena") {
+            renderOptions.selectBa = "selected";
+          } else if (map.category === "edit-courses") {
+            renderOptions.selectEc = "selected";
+          } else if (map.category === "creative-builds") {
+            renderOptions.selectCb = "selected";
+          }
+          renderOptions.adminTitle = "Submitted Maps";
+          currentMaps.push(map);
+          renderOptions.map = map;
+          renderOptions.youtubeLink = map.youtubeLink;
+          renderOptions.adminTitle = "Live Maps";
+          res.render('admin_map', renderOptions);
         }
-        renderOptions.adminTitle = "Submitted Maps";
-        currentMaps.push(map);
-        renderOptions.map = map;
-        renderOptions.youtubeLink = map.youtubeLink;
-        renderOptions.adminTitle = "Live Maps";
-        res.render('admin_map', renderOptions);
-      }
+      });
     });
-  });
+  } else {
+    res.redirect('admin');
+  }
 });
 
 app.post('/admin', function(req,res) {
+  renderOptions.adminLoginMessage = "";
   const adminEmail = "billybob@gmail.com";
   const adminPassword = "billy";
   const inputEmail = req.body.adminEmail;
@@ -472,9 +585,10 @@ app.post('/admin', function(req,res) {
   if (inputEmail === adminEmail && inputPassword === adminPassword) {
     loggedIn = true;
     res.redirect('/admin/livemaps');
+  } else {
+    renderOptions.adminLoginMessage = "Incorrect username or password.";
+    res.render('admin_login', renderOptions)
   }
-  console.log(req.body.adminEmail);
-  console.log(req.body.adminPassword);
 });
 
 app.post('/admin/editsubmission/:mapName', upload.single('mapPhoto'), function(req, res) {
@@ -591,104 +705,6 @@ app.post('/admin/deletelive/:mapName', function(req, res) {
       }
     });
   });
-});
-
-app.post('/search', function(req, res) {
-	searchInput = req.body.searchInput;
-	Map.find({name: {$regex: searchInput, $options: "$i"}}, function(err, foundMaps) {
-    renderOptions.hide_navbar_sort = "nav_hide";
-    renderOptions.tilesDisplay = foundMaps;
-		if(!err && searchInput !== "" && foundMaps.length !== 0) {
-      renderOptions.headingDisplay = "Search results for: " + searchInput;
-      res.render('maps_search', renderOptions);
-		} else if(!err && searchInput!== "") {
-      renderOptions.headingDisplay = "No results for: " + searchInput;
-      res.render('no_results', renderOptions);
-    }
-	});
-});
-
-app.post('/contact', function(req, res) {
-  const contactName = req.body.contactName;
-  const contactEmail = req.body.contactEmail;
-  const contactSubject = req.body.contactSubject;
-  const contactMessage = req.body.contactMessage;
-  let transporter = nodeMailer.createTransport({
-    host: 'smtp.gmail.com',
-    port: 465,
-    secure: true,
-    auth: {
-      user: 'fortnitecreativecodes1@gmail.com',
-      pass: 'welikefortnite'
-    }
-  });
-  let mailOptions = {
-    from: contactEmail, // sender address
-    to: 'joshgbuckner@gmail.com', // list of receivers
-    subject: contactSubject, // Subject line
-    text: contactMessage, // plain text body
-    html: "from: " + contactName + '<br> (' + contactEmail + ') <br>' + contactMessage // html body
-  };
-  transporter.sendMail(mailOptions, (error, info) => {
-    if (error) {
-      return console.log(error);
-    }
-    console.log('Message %s sent: %s', info.messageId, info.response);
-      res.redirect('contact');
-    });
-});
-
-app.post('/submit', upload.single('mapPhoto'), function(req, res) {
-	const mapName = req.body.mapName;
-	const authorName = req.body.authorName;
-	const islandCode = req.body.islandCode;
-	const category = req.body.category;
-  const youtubeLink = req.body.youtubeLink;
-  const youtubeUrl = youtubeLink.slice(32, youtubeLink.length);
-	const date = new Date();
-	const filePath = req.file.path.substring(7);
-	if (!req.file) {
-		console.log("no file recieved");
-	} else {
-		console.log('file received');
-	}
-	const submission = new Submission({
-		name: mapName,
-		author: authorName,
-		code: islandCode,
-		photo: filePath,
-		category: category,
-		date: date,
-		views: 1,
-		bio: "default",
-    youtubeLink: youtubeUrl
-	});
-	Map.find({code: islandCode}, function(err, foundMaps) {
-		if(!err) {
-			if (foundMaps.length !== 0) {
-				console.log("Map already in database");
-			} else {
-				console.log("Map is okay to add");
-				const options = {
-				  uri: `https://fortnite.com/fn/` + islandCode,
-				  transform: function (body) {
-				    return cheerio.load(body);
-				  }
-				};
-				rp(options)
-				.then(($) => {
-					const bio = $('.island-header-tagline').text();
-					Submission.update({ code: islandCode }, { $set: { bio: bio }}, function(err, result) {
-						// console.log(result);
-					});
-				})
-				.catch((err) => {
-					console.log(err);
-				});
-				submission.save();
-			}
-		}
-	});
 });
 
 app.listen(3000, function() {

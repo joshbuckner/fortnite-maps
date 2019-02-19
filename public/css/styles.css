@@ -29,6 +29,10 @@ body {
   background-color: #c272d9;
 }
 
+.failure_bg {
+  background-color: #ffdce0;
+}
+
 .pale_sky_gray {
   color: #6c757d;
 }
@@ -532,10 +536,6 @@ input[type="search"]:focus {
   background-color: rgba(255,255,255,.1);
 }*/
 
-#submit {
-  padding-top: 8rem;
-}
-
 #submit input {
   color: rgba(255,255,255,.9);
   /*font-size: 1.2rem;*/
@@ -615,10 +615,6 @@ input[type="text"]:focus, input[type="tel"]:focus, input[type="email"]:focus, te
 
 /*contact*/
 
-#contact {
-  padding-top: 8rem;
-}
-
 .contact {
   max-width: 35rem;
 }
@@ -662,6 +658,7 @@ input[type="text"]:focus, input[type="tel"]:focus, input[type="email"]:focus, te
 }
 
 /*admin_login*/
+
 .admin_tile {
  margin: 5rem;
 }
