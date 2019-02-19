@@ -520,18 +520,6 @@ a:link {
   top: 57%;
 }
 
-.crop_thumbnail {
-  display: inline-block;
-  height: 59px;
-  overflow: hidden;
-}
-
-.crop_thumbnail img {
-  position: relative;
-  top: 50%;
-  transform: translateY(-50%);
-}
-
 /* submit */
 
 /*#navbar-main input {
@@ -657,6 +645,25 @@ input[type="text"]:focus, input[type="tel"]:focus, input[type="email"]:focus, te
 
 .user_map {
   position: relative;
+}
+
+.crop_thumbnail {
+  display: inline-block;
+  height: 3.6rem;
+  overflow: hidden;
+}
+
+.crop_thumbnail img {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.fa-play-circle {
+  font-size: 2rem;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 /*maps_search*/
@@ -833,9 +840,7 @@ input[type="text"]:focus, input[type="tel"]:focus, input[type="email"]:focus, te
 		top: 53%;
 	}
   .crop_thumbnail {
-    display: inline-block;
-    height: 38px;
-    overflow: hidden;
+    height: 3rem;
   }
 }
 
@@ -868,9 +873,7 @@ input[type="text"]:focus, input[type="tel"]:focus, input[type="email"]:focus, te
     padding-right: 0;
   }
   .crop_thumbnail {
-    display: inline-block;
-    height: 79px;
-    overflow: hidden;
+    height: 6.9rem;
   }
 }
 
@@ -879,6 +882,9 @@ input[type="text"]:focus, input[type="tel"]:focus, input[type="email"]:focus, te
 		top: 65%;
 		right: 2.5%;
 	}
+  .crop_thumbnail {
+    height: 4.7rem;
+  }
 }
 
 @media (max-width: 576px) {
@@ -886,4 +892,7 @@ input[type="text"]:focus, input[type="tel"]:focus, input[type="email"]:focus, te
 		top: 62%;
 		right: 2.5%;
 	}
+  .crop_thumbnail {
+    height: 3.3rem;
+  }
 }
