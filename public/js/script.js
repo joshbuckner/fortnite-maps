@@ -58,6 +58,21 @@ const copyToClipboard = () => {
   document.body.removeChild(el);
 };
 
+
+// let prevScrollpos = window.pageYOffset;
+// window.onscroll = function() {
+//   let currentScrollPos = window.pageYOffset;
+//   if (prevScrollpos > currentScrollPos) {
+//     $('#navbar-main')[0].style.top = "0";
+//     $('#navbar_sort')[0].style.top = "0";
+//   } else {
+//     $('#navbar-main')[0].style.top = "-9.5rem";
+//     $('#navbar_sort')[0].style.top = "-10rem";
+//     $('.navbar-collapse')[0].classList.value = 'navbar-collapse text-center collapse';
+//   }
+//   prevScrollpos = currentScrollPos;
+// }
+
 /* When the user scrolls down, hide the navbar. When the user scrolls up, show the navbar */
 let prevScrollpos = window.pageYOffset;
 window.onscroll = function() {
@@ -66,9 +81,19 @@ window.onscroll = function() {
     $('#navbar-main')[0].style.top = "0";
     $('#navbar_sort')[0].style.top = "0";
   } else {
-    $('#navbar-main')[0].style.top = "-9.5rem";
-    $('#navbar_sort')[0].style.top = "-10rem";
-    $('.navbar-collapse')[0].classList.value = 'navbar-collapse text-center collapse';
+    console.log($( window ).width());
+    if($( window ).width() >= 1394) {
+      $('#navbar-main')[0].style.top = "-9.5rem";
+      $('#navbar_sort')[0].style.top = "-10rem";
+      
+    } else if($( window ).width() >= 993) {
+      $('#navbar-main')[0].style.top = "-9.5rem";
+      $('#navbar_sort')[0].style.top = "-12rem";
+    } else {
+      $('#navbar-main')[0].style.top = "-35rem";
+      $('#navbar_sort')[0].style.top = "-37rem";
+    }
+    // $('.navbar-collapse')[0].classList.value = 'navbar-collapse text-center collapse';
   }
   prevScrollpos = currentScrollPos;
 }
