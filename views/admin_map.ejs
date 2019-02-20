@@ -108,13 +108,12 @@
                     </div>
                     <div class="input-group mb-5 custom-category">
                       <select name="category" class="form-control custom-select d-block text-center rounded-right" id="category" required>
-                        <option value="">Choose Category</option class="p-4 categ_option">
-                        <option value="Obstacle" selected="<% selectOp %>" class="p-4 categ_option">Obstacle</option>
-                        <option value="Racing" selected="<%= selectRacing %>" class="p-4 categ_option">Racing</option>
-                        <option value="Minigame" selected="<%= selectMg %>" class="p-4 categ_option">Minigame</option>
-                        <option value="PvP" selected="<%= selectBa %>" class="p-4 categ_option">PvP</option>
-                        <option value="Practice" selected="<%= selectEc %>" class="p-4 categ_option">Practice</option>
-                        <option value="Creative" selected="<%= selectCb %>" class="p-4 categ_option">Creative</option>
+                        <option value="Obstacle" <% selectOp %> class="p-4 categ_option">Obstacle</option>
+                        <option value="Racing" <%= selectRacing %> class="p-4 categ_option">Racing</option>
+                        <option value="Minigame" <%= selectMg %> class="p-4 categ_option">Minigame</option>
+                        <option value="PvP" <%= selectBa %> class="p-4 categ_option">PvP</option>
+                        <option value="Practice" <%= selectEc %> class="p-4 categ_option">Practice</option>
+                        <option value="Creative" <%= selectCb %> class="p-4 categ_option">Creative</option>
                       </select>
                       <div class="invalid-feedback">Please select a Category.</div>
                     </div>

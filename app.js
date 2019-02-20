@@ -546,6 +546,14 @@ app.get('/admin/editsubmission/:mapName', function(req, res) {
           renderOptions.map = map;
           renderOptions.youtubeLink = map.youtubeLink;
           res.render('admin_map', renderOptions);
+          setTimeout(function() {
+            renderOptions.selectOp = "";
+            renderOptions.selectRacing = "";
+            renderOptions.selectMg = "";
+            renderOptions.selectBa = "";
+            renderOptions.selectEc = "";
+            renderOptions.selectCb = "";
+          }, 10);
         }
       });
     });
@@ -566,29 +574,30 @@ app.get('/admin/editlive/:mapName', function(req, res) {
           // });
           if (map.category === "Obstacle") {
             renderOptions.selectOp = "selected";
-            console.log('obstacle');
           } else if (map.category === "Racing") {
             renderOptions.selectRacing = "selected";
-            console.log('racing');
           } else if (map.category === "Minigame") {
             renderOptions.selectMg = "selected";
-            console.log('minigame');
           } else if (map.category === "PvP") {
             renderOptions.selectBa = "selected";
-            console.log('pvp');
           } else if (map.category === "Practice") {
             renderOptions.selectEc = "selected";
-            console.log('practice');
           } else if (map.category === "Creative") {
             renderOptions.selectCb = "selected";
-            console.log('creative');
           }
-          renderOptions.adminTitle = "Submitted Maps";
+          renderOptions.adminTitle = "Live Maps";
           currentMaps.push(map);
           renderOptions.map = map;
           renderOptions.youtubeLink = map.youtubeLink;
-          renderOptions.adminTitle = "Live Maps";
           res.render('admin_map', renderOptions);
+          setTimeout(function() {
+            renderOptions.selectOp = "";
+            renderOptions.selectRacing = "";
+            renderOptions.selectMg = "";
+            renderOptions.selectBa = "";
+            renderOptions.selectEc = "";
+            renderOptions.selectCb = "";
+          }, 10);
         }
       });
     });

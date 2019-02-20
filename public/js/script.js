@@ -88,4 +88,3 @@ window.onscroll = function() {
 //     checkScroll();
 //   });
 // }
-
