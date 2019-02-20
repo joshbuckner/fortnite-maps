@@ -649,7 +649,7 @@ input[type="text"]:focus, input[type="tel"]:focus, input[type="email"]:focus, te
 
 .crop_thumbnail {
   display: inline-block;
-  height: 3.6rem;
+  height: 7rem;
   overflow: hidden;
 }
 
