@@ -1,6 +1,6 @@
 // enable tooltips
 $(function () {
-  $('[data-toggle="tooltip"]').tooltip()
+  $('[data-toggle="tooltip"]').tooltip();
 });
 
 // javaScript for disabling form submissions if there are invalid fields
@@ -47,6 +47,9 @@ function previewFile() {
 // copy text within element to clipboard and display tooltip
 const copyToClipboard = () => {
 	$('#copy-code').attr('data-original-title', 'Copied to Clipboard!').tooltip('show');
+  setTimeout(function() {
+    $('#copy-code').attr('data-original-title', 'Click to Copy');
+  }, 10);
   const el = document.createElement('textarea');
   el.value = $('#map-code-text')[0].innerHTML.slice(0, 14);
   document.body.appendChild(el);

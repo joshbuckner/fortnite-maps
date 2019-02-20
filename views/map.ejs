@@ -8,7 +8,7 @@
 			<div class="col-lg-12">
 			  <div class="card-body text-white h-100 p-5 gray_trans_bg">
           <h1 class="display-1 burbank_font island_title text-center"><%= map.name %></h1>
-          <h5 class="island-views text-center"><%= map.views %> <span class="h6">VIEWS</span></h5>
+          <h5 class="island_author text-center ">By <%= map.author %></h5>
           <div class="container pt-3">
   					<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="false">
   			  		<div class="carousel-inner">
@@ -32,11 +32,12 @@
   			  		</div>
   			  	</div>
           </div>
-          <h5 class="island_author text-center pt-3 h3">By <%= map.author %></h5>
+          <h5 class="island-views text-center pt-3 h3"><%= map.views %> <span class="h6">VIEWS</span></h5>
+          
           <h3 class="island_bio burbank_font manz_yellow py-3  text-center"><%= map.bio %></h3>
           <h6 class="text-center pb-2">ISLAND CODE</h6>
-          <a id="copy-code" onclick="copyToClipboard()" data-toggle="tooltip" data-placement="top" title="Click to Copy">
-          <h3 id="map-code-text" class="display-4 island_code burbank_font pb-0 mb-0 text-center"><%= map.code %></h3></a>
+          <a id="copy-code" onclick="copyToClipboard()" data-toggle="tooltip" data-placement="bottom" title="Click to Copy">
+          <h3 id="map-code-text" class="display-2 island_code burbank_font pb-0 mb-0 text-center"><%= map.code %></h3></a>
 				  </div>
       	</div>
 			</div>   			
