@@ -12,7 +12,7 @@
 <div class="container-fluid text-white">
   <div class="row">
 
-    <nav class="col-md-2 d-none d-md-block mine_shaft_gray_bg sidebar">
+    <nav class="col-md-2  mine_shaft_gray_bg sidebar">
       <div class="sidebar-sticky">
         <ul class="nav flex-column">
           <li class="nav-item">
@@ -44,100 +44,106 @@
           </button>
         </div> -->
       </div>
-
-      <div class="user_map container pt-5">
-        <div class="row rounded px-3">
-          <div class="col-lg-12">
-            <div class="card-body text-white h-100 p-5 gray_trans_bg">
-              <h1 class="display-1 burbank_font island_title text-center"><%= map.name %></h1>
-              <h5 class="island-views text-center"><%= map.views %> <span class="h6">VIEWS</span></h5>
-              <div class="container pt-3">
-                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="false">
-                  <div class="carousel-inner">
-                    <div class="carousel-item active">
-                      <img class="d-block w-100" src="<%= map.photo %>" alt="First slide">
+      <div class="row px-4">
+        <!-- edit submitted map -->
+        <div class="col-lg-4">
+          <section>
+            <div class="submit-map text-white mb-5 pt-2">
+              <div class="container tablet_mt gray_trans_bg rounded pb-5">
+                <form id="myForm" method="POST" autocomplete="off" class="needs-validation placeholder_center" novalidate enctype="multipart/form-data">
+                  <div class="row px-1 py-5 m-1 rounded">
+                    <div class="col-lg-12 px-4 mt-5">
+                      <div class="mb-5 input-group input-group-md">
+                        <input name="mapName" type="text" value="<%= map.name %>" class="form-control text-center rounded" id="map-name" placeholder="Map Name (maximum 24 characters)" required maxlength="24">
+                        <div class="invalid-feedback">Please enter a Map Name.</div>
+                      </div>
+                      <div class="mb-5 input-group input-group-md">
+                        <input name="authorName" type="text" value="<%= map.author %>" class="form-control text-center rounded" id="author" placeholder="Author" required>
+                        <div class="invalid-feedback">Please enter an Author Name.</div>
+                      </div>
+                      <div class="mb-5 input-group input-group-md">
+                        <input name="islandCode" type="tel" pattern="[0-9]{4}-[0-9]{4}-[0-9]{4}" value="<%= map.code %>" class="form-control text-center rounded" id="island-code" placeholder="Island Code (1234-1234-1234)" required onkeyup="addHyphen();" maxlength="14">
+                        <div class="invalid-feedback">Please enter a valid Island Code.</div>
+                      </div>
+                      <div class="mb-5 input-group input-group-md">
+                        <input name="youtubeLink" type="text" value="https://www.youtube.com/watch?v=<%= map.youtubeLink %>" class="form-control text-center rounded" id="author" placeholder="Youtube Video Link (Optional)">
+                      </div>
+                      <div class="input-group mb-5 custom-category">
+                        <select name="category" class="form-control custom-select d-block text-center rounded-right" id="category" required>
+                          <option value="Obstacle" <% selectOp %> class="p-4 categ_option">Obstacle</option>
+                          <option value="Racing" <%= selectRacing %> class="p-4 categ_option">Racing</option>
+                          <option value="Minigame" <%= selectMg %> class="p-4 categ_option">Minigame</option>
+                          <option value="PvP" <%= selectBa %> class="p-4 categ_option">PvP</option>
+                          <option value="Practice" <%= selectEc %> class="p-4 categ_option">Practice</option>
+                          <option value="Creative" <%= selectCb %> class="p-4 categ_option">Creative</option>
+                        </select>
+                        <div class="invalid-feedback">Please select a Category.</div>
+                      </div>
                     </div>
-                    <div class="carousel-item">
-                      <div class="embed-responsive embed-responsive-16by9">
-                        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/<%= map.youtubeLink %>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <div class="col-lg-12 px-4 px-auto">
+                      <div class="upload_btn_wrapper mb-4">
+                        <button class="btn btn-outline-light btn-md  px-3 py-2 photo_btn"><i class="fas fa-upload"></i> Upload a photo</button>
+                        <input name="mapPhoto" type="file" onchange="previewFile();" id="inputGroupFile01" name="mapPhoto" aria-describedby="inputGroupFileAddon01">
+                        <div class="invalid-feedback">Please upload a Photo.</div>
+                      </div>
+                      <!-- <div class="mb-5 input-group input-group-md custom-file">
+                        <label class="custom-file-label rounded-right" for="inputGroupFile01">Choose Photo</label>
+                        <input name="mapPhoto" type="file" onchange="previewFile();" class="custom-file-input rounded-left" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" required>
+                        <div class="invalid-feedback ">Please upload a Photo.</div>
+                      </div> -->
+                      <div class="mb-5">
+                        <img id="image-preview" src="<%= map.photo %>" class="file-preview ml-auto mr-auto img-fluid rounded" height="" alt="Map Photo">
+                      </div>
+                    </div>
+                    <button class="btn btn-outline-light btn-lg  p-4 submit_button  btn-block mx-4" type="submit">Update Map</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </section>
+        </div>
+        <!-- submitted map -->
+        <div class="col-lg-8">
+          <div class="user_map container pt-5">
+            
+             
+                <div class="card-body text-white h-100 p-5 gray_trans_bg">
+                  <h1 class="display-1 burbank_font island_title text-center"><%= map.name %></h1>
+                  <h5 class="island-views text-center"><%= map.views %> <span class="h6">VIEWS</span></h5>
+                  <div class="container pt-3">
+                    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="false">
+                      <div class="carousel-inner">
+                        <div class="carousel-item active">
+                          <img class="d-block w-100" src="<%= map.photo %>" alt="First slide">
+                        </div>
+                        <div class="carousel-item">
+                          <div class="embed-responsive embed-responsive-16by9">
+                            <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/<%= map.youtubeLink %>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row pt-1">
+                      <div class="col-3 my-3" data-target="#carouselExampleIndicators" data-slide-to="0">
+                        <img class="img-fluid c_slide" src="<%= map.photo %>">
+                      </div>
+                      <div class="col-3 my-3" data-target="#carouselExampleIndicators" data-slide-to="1">
+                        <img class="img-fluid c_slide" src="https://img.youtube.com/vi/<%= map.youtubeLink %>/maxresdefault.jpg">
+                        <i class="far fa-play-circle c_slide position-absolute"></i>
                       </div>
                     </div>
                   </div>
+                  <h5 class="island_author text-center pt-3 h3">By <%= map.author %></h5>
+                  <h3 class="island_bio burbank_font manz_yellow py-3  text-center"><%= map.bio %></h3>
+                  <h6 class="text-center pb-2">ISLAND CODE</h6>
+                  <a id="copy-code" onclick="copyToClipboard()" data-toggle="tooltip" data-placement="top" title="Click to Copy">
+                  <h3 id="map-code-text" class="display-4 island_code burbank_font pb-0 mb-0 text-center"><%= map.code %></h3></a>
                 </div>
-                <div class="row pt-1">
-                  <div class="col-3 my-3" data-target="#carouselExampleIndicators" data-slide-to="0">
-                    <img class="img-fluid c_slide" src="<%= map.photo %>">
-                  </div>
-                  <div class="col-3 my-3" data-target="#carouselExampleIndicators" data-slide-to="1">
-                    <img class="img-fluid c_slide" src="https://img.youtube.com/vi/<%= map.youtubeLink %>/maxresdefault.jpg">
-                    <i class="far fa-play-circle c_slide position-absolute"></i>
-                  </div>
-                </div>
-              </div>
-              <h5 class="island_author text-center pt-3 h3">By <%= map.author %></h5>
-              <h3 class="island_bio burbank_font manz_yellow py-3  text-center"><%= map.bio %></h3>
-              <h6 class="text-center pb-2">ISLAND CODE</h6>
-              <a id="copy-code" onclick="copyToClipboard()" data-toggle="tooltip" data-placement="top" title="Click to Copy">
-              <h3 id="map-code-text" class="display-4 island_code burbank_font pb-0 mb-0 text-center"><%= map.code %></h3></a>
-            </div>
+              
+              
           </div>
-        </div>    
-      </div>
-        <!-- edit submitted map -->
-        <section>
-          <div class="submit-map text-white mb-5">
-            <div class="container tablet_mt gray_trans_bg rounded">
-              <form id="myForm" method="POST" autocomplete="off" class="needs-validation placeholder_center" novalidate enctype="multipart/form-data">
-                <div class="row px-1 py-5 m-1 rounded">
-                  <div class="col-lg-6 px-4">
-                    <div class="mb-5 input-group input-group-md">
-                      <input name="mapName" type="text" value="<%= map.name %>" class="form-control text-center rounded" id="map-name" placeholder="Map Name (maximum 24 characters)" required maxlength="24">
-                      <div class="invalid-feedback">Please enter a Map Name.</div>
-                    </div>
-                    <div class="mb-5 input-group input-group-md">
-                      <input name="authorName" type="text" value="<%= map.author %>" class="form-control text-center rounded" id="author" placeholder="Author" required>
-                      <div class="invalid-feedback">Please enter an Author Name.</div>
-                    </div>
-                    <div class="mb-5 input-group input-group-md">
-                      <input name="islandCode" type="tel" pattern="[0-9]{4}-[0-9]{4}-[0-9]{4}" value="<%= map.code %>" class="form-control text-center rounded" id="island-code" placeholder="Island Code (1234-1234-1234)" required onkeyup="addHyphen();" maxlength="14">
-                      <div class="invalid-feedback">Please enter a valid Island Code.</div>
-                    </div>
-                    <div class="mb-5 input-group input-group-md">
-                      <input name="youtubeLink" type="text" value="https://www.youtube.com/watch?v=<%= map.youtubeLink %>" class="form-control text-center rounded" id="author" placeholder="Youtube Video Link (Optional)">
-                    </div>
-                    <div class="input-group mb-5 custom-category">
-                      <select name="category" class="form-control custom-select d-block text-center rounded-right" id="category" required>
-                        <option value="Obstacle" <% selectOp %> class="p-4 categ_option">Obstacle</option>
-                        <option value="Racing" <%= selectRacing %> class="p-4 categ_option">Racing</option>
-                        <option value="Minigame" <%= selectMg %> class="p-4 categ_option">Minigame</option>
-                        <option value="PvP" <%= selectBa %> class="p-4 categ_option">PvP</option>
-                        <option value="Practice" <%= selectEc %> class="p-4 categ_option">Practice</option>
-                        <option value="Creative" <%= selectCb %> class="p-4 categ_option">Creative</option>
-                      </select>
-                      <div class="invalid-feedback">Please select a Category.</div>
-                    </div>
-                  </div>
-                  <div class="col-lg-6 px-4 px-auto">
-                    <div class="upload_btn_wrapper col-6 mb-4">
-                      <button class="btn btn-outline-light btn-lg btn-block p-1 py-2 photo_btn"><i class="fas fa-upload"></i> Upload a photo</button>
-                      <input name="mapPhoto" type="file" onchange="previewFile();" id="inputGroupFile01" name="mapPhoto" aria-describedby="inputGroupFileAddon01">
-                      <div class="invalid-feedback">Please upload a Photo.</div>
-                    </div>
-                    <!-- <div class="mb-5 input-group input-group-md custom-file">
-                      <label class="custom-file-label rounded-right" for="inputGroupFile01">Choose Photo</label>
-                      <input name="mapPhoto" type="file" onchange="previewFile();" class="custom-file-input rounded-left" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" required>
-                      <div class="invalid-feedback ">Please upload a Photo.</div>
-                    </div> -->
-                    <div class="mb-5">
-                      <img id="image-preview" src="<%= map.photo %>" class="file-preview ml-auto mr-auto img-fluid rounded" height="" alt="Map Photo">
-                    </div>
-                  </div>
-                  <button class="btn btn-outline-light btn-lg btn-block p-4 submit_button btn_center_submit" type="submit">Update Map</button>
-                </div>
-              </form>
-            </div>
-          </div>
-        </section>
+        </div>
+        
         <%- include('partials/footer') -%>
       </div>
     </main>
