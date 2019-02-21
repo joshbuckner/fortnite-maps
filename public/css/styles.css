@@ -78,7 +78,8 @@ body {
   background-image: linear-gradient( rgba(31, 31, 31, .7), rgba(31, 31, 31, 0.7)), url("../images/fortnite_creative_trans.jpg");
   background-size: cover;
   background-position: 0% 45%;
-  padding: 12rem;
+  padding-top: 12rem;
+  padding-bottom: 12rem;
   position: absolute;
   width: 100%;
 }
@@ -87,7 +88,8 @@ body {
   background-image: linear-gradient( rgba(31, 31, 31, .7), rgba(31, 31, 31, 0.7)), url("../images/fortnite_creative_2.png");
   background-size: cover;
   background-position: 0% 10%;
-  padding: 12rem;
+  padding-top: 12rem;
+  padding-bottom: 12rem;
   position: absolute;
   width: 100%;
 }
@@ -160,7 +162,7 @@ input[type="search"]:focus {
 
 .navbar_sort {
   margin: 6.7rem auto 0;
-  max-width: 280px;
+  max-width: 310px;
   border-radius: 0 0 50px 50px;
 }
 
@@ -603,9 +605,13 @@ input[type="text"]:focus, input[type="tel"]:focus, input[type="email"]:focus, te
   margin: 0 9rem 0;
 }
 
-.btn_center_contact {
-  margin: 0 3.3rem 0;
+/*.btn_center_contact {
+  margin: 0 1rem 0;
   max-width: 80%;
+}*/
+
+.btn_center_contact {
+  margin: 0 5%;
 }
 
 .submit_button:hover {
@@ -629,6 +635,11 @@ input[type="text"]:focus, input[type="tel"]:focus, input[type="email"]:focus, te
 }
 
 /* map */
+
+.map_walls {
+  padding: 3rem;
+}
+
 #user_map {
   padding-top: 8rem;
 }
@@ -851,16 +862,30 @@ input[type="text"]:focus, input[type="tel"]:focus, input[type="email"]:focus, te
   }
   .navbar_sort {
     margin: 8.8rem auto 0;
-    max-width: 280px;
+    max-width: 310px;
     border-radius: 0 0 50px 50px;
+  }
+  #maps {
+    padding-top: 9rem;
+  }
+  #maps_filter {
+    padding-top: 9rem;
+  }
+  .heading_mt {
+    padding-top: 10rem;
   }
 }
 
 @media (max-width: 1354px) {
-  .navbar_sort {
-    margin: 10.3rem auto 0;
-    max-width: 280px;
-    border-radius: 0 0 50px 50px;
+ 
+  #maps {
+    padding-top: 10.5rem;
+  }
+  #maps_filter {
+    padding-top: 10.5rem;
+  }
+  .heading_mt {
+    padding-top: 12rem;
   }
 }
 
@@ -877,6 +902,14 @@ input[type="text"]:focus, input[type="tel"]:focus, input[type="email"]:focus, te
 	}
   .crop_thumbnail {
     height: 3rem;
+  }
+}
+
+@media (max-width: 1171px) {
+  .navbar_sort {
+    margin: 10.3rem auto 0;
+    max-width: 310px;
+    border-radius: 0 0 50px 50px;
   }
 }
 
@@ -912,18 +945,50 @@ input[type="text"]:focus, input[type="tel"]:focus, input[type="email"]:focus, te
     height: 6.9rem;
   }
   .navbar_sort {
-    margin: 31.9rem auto 0;
-    max-width: 280px;
-    border-radius: 0 0 50px 50px;
+    margin: 5rem auto 0;
+    z-index: 2!important;
+    border-radius: 0;
     top: 0;
+    text-align: center;
   }
-  .underline_active {
+  .navbar {
+      z-index: 1;
+    }
+  }
+  .underline_active_sort {
     max-width: 5rem;
   }
   .navbar_sort_links {
     top: 50%;
     left: 50%;
     transform: translate(32%);
+  }
+  .heading_mt {
+    padding-top: 9rem;
+  }
+  .btn_center_submit {
+    margin: 0 5%;
+  }
+  .island_title {
+    font-size: 4rem;
+  }
+  .island_author {
+    font-size: 1.5rem;
+  }
+  .map_walls {
+    padding: 3rem 2rem;
+  }
+  .island-views {
+    font-size: 1.5rem;
+  }
+  .island_bio {
+    font-size: 1.75rem;
+  }
+  .island_code_title {
+    font-size: 1.5rem;
+  }
+  .island_code {
+    font-size: 4rem;
   }
 }
 
@@ -935,14 +1000,63 @@ input[type="text"]:focus, input[type="tel"]:focus, input[type="email"]:focus, te
   .crop_thumbnail {
     height: 4.7rem;
   }
+  .island_title {
+    font-size: 3.5rem;
+  }
+  .island_author {
+    font-size: 1.25rem;
+  }
+  .map_walls {
+    padding: 3rem 1.5rem;
+  }
+  .island-views {
+    font-size: 1.25rem;
+  }
+  .island_bio {
+    font-size: 1.5rem;
+  }
+  .island_code_title {
+    font-sizer: 1.25rem;
+  }
+  .island_code {
+    font-size: 3rem;
+  }
 }
 
 @media (max-width: 576px) {
+  .user_map .container {
+    padding: 0;
+  }
+  .map_mobile {
+    padding: 0;
+    margin: 0;
+  }
 	.category_tag {
 		top: 62%;
 		right: 2.5%;
 	}
   .crop_thumbnail {
     height: 3.3rem;
+  }
+  .island_title {
+    font-size: 3rem;
+  }
+  .island_author {
+    font-size: 1rem;
+  }
+  .map_walls {
+    padding: 3rem 0;
+  }
+  .island-views {
+    font-size: 1rem;
+  }
+  .island_bio {
+    font-size: 1.25rem;
+  }
+  .island_code_title {
+    font-sizer: 1rem;
+  }
+  .island_code {
+    font-size: 1.4rem;
   }
 }

@@ -1,18 +1,24 @@
 <section>
 	<div>
     <nav id="navbar_sort" class="navbar fixed-top navbar-expand-lg navbar-dark mine_shaft_gray_bg py-0 navbar_sort <%= hide_navbar_sort %> navbar_sort_hidden border-dark">
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <div class="" id="">
       <ul class="navbar-nav navbar_sort_links">
-        <li class="nav-item">
-          <a class="nav-link p-0" href="?sortby=newest">
-            <div class=" <%= newestActive %> submit_island">New</div>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link p-0" href="?sortby=views">
-            <div class=" <%= viewsActive %> submit_island">Popular</div>
-          </a>
-        </li>
+        <div class="row">
+          <div class="col-12-sm col-6 <%= newestActive %>">
+            <li class="nav-item ">
+              <a class="nav-link p-0 " href="?sortby=newest">
+                <div class="  underline_active_sort submit_island">New</div>
+              </a>
+            </li>
+          </div>
+          <div class="col-12-sm col-6 <%= viewsActive %>">
+            <li class="nav-item ">
+              <a class="nav-link p-0 " href="?sortby=views">
+                <div class="  underline_active_sort submit_island">Popular</div>
+              </a>
+            </li>
+          </div>
+        </div>
       </ul>
     </div>
   </nav>
@@ -39,7 +45,7 @@
                 <div class="row">
 
                   <div class="col-lg-3 col-3">
-                    <li class="nav-item px-3">
+                    <li class="nav-item">
                       <a class="nav-link text-muted" href="/new">
                         <div class="circle <%= newSort %>">
                           <i class="fas fa-clock icon_parkour"></i>
@@ -50,7 +56,7 @@
                   </div>
 
                   <div class="col-lg-3 col-3">
-                    <li class="nav-item px-3">
+                    <li class="nav-item">
                       <a class="nav-link text-muted" href="/popular">
                         <div class="circle <%= popularSort %>">
                           <i class="fas fa-fire icon_parkour"></i>
@@ -61,7 +67,7 @@
                   </div>
 
                   <div class="col-lg-3 col-3">
-                    <li class="nav-item px-3">
+                    <li class="nav-item">
                       <a class="nav-link text-muted" href="/obstacle">
                         <div class="circle <%= obstacleParkour %>">
                           <i class="fas fa-running icon_parkour"></i>
@@ -72,7 +78,7 @@
                   </div>
 
                   <div class="col-lg-3 col-3">
-                    <li class="nav-item px-3">
+                    <li class="nav-item">
                       <a class="nav-link text-muted" href="/racing">
                         <div class="circle <%= racing %>">
                           <i class="fas fa-flag-checkered icon_racing"></i>
@@ -91,7 +97,7 @@
                 <div class="row">
 
                   <div class="col-lg-3 col-3">
-                    <li class="nav-item px-3">
+                    <li class="nav-item">
                       <a class="nav-link text-muted" href="/minigame">
                         <div class="circle <%= minigame %>">
                           <i class="fas fa-gamepad icon_minigame"></i>
@@ -102,7 +108,7 @@
                   </div>
 
                   <div class="col-lg-3 col-3">
-                    <li class="nav-item px-3">
+                    <li class="nav-item">
                       <a class="nav-link text-muted" href="/pvp">
                         <div class="circle <%= battleArena %>">
                           <i class="fas fa-fist-raised icon_arena"></i>
@@ -113,7 +119,7 @@
                   </div>
 
                   <div class="col-lg-3 col-3">
-                    <li class="nav-item px-3">
+                    <li class="nav-item">
                       <a class="nav-link text-muted" href="/practice">
                         <div class="circle <%= editCourses %>">
                           <i class="fas fa-pencil-alt icon_edit"></i>
@@ -124,7 +130,7 @@
                   </div>
 
                   <div class="col-lg-3 col-3">
-                    <li class="nav-item px-3">
+                    <li class="nav-item">
                       <a class="nav-link text-muted" href="/creative">
                         <div class="circle <%= creativeBuilds %>">
                           <i class="fas fa-torii-gate icon_creative"></i>
