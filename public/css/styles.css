@@ -9,6 +9,10 @@ body {
 	background-color: #2a2a2a;
 }
 
+.mine_shaft_gray_toggle {
+    background-color: #2a2a2a;
+  }
+
 .gray_trans_bg {
   background-color: rgba(42, 42, 42, .9);
 }
@@ -60,6 +64,11 @@ body {
 
 .burbank_font {
   font-family: 'Burbank Big Cd Bk', sans-serif;
+}
+
+.burbank_font_spaced {
+  font-family: 'Burbank Big Cd Bk', sans-serif;
+  letter-spacing: .5rem;
 }
 
 .code_font {
@@ -162,12 +171,15 @@ input[type="search"]:focus {
 
 .navbar_sort {
   margin: 6.7rem auto 0;
-  max-width: 310px;
+  max-width: 275px;
   border-radius: 0 0 50px 50px;
 }
 
 .navbar_sort_links {
   margin: 0 auto;
+  /*top: 50%;
+  left: 50%;*/
+  transform: translate(17%, 0);
 }
 
 .navbar_sort_links a {
@@ -862,7 +874,7 @@ input[type="text"]:focus, input[type="tel"]:focus, input[type="email"]:focus, te
   }
   .navbar_sort {
     margin: 8.8rem auto 0;
-    max-width: 310px;
+    max-width: 275px;
     border-radius: 0 0 50px 50px;
   }
   #maps {
@@ -908,7 +920,7 @@ input[type="text"]:focus, input[type="tel"]:focus, input[type="email"]:focus, te
 @media (max-width: 1171px) {
   .navbar_sort {
     margin: 10.3rem auto 0;
-    max-width: 310px;
+    max-width: 275px;
     border-radius: 0 0 50px 50px;
   }
 }
@@ -945,7 +957,7 @@ input[type="text"]:focus, input[type="tel"]:focus, input[type="email"]:focus, te
     height: 6.9rem;
   }
   .navbar_sort {
-    margin: 5rem auto 0;
+    margin: 5.1rem auto 0;
     z-index: 2!important;
     border-radius: 0;
     top: 0;
@@ -953,7 +965,6 @@ input[type="text"]:focus, input[type="tel"]:focus, input[type="email"]:focus, te
   }
   .navbar {
       z-index: 1;
-    }
   }
   .underline_active_sort {
     max-width: 5rem;
@@ -989,6 +1000,9 @@ input[type="text"]:focus, input[type="tel"]:focus, input[type="email"]:focus, te
   }
   .island_code {
     font-size: 4rem;
+  }
+  .mine_shaft_gray_toggle {
+    background-color: rgba(42, 42, 42,0);
   }
 }
 
@@ -1054,7 +1068,7 @@ input[type="text"]:focus, input[type="tel"]:focus, input[type="email"]:focus, te
     font-size: 1.25rem;
   }
   .island_code_title {
-    font-sizer: 1rem;
+    font-size: 1rem;
   }
   .island_code {
     font-size: 1.4rem;
