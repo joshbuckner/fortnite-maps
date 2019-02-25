@@ -769,6 +769,12 @@ app.post('/admin/deletelive/:mapName', function(req, res) {
   });
 });
 
-app.listen(3000, '0.0.0.0', function() {
-    console.log('Listening to port:  ' + 3000);
+let port = process.env.PORT;
+if (port == null || port == "") {
+  port = 3000;
+}
+
+
+app.listen(port, '0.0.0.0', function() {
+    console.log('Server has started successfully.');
 });
