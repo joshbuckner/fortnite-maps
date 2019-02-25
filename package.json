@@ -16,6 +16,9 @@
   ],
   "author": "Josh Buckner",
   "license": "ISC",
+  "engines": {
+    "node": "10.15.1"
+  },
   "dependencies": {
     "body-parser": "^1.18.3",
     "cheerio": "^1.0.0-rc.2",
