@@ -21,7 +21,7 @@ app.use('/admin', express.static('public'));
 app.use('/admin/editlive', express.static('public'));
 app.use('/admin/editsubmission', express.static('public'));
 
-mongoose.connect('mongodb://localhost:27017/fortniteMapsDB', {useNewUrlParser: true});
+mongoose.connect('mongodb+srv://admin-josh:admin-jgb@cluster0-v7wao.mongodb.net/fortniteMapsDB', {useNewUrlParser: true});
 
 const mapsSchema = {
 	name: String,
@@ -117,7 +117,7 @@ app.get('/obstacle', function(req, res) {
 	} 
   setTimeout(function() {
     renderOptions.obstacleParkour = "hvr_grow hvr-circle-to-top";
-  }, 10);
+  }, 100);
 });
 
 app.get('/racing', function(req, res) {
@@ -146,7 +146,7 @@ app.get('/racing', function(req, res) {
 	}
   setTimeout(function() {
     renderOptions.racing = "hvr_grow hvr-circle-to-top";
-  }, 10);
+  }, 100);
 });
 
 app.get('/minigame', function(req, res) {
@@ -175,7 +175,7 @@ app.get('/minigame', function(req, res) {
   }
   setTimeout(function() {
     renderOptions.minigame = "hvr_grow hvr-circle-to-top";
-  }, 10);
+  }, 100);
 });
 
 app.get('/pvp', function(req, res) {
@@ -204,7 +204,7 @@ app.get('/pvp', function(req, res) {
   }
   setTimeout(function() {
     renderOptions.battleArena = "hvr_grow hvr-circle-to-top";
-  }, 10);
+  }, 100);
 });
 
 app.get('/practice', function(req, res) {
@@ -233,7 +233,7 @@ app.get('/practice', function(req, res) {
   }
   setTimeout(function() {
     renderOptions.editCourses = "hvr_grow hvr-circle-to-top";
-  }, 10);
+  }, 100);
 });
 
 app.get('/creative', function(req, res) {
@@ -262,7 +262,7 @@ app.get('/creative', function(req, res) {
   }
   setTimeout(function() {
     renderOptions.creativeBuilds = "hvr_grow hvr-circle-to-top";
-  }, 10);
+  }, 100);
 });
 
 app.get('/popular', function(req, res) {
@@ -278,7 +278,7 @@ app.get('/popular', function(req, res) {
   setTimeout(function() {
     renderOptions.popularSort = "hvr_grow hvr-circle-to-top";
     renderOptions.hide_navbar_sort = "";
-  }, 10);
+  }, 100);
 });
 
 app.get('/new', function(req, res) {
@@ -294,7 +294,7 @@ app.get('/new', function(req, res) {
   setTimeout(function() {
     renderOptions.newSort = "hvr_grow hvr-circle-to-top";
     renderOptions.hide_navbar_sort = "";
-  }, 10);
+  }, 100);
 });
 
 app.get('/maps/:mapName', function(req, res) {
@@ -320,7 +320,7 @@ app.get('/maps/:mapName', function(req, res) {
   });
   setTimeout(function() {
     renderOptions.hide_navbar_sort = "";
-  }, 10);
+  }, 100);
 });
 
 app.get('/contact', function(req, res) {
@@ -333,7 +333,7 @@ app.get('/contact', function(req, res) {
     renderOptions.hide_navbar_sort = "";
     renderOptions.siteBackground = "background_header_main";
     renderOptions.contact = "hvr_underline_reveal";
-  }, 10);
+  }, 100);
 });
 
 app.get('/submit', function(req, res) {
@@ -346,7 +346,7 @@ app.get('/submit', function(req, res) {
     renderOptions.hide_navbar_sort = "";
     renderOptions.siteBackground = "background_header_main";
     renderOptions.submitIsland = "hvr_underline_reveal";
-  }, 10);
+  }, 100);
 });
 
 app.get('/submitsuccess', function(req, res) {
@@ -359,7 +359,7 @@ app.get('/submitsuccess', function(req, res) {
     renderOptions.hide_navbar_sort = "";
     renderOptions.siteBackground = "background_header_main";
     renderOptions.submitIsland = "hvr_underline_reveal";
-  }, 10);
+  }, 100);
 });
 
 
@@ -553,7 +553,7 @@ app.get('/admin/editsubmission/:mapName', function(req, res) {
             renderOptions.selectBa = "";
             renderOptions.selectEc = "";
             renderOptions.selectCb = "";
-          }, 10);
+          }, 100);
         }
       });
     });
@@ -597,7 +597,7 @@ app.get('/admin/editlive/:mapName', function(req, res) {
             renderOptions.selectBa = "";
             renderOptions.selectEc = "";
             renderOptions.selectCb = "";
-          }, 10);
+          }, 100);
         }
       });
     });
@@ -769,6 +769,6 @@ app.post('/admin/deletelive/:mapName', function(req, res) {
   });
 });
 
-app.listen(3000, function() {
-  console.log("Server started on port 3000");
+app.listen(3000, '0.0.0.0', function() {
+    console.log('Listening to port:  ' + 3000);
 });
