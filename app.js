@@ -7,6 +7,7 @@ const multer = require('multer');
 const rp = require("request-promise");
 const cheerio = require("cheerio");
 const nodeMailer = require('nodemailer');
+const cloudinary = require('cloudinary');
 
 const upload = multer({ dest: 'public/uploads'});
 
@@ -20,6 +21,12 @@ app.use('/maps', express.static('public'));
 app.use('/admin', express.static('public'));
 app.use('/admin/editlive', express.static('public'));
 app.use('/admin/editsubmission', express.static('public'));
+
+cloudinary.config({
+  cloud_name: 'hsjd5w8nk',
+  api_key: '436618114611863',
+  api_secret: 'a4DJyvNFKJEYP-FnFwV9v5GFvPQ'
+});
 
 mongoose.connect('mongodb+srv://admin-josh:admin-jgb@cluster0-v7wao.mongodb.net/fortniteMapsDB', {useNewUrlParser: true});
 
@@ -416,17 +423,12 @@ app.post('/submit', upload.single('mapPhoto'), function(req, res) {
   const youtubeLink = req.body.youtubeLink;
   const youtubeUrl = youtubeLink.slice(32, youtubeLink.length);
   const date = new Date();
-  const filePath = req.file.path.substring(7);
-  if (!req.file) {
-    console.log("no file recieved");
-  } else {
-    console.log('file received');
-  }
+  
   const submission = new Submission({
     name: mapName,
     author: authorName,
     code: islandCode,
-    photo: filePath,
+    photo: "",
     category: category,
     date: date,
     views: 1,
@@ -454,6 +456,11 @@ app.post('/submit', upload.single('mapPhoto'), function(req, res) {
         })
         .catch((err) => {
           console.log(err);
+        });
+        cloudinary.uploader.upload(req.file.path, function(result) {
+          Submission.update({ code: islandCode }, { $set: { photo: result.url }}, function(err, result) {
+            // console.log(result);
+          });
         });
         submission.save();
         res.redirect('submitSuccess');
@@ -637,8 +644,13 @@ app.post('/admin/editsubmission/:mapName', upload.single('mapPhoto'), function(r
     });
   } else {
     console.log('file received');
-    const filePath = req.file.path.substring(7);
-    Submission.update({ code: requestedMap }, { name: mapName, author: authorName, code: islandCode, category: category, youtubeLink: youtubeUrl, photo: filePath}, function(err, result) {
+    // const filePath = req.file.path.substring(7);
+    cloudinary.uploader.upload(req.file.path, function(result) {
+      Submission.update({ code: requestedMap }, { $set: { photo: result.url }}, function(err, result) {
+        // console.log(result);
+      });
+    });
+    Submission.update({ code: requestedMap }, { name: mapName, author: authorName, code: islandCode, category: category, youtubeLink: youtubeUrl}, function(err, result) {
     });
   }
   // let photoUpdate = filePath;
@@ -665,14 +677,20 @@ app.post('/admin/editlive/:mapName', upload.single('mapPhoto'), function(req, re
     });
   } else {
     console.log('file received');
-    const filePath = req.file.path.substring(7);
-    Map.update({ code: requestedMap }, { name: mapName, author: authorName, code: islandCode, category: category, youtubeLink: youtubeUrl, photo: filePath}, function(err, result) {
+    // const filePath = req.file.path.substring(7);
+    cloudinary.uploader.upload(req.file.path, function(result) {
+      Map.update({ code: requestedMap }, { $set: { photo: result.url }}, function(err, result) {
+        // console.log(result);
+      });
+      console.log(result);
+    });
+    Map.update({ code: requestedMap }, { name: mapName, author: authorName, code: islandCode, category: category, youtubeLink: youtubeUrl}, function(err, result) {
     });
   }
   // let photoUpdate = filePath;
   // if (filePath === undefined) {
   //   photoUpdate = "";
-  // } 
+  // }
   res.redirect('/admin/editlive/' + requestedMap);
   // res.redirect('/admin/:mapName', renderOptions);
 });
