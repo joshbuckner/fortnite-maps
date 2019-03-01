@@ -617,7 +617,7 @@ app.get('/admin/editlive/:mapName', function(req, res) {
 app.post('/admin', function(req,res) {
   renderOptions.adminLoginMessage = "";
   const adminEmail = process.env.ADMIN_EMAIL;
-  const adminPassword = process.env.ADMIN_PASWORD;
+  const adminPassword = process.env.ADMIN_PASSWORD;
   const inputEmail = req.body.adminEmail;
   const inputPassword = req.body.adminPassword;
   if (inputEmail === adminEmail && inputPassword === adminPassword) {
