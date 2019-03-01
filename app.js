@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
@@ -23,12 +24,12 @@ app.use('/admin/editlive', express.static('public'));
 app.use('/admin/editsubmission', express.static('public'));
 
 cloudinary.config({
-  cloud_name: 'hsjd5w8nk',
-  api_key: '436618114611863',
-  api_secret: 'a4DJyvNFKJEYP-FnFwV9v5GFvPQ'
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.CLOUD_API_KEY,
+  api_secret: process.env.CLOUD_API_SECRET
 });
 
-mongoose.connect('mongodb+srv://admin-josh:admin-jgb@cluster0-v7wao.mongodb.net/fortniteMapsDB', {useNewUrlParser: true});
+mongoose.connect('mongodb+srv://' + process.env.DB_USER + ':' + process.env.DB_PASSWORD + '@cluster0-v7wao.mongodb.net/fortniteMapsDB', {useNewUrlParser: true});
 
 const mapsSchema = {
 	name: String,
@@ -615,8 +616,8 @@ app.get('/admin/editlive/:mapName', function(req, res) {
 
 app.post('/admin', function(req,res) {
   renderOptions.adminLoginMessage = "";
-  const adminEmail = "billybob@gmail.com";
-  const adminPassword = "billy";
+  const adminEmail = process.env.ADMIN_EMAIL;
+  const adminPassword = process.env.ADMIN_PASWORD;
   const inputEmail = req.body.adminEmail;
   const inputPassword = req.body.adminPassword;
   if (inputEmail === adminEmail && inputPassword === adminPassword) {

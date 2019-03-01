@@ -2,4 +2,6 @@ node_modules/
 public/uploads/
 npm-debug.log
 .DS_Store
+.env
+.env.test
 /*env
