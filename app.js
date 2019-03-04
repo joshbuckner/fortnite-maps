@@ -459,8 +459,8 @@ app.post('/submit', upload.single('mapPhoto'), function(req, res) {
           console.log(err);
         });
         cloudinary.uploader.upload(req.file.path, function(result) {
-          Submission.update({ code: islandCode }, { $set: { photo: result.url }}, function(err, result) {
-            // console.log(result);
+          const securePhoto = result.url.slice(0,4) + "s" + result.url.slice(4,result.url.length);
+          Submission.update({ code: islandCode }, { $set: { photo: securePhoto }}, function(err, result) {
           });
         });
         submission.save();
@@ -647,7 +647,8 @@ app.post('/admin/editsubmission/:mapName', upload.single('mapPhoto'), function(r
     console.log('file received');
     // const filePath = req.file.path.substring(7);
     cloudinary.uploader.upload(req.file.path, function(result) {
-      Submission.update({ code: requestedMap }, { $set: { photo: result.url }}, function(err, result) {
+      const securePhoto = result.url.slice(0,4) + "s" + result.url.slice(4,result.url.length);
+      Submission.update({ code: requestedMap }, { $set: { photo: securePhoto }}, function(err, result) {
         // console.log(result);
       });
     });
@@ -680,7 +681,8 @@ app.post('/admin/editlive/:mapName', upload.single('mapPhoto'), function(req, re
     console.log('file received');
     // const filePath = req.file.path.substring(7);
     cloudinary.uploader.upload(req.file.path, function(result) {
-      Map.update({ code: requestedMap }, { $set: { photo: result.url }}, function(err, result) {
+      const securePhoto = result.url.slice(0,4) + "s" + result.url.slice(4,result.url.length);
+      Map.update({ code: requestedMap }, { $set: { photo: securePhoto }}, function(err, result) {
         // console.log(result);
       });
       console.log(result);
