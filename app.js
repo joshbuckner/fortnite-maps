@@ -94,7 +94,7 @@ function sortNew(e) {
 app.get('/', function(req, res) {
 	Map.find({}, function(err, foundMaps) {
 		if(!err) {
-			res.redirect('/popular');
+			res.redirect('/new');
 		}
 	});
 });
