@@ -9,12 +9,21 @@ const rp = require("request-promise");
 const cheerio = require("cheerio");
 const nodeMailer = require('nodemailer');
 const cloudinary = require('cloudinary');
+const passport = require('passport');
+const LocalStrategy = require('passport-local');
+const expressSession = require('express-session');
+const flash = require('connect-flash');
 
 const upload = multer({ dest: 'public/uploads'});
 
 const app = express();
 
 app.set('view engine', 'ejs');
+
+app.use(expressSession({secret: 'mySecretKey'}));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash());
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static('public'));
@@ -23,28 +32,81 @@ app.use('/admin', express.static('public'));
 app.use('/admin/editlive', express.static('public'));
 app.use('/admin/editsubmission', express.static('public'));
 
+mongoose.connect('mongodb+srv://' + process.env.DB_USER + ':' + process.env.DB_PASSWORD + '@cluster0-v7wao.mongodb.net/fortniteMapsDB', {useNewUrlParser: true});
+
+const mapsSchema = {
+  name: String,
+  author: String,
+  code: String,
+  photo: String,
+  category: String,
+  date: Date,
+  views: Number,
+  bio: String,
+  youtubeLink: String
+};
+
+const usersSchema = {
+  username: String,
+  password: String
+}
+
+const Map = mongoose.model("Map", mapsSchema);
+const Submission = mongoose.model("Submission", mapsSchema);
+const User = mongoose.model("User", usersSchema);
+
+
 cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,
   api_key: process.env.CLOUD_API_KEY,
   api_secret: process.env.CLOUD_API_SECRET
 });
 
-mongoose.connect('mongodb+srv://' + process.env.DB_USER + ':' + process.env.DB_PASSWORD + '@cluster0-v7wao.mongodb.net/fortniteMapsDB', {useNewUrlParser: true});
+passport.serializeUser(function(user, done) {
+  done(null, user._id);
+});
+ 
+passport.deserializeUser(function(id, done) {
+  User.findById(id, function(err, user) {
+    done(err, user);
+  });
+});
 
-const mapsSchema = {
-	name: String,
-	author: String,
-	code: String,
-	photo: String,
-	category: String,
-	date: Date,
-	views: Number,
-	bio: String,
-  youtubeLink: String
-};
+// passport/login.js
+passport.use('login', new LocalStrategy({
+    passReqToCallback : true
+  },
+  function(req, username, password, done) { 
+    console.log(username);
+    console.log(password);
+    // check in mongo if a user with username exists or not
+    User.findOne({ 'username' :  username }, 
+      function(err, user) {
+        // In case of any error, return using the done method
+        if (err)
+          return done(err);
+        // Username does not exist, log error & redirect back
+        if (!user){
+          console.log('User Not Found with username '+username);
+          return done(null, false, 
+                req.flash('message', 'User Not found.'));                 
+        }
+        // User exists but wrong password, log the error 
+        if (!isValidPassword(user, password)){
+          console.log('Invalid Password');
+          return done(null, false, 
+              req.flash('message', 'Invalid Password'));
+        }
+        // User and password both match, return user from 
+        // done method which will be treated like success
+        return done(null, user);
+      }
+    );
+}));
 
-const Map = mongoose.model("Map", mapsSchema);
-const Submission = mongoose.model("Submission", mapsSchema);
+let isValidPassword = function(user, password) {
+  return user.password === password;
+}
 
 let renderOptions = {
   newSort: "hvr_grow hvr-circle-to-top",
@@ -472,162 +534,182 @@ app.post('/submit', upload.single('mapPhoto'), function(req, res) {
 
 // ADMIN PORTAL
 
-let loggedIn = false;
+var isAuthenticated = function (req, res, next) {
+  // if user is authenticated in the session, call the next() to call the next request handler 
+  // Passport adds this method to request object. A middleware is allowed to add properties to
+  // request and response objects
+  if (req.isAuthenticated())
+    return next();
+  // if the user is not authenticated then redirect him to the login page
+  res.redirect('/login');
+}
+
+// let loggedIn = false;
+
+// app.get('/signout', function(req, res) {
+//   loggedIn = false;
+//   res.redirect('admin');
+// });
+
+// app.get('/admin', function(req, res) {
+//   if (loggedIn) {
+//     Map.find({}, function(err, foundMaps) {
+//       const newMaps = sortNew(foundMaps);
+//       if(!err) {
+//         renderOptions.tilesDisplay = newMaps;
+//         renderOptions.adminLoginMessage = "";
+//         res.render('admin_portal', renderOptions);
+//       }
+//     });
+//   } else {
+//     res.render('admin_login', renderOptions);
+//   }
+// });
+
+app.get('/login', function(req, res) {
+  res.render('admin_login', renderOptions);
+});
+
+app.get('/admin', isAuthenticated, function(req, res) {
+  Map.find({}, function(err, foundMaps) {
+    const newMaps = sortNew(foundMaps);
+    if (!err) {
+      renderOptions.tilesDisplay = newMaps;
+      renderOptions.adminLoginMessage = "";
+      res.render('admin_portal', renderOptions);
+    }
+  });
+});
+
+app.get('/admin/livemaps', isAuthenticated, function(req, res) {
+  renderOptions.adminTitle = "Live Maps";
+  Map.find({}, function(err, foundMaps) {
+    const newMaps = sortNew(foundMaps);
+    if(!err) {
+      renderOptions.tilesDisplay = newMaps;
+      renderOptions.adminView = "live_maps";
+      res.render('admin_portal', renderOptions);
+    }
+  });
+});
+
+app.get('/admin/submittedmaps', isAuthenticated, function(req, res) {
+  renderOptions.adminTitle = "Submitted Maps";
+  Submission.find({}, function(err, foundMaps) {
+    const newMaps = sortNew(foundMaps);
+    if(!err) {
+      renderOptions.tilesDisplay = newMaps;
+      renderOptions.adminView = "submitted_maps";
+      res.render('admin_portal', renderOptions);
+    }
+  });
+});
+
+app.get('/admin/editsubmission/:mapName', isAuthenticated, function(req, res) {
+  const requestedMap = req.params.mapName;
+  const currentMaps = [];
+  Submission.find({}, function(err, foundMaps) {
+    foundMaps.forEach(function(map) {
+      const storedCode = map.code;
+      if (requestedMap === storedCode) {
+        // Submission.update({ name: map.name }, { $inc: { views: 1 }}, function(err, result) {
+        // });
+        if (map.category === "Obstacle") {
+          renderOptions.selectOp = "selected";
+        } else if (map.category === "Racing") {
+          renderOptions.selectRacing = "selected";
+        } else if (map.category === "Minigame") {
+          renderOptions.selectMg = "selected";
+        } else if (map.category === "PvP") {
+          renderOptions.selectBa = "selected";
+        } else if (map.category === "Practice") {
+          renderOptions.selectEc = "selected";
+        } else if (map.category === "Creative") {
+          renderOptions.selectCb = "selected";
+        }
+        renderOptions.adminTitle = "Submitted Maps";
+        currentMaps.push(map);
+        renderOptions.map = map;
+        renderOptions.youtubeLink = map.youtubeLink;
+        res.render('admin_map', renderOptions);
+        setTimeout(function() {
+          renderOptions.selectOp = "";
+          renderOptions.selectRacing = "";
+          renderOptions.selectMg = "";
+          renderOptions.selectBa = "";
+          renderOptions.selectEc = "";
+          renderOptions.selectCb = "";
+        }, 100);
+      }
+    });
+  });
+});
+
+app.get('/admin/editlive/:mapName', isAuthenticated, function(req, res) {
+  const requestedMap = req.params.mapName;
+  const currentMaps = [];
+  Map.find({}, function(err, foundMaps) {
+    foundMaps.forEach(function(map) {
+      const storedCode = map.code;
+      if (requestedMap === storedCode) {
+        // Map.update({ name: map.name }, { $inc: { views: 1 }}, function(err, result) {
+        // });
+        if (map.category === "Obstacle") {
+          renderOptions.selectOp = "selected";
+        } else if (map.category === "Racing") {
+          renderOptions.selectRacing = "selected";
+        } else if (map.category === "Minigame") {
+          renderOptions.selectMg = "selected";
+        } else if (map.category === "PvP") {
+          renderOptions.selectBa = "selected";
+        } else if (map.category === "Practice") {
+          renderOptions.selectEc = "selected";
+        } else if (map.category === "Creative") {
+          renderOptions.selectCb = "selected";
+        }
+        renderOptions.adminTitle = "Live Maps";
+        currentMaps.push(map);
+        renderOptions.map = map;
+        renderOptions.youtubeLink = map.youtubeLink;
+        res.render('admin_map', renderOptions);
+        setTimeout(function() {
+          renderOptions.selectOp = "";
+          renderOptions.selectRacing = "";
+          renderOptions.selectMg = "";
+          renderOptions.selectBa = "";
+          renderOptions.selectEc = "";
+          renderOptions.selectCb = "";
+        }, 100);
+      }
+    });
+  });
+});
 
 app.get('/signout', function(req, res) {
-  loggedIn = false;
-  res.redirect('admin');
+  req.logout();
+  res.redirect('/login');
 });
 
-app.get('/admin', function(req, res) {
-  if (loggedIn) {
-    Map.find({}, function(err, foundMaps) {
-      const newMaps = sortNew(foundMaps);
-      if(!err) {
-        renderOptions.tilesDisplay = newMaps;
-        renderOptions.adminLoginMessage = "";
-        res.render('admin_portal', renderOptions);
-      }
-    });
-  } else {
-    res.render('admin_login', renderOptions);
-  }
-});
+// app.post('/admin', function(req,res) {
+//   renderOptions.adminLoginMessage = "";
+//   const adminEmail = process.env.ADMIN_EMAIL;
+//   const adminPassword = process.env.ADMIN_PASSWORD;
+//   const inputEmail = req.body.adminEmail;
+//   const inputPassword = req.body.adminPassword;
+//   if (inputEmail === adminEmail && inputPassword === adminPassword) {
+//     loggedIn = true;
+//     res.redirect('/admin/livemaps');
+//   } else {
+//     renderOptions.adminLoginMessage = "Incorrect username or password.";
+//     res.render('admin_login', renderOptions)
+//   }
+// });
 
-app.get('/admin/livemaps', function(req, res) {
-  if (loggedIn) {
-    renderOptions.adminTitle = "Live Maps";
-    Map.find({}, function(err, foundMaps) {
-      const newMaps = sortNew(foundMaps);
-      if(!err) {
-        renderOptions.tilesDisplay = newMaps;
-        renderOptions.adminView = "live_maps";
-        res.render('admin_portal', renderOptions);
-      }
-    });
-  } else {
-    res.redirect('/admin');
-  }
-});
-
-app.get('/admin/submittedmaps', function(req, res) {
-  if (loggedIn) {
-    renderOptions.adminTitle = "Submitted Maps";
-    Submission.find({}, function(err, foundMaps) {
-      const newMaps = sortNew(foundMaps);
-      if(!err) {
-        renderOptions.tilesDisplay = newMaps;
-        renderOptions.adminView = "submitted_maps";
-        res.render('admin_portal', renderOptions);
-      }
-    });
-  } else {
-    res.redirect('/admin');
-  }
-});
-
-app.get('/admin/editsubmission/:mapName', function(req, res) {
-  if (loggedIn) {
-    const requestedMap = req.params.mapName;
-    const currentMaps = [];
-    Submission.find({}, function(err, foundMaps) {
-      foundMaps.forEach(function(map) {
-        const storedCode = map.code;
-        if (requestedMap === storedCode) {
-          // Submission.update({ name: map.name }, { $inc: { views: 1 }}, function(err, result) {
-          // });
-          if (map.category === "Obstacle") {
-            renderOptions.selectOp = "selected";
-          } else if (map.category === "Racing") {
-            renderOptions.selectRacing = "selected";
-          } else if (map.category === "Minigame") {
-            renderOptions.selectMg = "selected";
-          } else if (map.category === "PvP") {
-            renderOptions.selectBa = "selected";
-          } else if (map.category === "Practice") {
-            renderOptions.selectEc = "selected";
-          } else if (map.category === "Creative") {
-            renderOptions.selectCb = "selected";
-          }
-          renderOptions.adminTitle = "Submitted Maps";
-          currentMaps.push(map);
-          renderOptions.map = map;
-          renderOptions.youtubeLink = map.youtubeLink;
-          res.render('admin_map', renderOptions);
-          setTimeout(function() {
-            renderOptions.selectOp = "";
-            renderOptions.selectRacing = "";
-            renderOptions.selectMg = "";
-            renderOptions.selectBa = "";
-            renderOptions.selectEc = "";
-            renderOptions.selectCb = "";
-          }, 100);
-        }
-      });
-    });
-  } else {
-    res.redirect('/admin');
-  }
-});
-
-app.get('/admin/editlive/:mapName', function(req, res) {
-  if (loggedIn) {
-    const requestedMap = req.params.mapName;
-    const currentMaps = [];
-    Map.find({}, function(err, foundMaps) {
-      foundMaps.forEach(function(map) {
-        const storedCode = map.code;
-        if (requestedMap === storedCode) {
-          // Map.update({ name: map.name }, { $inc: { views: 1 }}, function(err, result) {
-          // });
-          if (map.category === "Obstacle") {
-            renderOptions.selectOp = "selected";
-          } else if (map.category === "Racing") {
-            renderOptions.selectRacing = "selected";
-          } else if (map.category === "Minigame") {
-            renderOptions.selectMg = "selected";
-          } else if (map.category === "PvP") {
-            renderOptions.selectBa = "selected";
-          } else if (map.category === "Practice") {
-            renderOptions.selectEc = "selected";
-          } else if (map.category === "Creative") {
-            renderOptions.selectCb = "selected";
-          }
-          renderOptions.adminTitle = "Live Maps";
-          currentMaps.push(map);
-          renderOptions.map = map;
-          renderOptions.youtubeLink = map.youtubeLink;
-          res.render('admin_map', renderOptions);
-          setTimeout(function() {
-            renderOptions.selectOp = "";
-            renderOptions.selectRacing = "";
-            renderOptions.selectMg = "";
-            renderOptions.selectBa = "";
-            renderOptions.selectEc = "";
-            renderOptions.selectCb = "";
-          }, 100);
-        }
-      });
-    });
-  } else {
-    res.redirect('admin');
-  }
-});
-
-app.post('/admin', function(req,res) {
-  renderOptions.adminLoginMessage = "";
-  const adminEmail = process.env.ADMIN_EMAIL;
-  const adminPassword = process.env.ADMIN_PASSWORD;
-  const inputEmail = req.body.adminEmail;
-  const inputPassword = req.body.adminPassword;
-  if (inputEmail === adminEmail && inputPassword === adminPassword) {
-    loggedIn = true;
-    res.redirect('/admin/livemaps');
-  } else {
-    renderOptions.adminLoginMessage = "Incorrect username or password.";
-    res.render('admin_login', renderOptions)
-  }
-});
+app.post('/login', passport.authenticate('login', {
+  successRedirect: '/admin',
+  failureRedirect: '/login',
+  failureFlash: true
+}));
 
 app.post('/admin/editsubmission/:mapName', upload.single('mapPhoto'), function(req, res) {
   const requestedMap = req.params.mapName;
