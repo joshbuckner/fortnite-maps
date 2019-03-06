@@ -133,7 +133,7 @@ let renderOptions = {
   selectBa: "",
   selectEc: "",
   selectCb: "",
-  adminView: "",
+  adminView: "live_maps",
   adminLoginMessage: ""
 }
 
