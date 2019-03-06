@@ -1,14 +1,14 @@
 <%- include('partials/header') -%>
 <section class="admin_login">
     <h1 class="text-center text-danger failure_bg mb-4 rounded container-fluid w-50"><%= adminLoginMessage %></h1>
-  <form class="form-signin gray_trans_bg rounded p-4" method="POST">
-    <h1 class="h3 mb-3 font-weight-normal text-white text-center"><i class="fas fa-sign-in-alt h3"></i> Admin sign in</h1>
-    <label for="inputEmail" class="sr-only">Email address</label>
-    <input type="email" name="adminEmail" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-    <label for="inputPassword" class="sr-only">Password</label>
-    <input type="password" name="adminPassword" id="inputPassword" class="form-control" placeholder="Password" required>
-    <button class="btn btn-lg btn-primary btn-block mt-4 submit_button" type="submit">Sign in</button>
-  </form>
+	  <form class="form-signin gray_trans_bg rounded p-4" method="POST">
+	    <h1 class="h3 mb-3 font-weight-normal text-white text-center"><i class="fas fa-sign-in-alt h3"></i> Admin sign in</h1>
+	    <label for="inputEmail" class="sr-only">Email address</label>
+	    <input type="text" name="username" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+	    <label for="inputPassword" class="sr-only">Password</label>
+	    <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
+	    <button class="btn btn-lg btn-primary btn-block mt-4 submit_button" type="submit">Sign in</button>
+	  </form>
 </section>
 
 <%- include('partials/footer') -%>
