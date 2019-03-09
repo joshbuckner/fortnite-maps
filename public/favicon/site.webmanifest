@@ -1,0 +1,14 @@
+{
+    "name": "Mapnite",
+    "short_name": "Mapnite",
+    "icons": [
+        {
+            "src": "/public/css/favicon/android-chrome-72x72.png",
+            "sizes": "72x72",
+            "type": "image/png"
+        }
+    ],
+    "theme_color": "#2a2a2a",
+    "background_color": "#2a2a2a",
+    "display": "standalone"
+}
