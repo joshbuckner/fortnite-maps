@@ -3,12 +3,12 @@
     "short_name": "Mapnite",
     "icons": [
         {
-            "src": "android-chrome-72x72.png?v=NmP3EndP62",
+            "src": "./android-chrome-72x72.png?v=JykRmPajoP",
             "sizes": "72x72",
             "type": "image/png"
         }
     ],
-    "theme_color": "#ffffff",
-    "background_color": "#ffffff",
+    "theme_color": "#2a2a2a",
+    "background_color": "#2a2a2a",
     "display": "standalone"
 }
