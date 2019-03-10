@@ -3,7 +3,7 @@
     "short_name": "Mapnite",
     "icons": [
         {
-            "src": "./android-chrome-72x72.png?v=JykRmPajoP",
+            "src": "/android-chrome-72x72.png?v=A073RwbqBM",
             "sizes": "72x72",
             "type": "image/png"
         }
