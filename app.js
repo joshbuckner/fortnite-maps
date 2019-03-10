@@ -9,7 +9,6 @@ const expressSession = require('express-session');
 const flash = require('connect-flash');
 const path = require('path');
 
-
 const app = express();
 
 app.set('view engine', 'ejs');
