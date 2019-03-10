@@ -8,6 +8,7 @@ const passport = require('passport');
 const expressSession = require('express-session');
 const flash = require('connect-flash');
 const path = require('path');
+const favicon = require('serve-favicon');
 
 const app = express();
 
@@ -21,6 +22,7 @@ app.use(flash());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static('public'));
 app.use('/static', express.static(path.join(__dirname, 'public')));
+app.use(favicon(path.join(__dirname, 'public/favicon', 'favicon.ico')))
 app.use('/maps', express.static('public'));
 app.use('/admin', express.static('public'));
 app.use('/admin/editlive', express.static('public'));
