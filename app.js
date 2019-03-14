@@ -34,6 +34,7 @@ mongoose.connect('mongodb+srv://' + process.env.DB_USER + ':' + process.env.DB_P
 const initPassport = require('./passport/init');
 initPassport(passport);
 
+// routes
 const routes = require('./routes/index')(passport);
 app.use('/', routes);
 
