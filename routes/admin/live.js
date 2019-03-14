@@ -49,14 +49,9 @@ const handleEditLiveGet = (req, res, renderOptions, Map) => {
 }
 
 const handleEditLive = (req, res, Map, cloudinary) => {
+	const { mapName, authorName, islandCode, category, youtubeLink } = req.body;
 	const requestedMap = req.params.mapName;
-	const mapName = req.body.mapName;
-	const authorName = req.body.authorName;
-	const islandCode = req.body.islandCode;
-	const category = req.body.category;
-	const youtubeLink = req.body.youtubeLink;
 	const youtubeUrl = youtubeLink.slice(32, youtubeLink.length);
-
 	if (!req.file) {
 		Map.update({ code: requestedMap }, { name: mapName, author: authorName, code: islandCode, category: category, youtubeLink: youtubeUrl}, function() {
 		});

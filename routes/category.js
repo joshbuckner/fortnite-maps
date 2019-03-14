@@ -29,31 +29,31 @@ const handleObstacleGet = (req, res, renderOptions, Map, sortNew, sortPopular) =
 
 const handleRacingGet = (req, res, renderOptions, Map, sortNew, sortPopular) => {
 	const sortBy = req.query.sortby;
-		renderOptions.racing = 'category_active rotate';
-		if (sortBy === 'views') {
-			Map.find({category: 'Racing'}, function(err, foundMaps) {
-				const newMaps = sortPopular(foundMaps);
-				if(!err) {
-					renderOptions.tilesDisplay = newMaps;
-					renderOptions.viewsActive = 'underline_active';
-					renderOptions.newestActive = 'hvr_underline_reveal';
-					res.render('maps', renderOptions);
-				}
-			});
-		} else {
-			Map.find({category: 'Racing'}, function(err, foundMaps) {
-				const newMaps = sortNew(foundMaps);
-				if(!err) {
-					renderOptions.tilesDisplay = newMaps;
-					renderOptions.viewsActive = 'hvr_underline_reveal';
-					renderOptions.newestActive = 'underline_active';
-					res.render('maps', renderOptions);
-				}
-			});
-		}
-		setTimeout(function() {
-			renderOptions.racing = 'hvr_grow hvr-circle-to-top';
-		}, 100);
+	renderOptions.racing = 'category_active rotate';
+	if (sortBy === 'views') {
+		Map.find({category: 'Racing'}, function(err, foundMaps) {
+			const newMaps = sortPopular(foundMaps);
+			if(!err) {
+				renderOptions.tilesDisplay = newMaps;
+				renderOptions.viewsActive = 'underline_active';
+				renderOptions.newestActive = 'hvr_underline_reveal';
+				res.render('maps', renderOptions);
+			}
+		});
+	} else {
+		Map.find({category: 'Racing'}, function(err, foundMaps) {
+			const newMaps = sortNew(foundMaps);
+			if(!err) {
+				renderOptions.tilesDisplay = newMaps;
+				renderOptions.viewsActive = 'hvr_underline_reveal';
+				renderOptions.newestActive = 'underline_active';
+				res.render('maps', renderOptions);
+			}
+		});
+	}
+	setTimeout(function() {
+		renderOptions.racing = 'hvr_grow hvr-circle-to-top';
+	}, 100);
 }
 
 const handleMinigameGet = (req, res, renderOptions, Map, sortNew, sortPopular) => {

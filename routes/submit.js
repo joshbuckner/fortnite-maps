@@ -38,11 +38,7 @@ const handleSubmitFailureGet = (req, res, renderOptions) => {
 }
 
 const handleSubmit = (req, res, renderOptions, Map, Submission, cheerio, cloudinary, rp) => {
-	const mapName = req.body.mapName;
-	const authorName = req.body.authorName;
-	const islandCode = req.body.islandCode;
-	const category = req.body.category;
-	const youtubeLink = req.body.youtubeLink;
+	const { mapName, authorName, islandCode, category, youtubeLink } = req.body;
 	const youtubeUrl = youtubeLink.slice(32, youtubeLink.length);
 	const date = new Date();
   
