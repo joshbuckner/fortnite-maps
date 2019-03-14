@@ -1,5 +1,5 @@
 const handleSearch = (req, res, renderOptions, Map) => {
-	const searchInput = req.body.searchInput;
+	const { searchInput } = req.body;
 	Map.find({name: {$regex: searchInput, $options: '$i'}}, function(err, foundMaps) {
 		renderOptions.hide_navbar_sort = 'nav_hide';
 		renderOptions.tilesDisplay = foundMaps;

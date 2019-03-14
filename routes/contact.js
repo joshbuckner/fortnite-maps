@@ -12,10 +12,7 @@ const handleContactGet = (req, res, renderOptions) => {
 }
 
 const handleContact = (req, res, nodeMailer) => {
-	const contactName = req.body.contactName;
-	const contactEmail = req.body.contactEmail;
-	const contactSubject = req.body.contactSubject;
-	const contactMessage = req.body.contactMessage;
+	const { contactName, contactEmail, contactSubject, contactMessage } = req.body;
 	let transporter = nodeMailer.createTransport({
 		host: 'smtp.gmail.com',
 		port: 465,
